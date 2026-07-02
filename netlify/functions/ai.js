@@ -1,15 +1,16 @@
 // Netlify serverless function — powers the "Talk to AI" assistant on your own site.
-// Set ANTHROPIC_API_KEY in Netlify (Site configuration → Environment variables).
+// Set ANTHROPIC_API_KEY in Netlify (Site configuration → Environment variables),
+// then trigger a new deploy so the variable loads.
 // Get a key at https://console.anthropic.com
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method not allowed' };
+    return { statusCode: 405, body: JSON.stringify({ text: '', error: 'Method not allowed' }) };
   }
 
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) {
-    return { statusCode: 200, body: JSON.stringify({ text: '' }) }; // triggers graceful fallback in the UI
+    return { statusCode: 200, body: JSON.stringify({ text: '', error: 'ANTHROPIC_API_KEY is not set on the server (add it in Netlify → Environment variables, then redeploy).' }) };
   }
 
   let system = '', question = '';
@@ -18,7 +19,11 @@ exports.handler = async (event) => {
     system = body.system || '';
     question = body.question || '';
   } catch (e) {
-    return { statusCode: 400, body: 'Bad request' };
+    return { statusCode: 200, body: JSON.stringify({ text: '', error: 'Bad request body' }) };
+  }
+
+  if (typeof fetch !== 'function') {
+    return { statusCode: 200, body: JSON.stringify({ text: '', error: 'This Node runtime has no fetch — set Node 18+ in Netlify (Environment variable NODE_VERSION = 18).' }) };
   }
 
   try {
@@ -30,7 +35,7 @@ exports.handler = async (event) => {
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-3-5-haiku-latest',
+        model: 'claude-3-5-haiku-20241022',
         max_tokens: 400,
         system: system,
         messages: [{ role: 'user', content: question }]
@@ -38,6 +43,12 @@ exports.handler = async (event) => {
     });
 
     const data = await resp.json();
+
+    if (!resp.ok) {
+      const msg = (data && data.error && data.error.message) || ('Anthropic HTTP ' + resp.status);
+      return { statusCode: 200, body: JSON.stringify({ text: '', error: msg }) };
+    }
+
     const text = (data && data.content && data.content[0] && data.content[0].text) || '';
     return {
       statusCode: 200,
@@ -45,6 +56,6 @@ exports.handler = async (event) => {
       body: JSON.stringify({ text })
     };
   } catch (err) {
-    return { statusCode: 200, body: JSON.stringify({ text: '' }) };
+    return { statusCode: 200, body: JSON.stringify({ text: '', error: String((err && err.message) || err) }) };
   }
 };

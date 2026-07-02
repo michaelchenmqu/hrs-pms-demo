@@ -780,10 +780,18 @@ class Component extends DCLogic {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ system: context, question: q })
         });
-        if (resp.ok) { const d = await resp.json(); answer = (d && d.text) || ''; }
+        if (resp.ok) {
+          const d = await resp.json();
+          answer = (d && d.text) || '';
+          if (!answer && d && d.error) answer = 'Assistant error: ' + d.error;
+        } else if (resp.status === 404) {
+          answer = "The AI function isn't deployed (404). Make sure the netlify/functions/ai.js file and netlify.toml were pushed to your repo, then redeploy.";
+        } else {
+          answer = 'Could not reach the AI function (HTTP ' + resp.status + ').';
+        }
       }
-    } catch (err) { answer = ''; }
-    if (!answer) answer = "I couldn't reach the assistant just now — check the API key is set in Netlify, then try again.";
+    } catch (err) { answer = 'Network error reaching the assistant: ' + String((err && err.message) || err); }
+    if (!answer) answer = "I couldn't reach the assistant just now — check the API key is set in Netlify, then redeploy.";
     this.setState({ aiMsgs: [...msgs, { role:'ai', text: answer.trim() }], aiBusy: false });
     setTimeout(() => { const b = document.getElementById('ai-scroll'); if (b) b.scrollTop = b.scrollHeight; }, 30);
   };
