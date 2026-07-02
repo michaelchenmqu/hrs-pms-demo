@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:#e9e3d7;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#14232e;-webkit-font-smoothing:antialiased}
+  ::-webkit-scrollbar{width:10px;height:10px}
+  ::-webkit-scrollbar-thumb{background:#ccc3b3;border-radius:6px}
+  .navitem:hover .navhi{opacity:.5!important}
+  .lift{transition:transform .16s ease, box-shadow .16s ease}
+  .lift:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(16,49,78,.13)}
+  .em:hover{background:#f4f0e8!important}
+  .btn{transition:filter .14s ease, background .14s ease}
+  .btn:hover{filter:brightness(1.06)}
+  .screen{opacity:1}
+</style>
+</helmet>
+
+<div style="display:flex;min-height:100vh;width:100%">
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside style="width:224px;flex:none;background:#0e2c46;color:#c3d3df;position:sticky;top:0;height:100vh;overflow-y:auto;padding:16px 12px 22px">
+    <div style="display:flex;align-items:center;gap:10px;padding:4px 8px 20px">
+      <div style="width:34px;height:34px;border-radius:9px;background:#cf9a34;color:#0e2c46;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;font-family:'Spectral',serif">H</div>
+      <div style="line-height:1.05"><div style="font-family:'Spectral',serif;font-weight:600;font-size:15px;color:#fff">Holiday Rental</div><div style="font-size:11px;color:#7f9bb2;letter-spacing:.04em">SPECIALISTS · PMS</div></div>
+    </div>
+
+    <div style="font-size:9.5px;font-weight:600;color:#5b7690;letter-spacing:.1em;padding:8px 10px 5px">MANAGEMENT</div>
+    <div class="navitem" data-screen="dashboard" onClick="{{ nav }}" style="position:relative;display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:12.5px;cursor:pointer;margin-bottom:1px">
+      <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}"><div class="navhi" style="position:absolute;inset:0;background:rgba(207,154,52,.16);border-left:3px solid #cf9a34;border-radius:9px"></div></sc-if>
+      <span style="position:relative;z-index:1;width:16px;text-align:center">▤</span><span style="position:relative;z-index:1">Dashboard</span></div>
+    <div class="navitem" data-screen="performance" onClick="{{ nav }}" style="position:relative;display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:12.5px;cursor:pointer;margin-bottom:1px">
+      <sc-if value="{{ isPerformance }}" hint-placeholder-val="{{ false }}"><div class="navhi" style="position:absolute;inset:0;background:rgba(207,154,52,.16);border-left:3px solid #cf9a34;border-radius:9px"></div></sc-if>
+      <span style="position:relative;z-index:1;width:16px;text-align:center">⌂</span><span style="position:relative;z-index:1">Property performance</span></div>
+    <div class="navitem" data-screen="reservations" onClick="{{ nav }}" style="position:relative;display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:12.5px;cursor:pointer;margin-bottom:1px">
+      <sc-if value="{{ isReservations }}" hint-placeholder-val="{{ false }}"><div class="navhi" style="position:absolute;inset:0;background:rgba(207,154,52,.16);border-left:3px solid #cf9a34;border-radius:9px"></div></sc-if>
+      <span style="position:relative;z-index:1;width:16px;text-align:center">☷</span><span style="position:relative;z-index:1">Reservations</span></div>
+    <div class="navitem" data-screen="owners" onClick="{{ nav }}" style="position:relative;display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:12.5px;cursor:pointer;margin-bottom:1px">
+      <sc-if value="{{ isOwners }}" hint-placeholder-val="{{ false }}"><div class="navhi" style="position:absolute;inset:0;background:rgba(207,154,52,.16);border-left:3px solid #cf9a34;border-radius:9px"></div></sc-if>
+      <span style="position:relative;z-index:1;width:16px;text-align:center">◉</span><span style="position:relative;z-index:1">Owners</span></div>
+
+    <div style="font-size:9.5px;font-weight:600;color:#5b7690;letter-spacing:.1em;padding:16px 10px 5px">OPERATIONS</div>
+    <div class="navitem" data-screen="inbox" onClick="{{ nav }}" style="position:relative;display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:12.5px;cursor:pointer;margin-bottom:1px">
+      <sc-if value="{{ isInbox }}" hint-placeholder-val="{{ false }}"><div class="navhi" style="position:absolute;inset:0;background:rgba(207,154,52,.16);border-left:3px solid #cf9a34;border-radius:9px"></div></sc-if>
+      <span style="position:relative;z-index:1;width:16px;text-align:center">✉</span><span style="position:relative;z-index:1;flex:1">Inbox &amp; enquiries</span><span style="position:relative;z-index:1;font-size:9.5px;font-weight:700;background:#cf9a34;color:#0e2c46;padding:1px 6px;border-radius:10px">5</span></div>
+    <div class="navitem" data-screen="workorders" onClick="{{ nav }}" style="position:relative;display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:12.5px;cursor:pointer;margin-bottom:1px">
+      <sc-if value="{{ isWorkorders }}" hint-placeholder-val="{{ false }}"><div class="navhi" style="position:absolute;inset:0;background:rgba(207,154,52,.16);border-left:3px solid #cf9a34;border-radius:9px"></div></sc-if>
+      <span style="position:relative;z-index:1;width:16px;text-align:center">⚙</span><span style="position:relative;z-index:1">Work orders</span></div>
+    <div class="navitem" data-screen="housekeeping" onClick="{{ nav }}" style="position:relative;display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:12.5px;cursor:pointer;margin-bottom:1px">
+      <sc-if value="{{ isHousekeeping }}" hint-placeholder-val="{{ false }}"><div class="navhi" style="position:absolute;inset:0;background:rgba(207,154,52,.16);border-left:3px solid #cf9a34;border-radius:9px"></div></sc-if>
+      <span style="position:relative;z-index:1;width:16px;text-align:center">⊘</span><span style="position:relative;z-index:1">Housekeeping &amp; laundry</span></div>
+    <div class="navitem" data-screen="qa" onClick="{{ nav }}" style="position:relative;display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:12.5px;cursor:pointer;margin-bottom:1px">
+      <sc-if value="{{ isQa }}" hint-placeholder-val="{{ false }}"><div class="navhi" style="position:absolute;inset:0;background:rgba(207,154,52,.16);border-left:3px solid #cf9a34;border-radius:9px"></div></sc-if>
+      <span style="position:relative;z-index:1;width:16px;text-align:center">✓</span><span style="position:relative;z-index:1">Q&amp;A / audits</span></div>
+
+    <div style="font-size:9.5px;font-weight:600;color:#5b7690;letter-spacing:.1em;padding:16px 10px 5px">FINANCE</div>
+    <div class="navitem" data-screen="invoicing" onClick="{{ nav }}" style="position:relative;display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:12.5px;cursor:pointer;margin-bottom:1px">
+      <sc-if value="{{ isInvoicing }}" hint-placeholder-val="{{ false }}"><div class="navhi" style="position:absolute;inset:0;background:rgba(207,154,52,.16);border-left:3px solid #cf9a34;border-radius:9px"></div></sc-if>
+      <span style="position:relative;z-index:1;width:16px;text-align:center">$</span><span style="position:relative;z-index:1">Invoicing</span></div>
+    <div class="navitem" data-screen="trust" onClick="{{ nav }}" style="position:relative;display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:12.5px;cursor:pointer;margin-bottom:1px">
+      <sc-if value="{{ isTrust }}" hint-placeholder-val="{{ false }}"><div class="navhi" style="position:absolute;inset:0;background:rgba(207,154,52,.16);border-left:3px solid #cf9a34;border-radius:9px"></div></sc-if>
+      <span style="position:relative;z-index:1;width:16px;text-align:center">⛁</span><span style="position:relative;z-index:1">Trust accounting</span></div>
+
+    <div style="font-size:9.5px;font-weight:600;color:#5b7690;letter-spacing:.1em;padding:16px 10px 5px">PORTALS</div>
+    <div class="navitem" data-screen="ownerportal" onClick="{{ nav }}" style="position:relative;display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:12.5px;cursor:pointer;margin-bottom:1px">
+      <sc-if value="{{ isOwnerPortal }}" hint-placeholder-val="{{ false }}"><div class="navhi" style="position:absolute;inset:0;background:rgba(207,154,52,.16);border-left:3px solid #cf9a34;border-radius:9px"></div></sc-if>
+      <span style="position:relative;z-index:1;width:16px;text-align:center">◈</span><span style="position:relative;z-index:1">Owner portal</span></div>
+    <div class="navitem" data-screen="contractorportal" onClick="{{ nav }}" style="position:relative;display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:12.5px;cursor:pointer;margin-bottom:1px">
+      <sc-if value="{{ isContractorPortal }}" hint-placeholder-val="{{ false }}"><div class="navhi" style="position:absolute;inset:0;background:rgba(207,154,52,.16);border-left:3px solid #cf9a34;border-radius:9px"></div></sc-if>
+      <span style="position:relative;z-index:1;width:16px;text-align:center">⛏</span><span style="position:relative;z-index:1">Contractor portal</span></div>
+
+    <div style="margin-top:20px;padding:12px;background:rgba(255,255,255,.05);border-radius:11px">
+      <div style="font-size:11px;color:#8fa9bf;line-height:1.5"><b style="color:#cf9a34">✦ AI this morning</b><br>12 emails read · 8 auto-replied · 4 tasks drafted</div>
+    </div>
+    <div class="btn" onClick="{{ openAi }}" style="margin-top:10px;display:flex;align-items:center;gap:9px;padding:11px 13px;background:linear-gradient(120deg,#cf9a34,#e0b455);border-radius:11px;cursor:pointer">
+      <span style="width:26px;height:26px;border-radius:8px;background:#0e2c46;color:#cf9a34;display:flex;align-items:center;justify-content:center;font-size:14px;flex:none">✦</span>
+      <div style="line-height:1.15"><div style="font-size:12.5px;font-weight:700;color:#0e2c46">Talk to AI</div><div style="font-size:10.5px;color:#5a4a1e">Ask about anything</div></div>
+    </div>
+  </aside>
+
+  <!-- ===================== MAIN ===================== -->
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+    <!-- topbar -->
+    <header style="height:58px;flex:none;background:#fff;border-bottom:1px solid #e8e2d6;display:flex;align-items:center;gap:16px;padding:0 22px;position:sticky;top:0;z-index:20">
+      <div style="font-size:15px;font-weight:700;color:#0e2c46">{{ screenTitle }}</div>
+      <div style="flex:1;max-width:380px;height:34px;display:flex;align-items:center;gap:9px;padding:0 13px;background:#f2eee6;border:1px solid #e8e2d6;border-radius:9px;color:#9aa6ac;font-size:12.5px">⌕ Search property, booking, owner…</div>
+      <div style="flex:1"></div>
+      <div style="display:flex;align-items:center;gap:7px;height:32px;padding:0 12px;border:1px solid #e8e2d6;border-radius:9px;font-size:12px;color:#4a5b66;font-weight:500">📍 South Coast ▾</div>
+      <div style="width:32px;height:32px;border-radius:9px;background:#f2eee6;display:flex;align-items:center;justify-content:center">🔔</div>
+      <div style="width:32px;height:32px;border-radius:50%;background:#0e2c46;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600">DK</div>
+    </header>
+
+    <main style="flex:1;padding:24px 26px 40px;overflow-x:hidden">
+
+      <!-- ============ DASHBOARD ============ -->
+      <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}">
+      <div class="screen">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:18px">
+          <div><div style="font-family:'Spectral',serif;font-size:25px;font-weight:600;color:#0e2c46">Portfolio performance</div><div style="font-size:12.5px;color:#6c7a86;margin-top:2px">387 homes · South Coast &amp; Port Stephens · Tuesday 30 June, updated 8:42am</div></div>
+          <div style="display:flex;gap:8px">
+            <div style="height:34px;display:flex;align-items:center;background:#fff;border:1px solid #e2dccf;border-radius:9px;overflow:hidden;font-size:12px;font-weight:600">
+              <span data-range="week" onClick="{{ setRange }}" style="padding:0 13px;height:100%;display:flex;align-items:center;cursor:pointer;background:{{ rWeekBg }};color:{{ rWeekCol }}">Week</span>
+              <span data-range="month" onClick="{{ setRange }}" style="padding:0 13px;height:100%;display:flex;align-items:center;cursor:pointer;background:{{ rMonthBg }};color:{{ rMonthCol }}">Month</span>
+              <span data-range="ytd" onClick="{{ setRange }}" style="padding:0 13px;height:100%;display:flex;align-items:center;cursor:pointer;background:{{ rYtdBg }};color:{{ rYtdCol }}">YTD</span>
+            </div>
+            <div class="btn" data-msg="⭳ Board report exported to PDF" onClick="{{ simpleToast }}" style="height:34px;padding:0 14px;background:#cf9a34;color:#0e2c46;border-radius:9px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer">⭳ Export report</div>
+          </div>
+        </div>
+        <!-- KPI row -->
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:13px;margin-bottom:16px">
+          <div class="lift" data-screen="performance" onClick="{{ nav }}" style="background:#fff;border-radius:14px;padding:15px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86;font-weight:500">Revenue ›</div><div style="font-family:'Spectral',serif;font-size:26px;font-weight:600;color:#0e2c46;margin-top:3px">{{ kRev }}</div><div style="font-size:10.5px;color:#1a9e6a;margin-top:2px;font-weight:600">{{ kRevNote }}</div></div>
+          <div class="lift" data-screen="performance" onClick="{{ nav }}" style="background:#fff;border-radius:14px;padding:15px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86;font-weight:500">Occupancy ›</div><div style="font-family:'Spectral',serif;font-size:26px;font-weight:600;color:#0e2c46;margin-top:3px">{{ kOcc }}</div><div style="font-size:10.5px;color:#1a9e6a;margin-top:2px;font-weight:600">{{ kOccNote }}</div></div>
+          <div class="lift" data-screen="performance" onClick="{{ nav }}" style="background:#fff;border-radius:14px;padding:15px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86;font-weight:500">ADR ›</div><div style="font-family:'Spectral',serif;font-size:26px;font-weight:600;color:#0e2c46;margin-top:3px">{{ kAdr }}</div><div style="font-size:10.5px;color:#1a9e6a;margin-top:2px;font-weight:600">▲ $22</div></div>
+          <div class="lift" data-screen="performance" onClick="{{ nav }}" style="background:#fff;border-radius:14px;padding:15px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86;font-weight:500">RevPAR ›</div><div style="font-family:'Spectral',serif;font-size:26px;font-weight:600;color:#0e2c46;margin-top:3px">{{ kRevpar }}</div><div style="font-size:10.5px;color:#1a9e6a;margin-top:2px;font-weight:600">▲ 6.4%</div></div>
+          <div class="lift" data-screen="qa" onClick="{{ nav }}" style="background:#fff;border-radius:14px;padding:15px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86;font-weight:500">Guest rating ›</div><div style="font-family:'Spectral',serif;font-size:26px;font-weight:600;color:#0e2c46;margin-top:3px">4.7<span style="font-size:13px;color:#9aa6ac">/5</span></div><div style="font-size:10.5px;color:#1a9e6a;margin-top:2px;font-weight:600">▲ 0.2 · 38 reviews</div></div>
+        </div>
+        <!-- charts -->
+        <div style="display:grid;grid-template-columns:1.55fr 1fr;gap:14px;margin-bottom:14px">
+          <div style="background:#fff;border-radius:16px;padding:18px 20px;box-shadow:0 1px 3px rgba(16,49,78,.05)">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px"><div><div style="font-size:14px;font-weight:700;color:#0e2c46">Revenue &amp; bookings</div><div style="font-size:11px;color:#6c7a86">Rolling 12 months</div></div><div style="display:flex;gap:14px;font-size:11px"><span style="color:#4a5b66"><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#0e2c46;margin-right:5px"></span>Revenue</span><span style="color:#4a5b66"><span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:#cf9a34;margin-right:5px"></span>Bookings</span></div></div>
+            <svg viewBox="0 0 560 200" style="width:100%;height:190px;display:block">
+              <g stroke="#f0ece3" stroke-width="1"><line x1="40" y1="20" x2="552" y2="20"/><line x1="40" y1="62" x2="552" y2="62"/><line x1="40" y1="104" x2="552" y2="104"/><line x1="40" y1="146" x2="552" y2="146"/></g>
+              <g fill="#b3bcc2" font-size="9" font-family="IBM Plex Mono"><text x="6" y="24">$1.6M</text><text x="6" y="108">$0.8M</text><text x="14" y="150">$0</text></g>
+              <g fill="#eeddb8"><rect x="48" y="120" width="20" height="42" rx="2"/><rect x="90" y="112" width="20" height="50" rx="2"/><rect x="132" y="126" width="20" height="36" rx="2"/><rect x="174" y="104" width="20" height="58" rx="2"/><rect x="216" y="96" width="20" height="66" rx="2"/><rect x="258" y="84" width="20" height="78" rx="2"/><rect x="300" y="70" width="20" height="92" rx="2"/><rect x="342" y="64" width="20" height="98" rx="2"/><rect x="384" y="90" width="20" height="72" rx="2"/><rect x="426" y="100" width="20" height="62" rx="2"/><rect x="468" y="88" width="20" height="74" rx="2"/><rect x="510" y="60" width="20" height="102" rx="2"/></g>
+              <polyline fill="none" stroke="#0e2c46" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" points="58,112 100,104 142,116 184,92 226,84 268,70 310,54 352,48 394,74 436,86 478,66 520,42"/>
+              <circle cx="520" cy="42" r="7" fill="#0e2c46" opacity="0.14"/><circle cx="520" cy="42" r="4" fill="#0e2c46"/>
+              <g fill="#b3bcc2" font-size="9"><text x="52" y="178">J</text><text x="94" y="178">A</text><text x="136" y="178">S</text><text x="178" y="178">O</text><text x="220" y="178">N</text><text x="262" y="178">D</text><text x="304" y="178">J</text><text x="346" y="178">F</text><text x="388" y="178">M</text><text x="430" y="178">A</text><text x="472" y="178">M</text><text x="514" y="178">J</text></g>
+            </svg>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="background:#fff;border-radius:16px;padding:16px 18px;box-shadow:0 1px 3px rgba(16,49,78,.05)">
+              <div style="font-size:13.5px;font-weight:700;color:#0e2c46;margin-bottom:8px">Occupancy trend</div>
+              <svg viewBox="0 0 300 88" style="width:100%;height:76px;display:block">
+                <defs><linearGradient id="og" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f7d94" stop-opacity="0.22"/><stop offset="1" stop-color="#2f7d94" stop-opacity="0"/></linearGradient></defs>
+                <path d="M4,60 L44,54 L84,58 L124,46 L164,40 L204,32 L244,28 L288,20 L288,84 L4,84 Z" fill="url(#og)"/>
+                <polyline fill="none" stroke="#2f7d94" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" points="4,60 44,54 84,58 124,46 164,40 204,32 244,28 288,20"/>
+                <circle cx="288" cy="20" r="3.6" fill="#2f7d94"/>
+              </svg>
+              <div style="display:flex;justify-content:space-between;font-size:10.5px;color:#9aa6ac;margin-top:2px"><span>Jan</span><span style="color:#2f7d94;font-weight:600">82% now</span></div>
+            </div>
+            <div style="background:#fff;border-radius:16px;padding:16px 18px;box-shadow:0 1px 3px rgba(16,49,78,.05)">
+              <div style="font-size:13.5px;font-weight:700;color:#0e2c46;margin-bottom:12px">Channel mix</div>
+              <div style="display:flex;align-items:center;gap:14px">
+                <div style="width:74px;height:74px;border-radius:50%;flex:none;background:conic-gradient(#0e2c46 0 38%,#cf9a34 38% 66%,#2f7d94 66% 86%,#8aa0b2 86% 100%);position:relative"><div style="position:absolute;inset:21px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#0e2c46">387</div></div>
+                <div style="font-size:11px;display:flex;flex-direction:column;gap:5px;color:#4a5b66">
+                  <div><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#0e2c46;margin-right:6px"></span>Direct 38%</div>
+                  <div><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#cf9a34;margin-right:6px"></span>Airbnb 28%</div>
+                  <div><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#2f7d94;margin-right:6px"></span>Stayz 20%</div>
+                  <div><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:#8aa0b2;margin-right:6px"></span>Booking 14%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- performers + housekeeping -->
+        <div style="display:grid;grid-template-columns:1.55fr 1fr;gap:14px">
+          <div style="background:#fff;border-radius:16px;padding:16px 20px;box-shadow:0 1px 3px rgba(16,49,78,.05)">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><div style="font-size:14px;font-weight:700;color:#0e2c46">Property performance</div><div class="btn" data-screen="performance" onClick="{{ nav }}" style="font-size:11px;color:#2f7d94;font-weight:600;cursor:pointer">All homes →</div></div>
+            <div style="display:grid;grid-template-columns:1fr 78px 56px 56px;font-size:10px;font-weight:600;color:#9aa6ac;text-transform:uppercase;letter-spacing:.04em;padding-bottom:8px;border-bottom:1px solid #f0ece3"><div>Home</div><div style="text-align:right">Rev MTD</div><div style="text-align:right">Occ</div><div style="text-align:right">Rating</div></div>
+            <sc-for list="{{ topProps }}" as="p" hint-placeholder-count="5">
+              <div style="display:grid;grid-template-columns:1fr 78px 56px 56px;align-items:center;padding:9px 0;border-bottom:1px solid #f5f2ea">
+                <div style="display:flex;align-items:center;gap:10px;min-width:0"><img src="{{ p.img }}" style="width:38px;height:30px;border-radius:6px;object-fit:cover;flex:none"><div style="min-width:0"><div style="font-size:12.5px;color:#14232e;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.name }}</div><div style="font-size:10.5px;color:#9aa6ac">{{ p.sub }}</div></div></div>
+                <div style="text-align:right;font-size:12.5px;font-weight:600;color:#0e2c46">{{ p.rev }}</div>
+                <div style="text-align:right;font-size:12.5px;color:#4a5b66">{{ p.occ }}</div>
+                <div style="text-align:right;font-size:12.5px;font-weight:600;color:{{ p.ratingColor }}">{{ p.rating }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="background:#0e2c46;border-radius:16px;padding:16px 20px;color:#c3d3df">
+            <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:14px">Housekeeping this week</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:15px">
+              <div><div style="font-size:11px;color:#7f9bb2">On-time turnovers</div><div style="font-family:'Spectral',serif;font-size:23px;font-weight:600;color:#fff;margin-top:1px">96%</div></div>
+              <div><div style="font-size:11px;color:#7f9bb2">Avg turnaround</div><div style="font-family:'Spectral',serif;font-size:23px;font-weight:600;color:#fff;margin-top:1px">3.2<span style="font-size:12px;color:#7f9bb2">h</span></div></div>
+              <div><div style="font-size:11px;color:#7f9bb2">Audit pass rate</div><div style="font-family:'Spectral',serif;font-size:23px;font-weight:600;color:#fff;margin-top:1px">92%</div></div>
+              <div><div style="font-size:11px;color:#7f9bb2">Linen sets out</div><div style="font-family:'Spectral',serif;font-size:23px;font-weight:600;color:#fff;margin-top:1px">148</div></div>
+            </div>
+            <div style="font-size:11px;color:#7f9bb2;margin-bottom:9px;font-weight:600">Top cleaning teams</div>
+            <div style="display:flex;flex-direction:column;gap:9px">
+              <div><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span>Sparkle Co.</span><span style="color:#7f9bb2">98%</span></div><div style="height:5px;background:rgba(255,255,255,.13);border-radius:4px;overflow:hidden"><div style="width:98%;height:100%;background:#cf9a34"></div></div></div>
+              <div><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span>Coastal Cleans</span><span style="color:#7f9bb2">94%</span></div><div style="height:5px;background:rgba(255,255,255,.13);border-radius:4px;overflow:hidden"><div style="width:94%;height:100%;background:#cf9a34"></div></div></div>
+              <div><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span>Bay Housekeeping</span><span style="color:#7f9bb2">88%</span></div><div style="height:5px;background:rgba(255,255,255,.13);border-radius:4px;overflow:hidden"><div style="width:88%;height:100%;background:#2f7d94"></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ INBOX / EMAIL RENDERING ============ -->
+      <sc-if value="{{ isInbox }}" hint-placeholder-val="{{ false }}">
+      <div class="screen">
+        <div style="display:flex;align-items:center;gap:12px;background:linear-gradient(100deg,#0e2c46,#164066);border-radius:13px;padding:14px 18px;margin-bottom:16px;color:#dbe7f0">
+          <div style="width:34px;height:34px;border-radius:9px;background:#cf9a34;color:#0e2c46;display:flex;align-items:center;justify-content:center;font-size:16px;flex:none">✦</div>
+          <div style="flex:1"><div style="font-size:14px;font-weight:700;color:#fff">Email rendering — structured data from the plain inbox</div><div style="font-size:12px;color:#9fb8cc;margin-top:1px">HRS reads bookings, enquiries &amp; issues straight from forwarded emails. No channel API required — though we can connect one if you have it.</div></div>
+          <div style="font-size:11.5px;text-align:right"><div style="color:#fff;font-weight:600">12 parsed today</div><div style="color:#9fb8cc">8 auto-replied</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:340px 1fr;gap:16px">
+          <!-- email list -->
+          <div style="background:#fff;border-radius:14px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden;align-self:start">
+            <div style="padding:12px 15px;border-bottom:1px solid #f0ece3;font-size:13px;font-weight:700;color:#0e2c46;display:flex;justify-content:space-between">Inbox <span style="font-size:11px;color:#9aa6ac;font-weight:500">Forwarded → parse@hrs</span></div>
+            <sc-for list="{{ emails }}" as="e" hint-placeholder-count="5">
+              <div class="em" data-id="{{ e.id }}" onClick="{{ selectEmail }}" style="display:flex;gap:10px;padding:12px 15px;border-bottom:1px solid #f5f2ea;cursor:pointer;background:{{ e.rowBg }}">
+                <div style="width:6px;border-radius:4px;flex:none;background:{{ e.channelColor }}"></div>
+                <div style="min-width:0;flex:1">
+                  <div style="display:flex;justify-content:space-between;gap:8px"><span style="font-size:12px;font-weight:600;color:#14232e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ e.name }}</span><span style="font-size:10.5px;color:#9aa6ac;flex:none">{{ e.time }}</span></div>
+                  <div style="font-size:11.5px;color:#4a5b66;margin:2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ e.subject }}</div>
+                  <div style="display:flex;align-items:center;gap:6px"><span style="font-size:9.5px;font-weight:700;color:#fff;background:{{ e.channelColor }};padding:1px 7px;border-radius:10px">{{ e.channel }}</span><span style="font-size:10px;color:{{ e.kindColor }};font-weight:600">{{ e.kind }}</span><sc-if value="{{ e.processed }}" hint-placeholder-val="{{ false }}"><span style="font-size:9.5px;font-weight:700;color:#137a4f;margin-left:auto">✓ Filed</span></sc-if></div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <!-- parsed panel -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start">
+            <!-- raw email -->
+            <div style="background:#fff;border-radius:14px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden">
+              <div style="padding:12px 16px;border-bottom:1px solid #f0ece3;font-size:11px;font-weight:600;color:#9aa6ac;letter-spacing:.05em;text-transform:uppercase">Raw email</div>
+              <div style="padding:16px">
+                <div style="font-size:13px;font-weight:700;color:#0e2c46">{{ selectedEmail.subject }}</div>
+                <div style="font-size:11.5px;color:#6c7a86;margin:6px 0 14px">From: {{ selectedEmail.fromLine }}</div>
+                <div style="font-size:12px;line-height:1.7;color:#3a4b56;white-space:pre-line;font-family:'IBM Plex Mono',monospace;background:#faf8f3;border:1px solid #f0ece3;border-radius:9px;padding:13px">{{ selectedEmail.body }}</div>
+              </div>
+            </div>
+            <!-- structured -->
+            <div style="background:#fff;border-radius:14px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden;border:1.5px solid #e7d3a6">
+              <div style="padding:12px 16px;border-bottom:1px solid #f0ece3;display:flex;align-items:center;justify-content:space-between;background:#fbf6ea">
+                <div style="font-size:11px;font-weight:700;color:#a97e20;letter-spacing:.05em;text-transform:uppercase">✦ Rendered by HRS</div>
+                <span style="font-size:10px;color:#1a9e6a;font-weight:600">● {{ selectedEmail.confidence }} confidence</span>
+              </div>
+              <div style="padding:16px">
+                <span style="display:inline-block;font-size:11px;font-weight:700;color:#fff;background:{{ selectedEmail.kindColor }};padding:3px 10px;border-radius:20px;margin-bottom:13px">{{ selectedEmail.kind }}</span>
+                <sc-for list="{{ selectedEmail.fields }}" as="f" hint-placeholder-count="5">
+                  <div style="display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #f5f2ea">
+                    <span style="font-size:11.5px;color:#9aa6ac">{{ f.k }}</span>
+                    <span style="font-size:12px;color:#14232e;font-weight:600;text-align:right">{{ f.v }}</span>
+                  </div>
+                </sc-for>
+                <div style="font-size:11.5px;color:#6c7a86;margin:14px 0 9px;font-weight:600">Suggested actions</div>
+                <sc-if value="{{ notProcessed }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <div class="btn" data-label="{{ selectedEmail.primaryAction }}" onClick="{{ processEmail }}" style="height:36px;background:#cf9a34;color:#0e2c46;border-radius:9px;font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer">✓ {{ selectedEmail.primaryAction }}</div>
+                  <div class="btn" data-msg="✎ Draft opened for editing" onClick="{{ simpleToast }}" style="height:34px;background:#f2eee6;color:#0e2c46;border-radius:9px;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer">✎ {{ selectedEmail.secondaryAction }}</div>
+                </div>
+                </sc-if>
+                <sc-if value="{{ selProcessed }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;align-items:center;gap:9px;height:56px;background:#e4f4ec;border-radius:10px;padding:0 15px;color:#137a4f"><span style="font-size:18px">✓</span><div><div style="font-size:12.5px;font-weight:700">Processed &amp; filed</div><div style="font-size:11px;color:#2f7d64">Action complete — email archived</div></div></div>
+                </sc-if>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ RESERVATIONS ============ -->
+      <sc-if value="{{ isReservations }}" hint-placeholder-val="{{ false }}">
+      <div class="screen">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+          <div style="display:flex;gap:6px;font-size:12px;font-weight:600">
+            <span data-tab="arrivals" onClick="{{ setResTab }}" style="padding:7px 14px;border-radius:9px;cursor:pointer;background:{{ tabArrBg }};color:{{ tabArrCol }};border:1px solid {{ tabArrBd }}">Arrivals</span>
+            <span data-tab="departures" onClick="{{ setResTab }}" style="padding:7px 14px;border-radius:9px;cursor:pointer;background:{{ tabDepBg }};color:{{ tabDepCol }};border:1px solid {{ tabDepBd }}">Departures</span>
+            <span data-tab="instay" onClick="{{ setResTab }}" style="padding:7px 14px;border-radius:9px;cursor:pointer;background:{{ tabStayBg }};color:{{ tabStayCol }};border:1px solid {{ tabStayBd }}">In stay</span>
+            <span data-tab="calendar" onClick="{{ setResTab }}" style="padding:7px 14px;border-radius:9px;cursor:pointer;background:{{ tabCalBg }};color:{{ tabCalCol }};border:1px solid {{ tabCalBd }}">Calendar</span>
+          </div>
+          <div class="btn" style="height:34px;padding:0 14px;background:#cf9a34;color:#0e2c46;border-radius:9px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer" data-msg="New booking form opened" onClick="{{ simpleToast }}">+ New booking</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:16px">
+          <div class="lift" data-tab="arrivals" onClick="{{ setResTab }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Arrivals today ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">6</div></div>
+          <div class="lift" data-tab="departures" onClick="{{ setResTab }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Departures ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">4</div></div>
+          <div class="lift" data-tab="instay" onClick="{{ setResTab }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Guests in-house ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">143</div></div>
+          <div class="lift" data-screen="inbox" onClick="{{ nav }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">New enquiries ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">9</div></div>
+        </div>
+        <!-- Arrivals -->
+        <sc-if value="{{ isResArrivals }}" hint-placeholder-val="{{ true }}">
+        <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden">
+          <div style="padding:14px 18px;border-bottom:1px solid #f0ece3;font-size:14px;font-weight:700;color:#0e2c46">Arrivals · Tuesday 30 June</div>
+          <sc-for list="{{ reservations }}" as="r" hint-placeholder-count="6">
+            <div class="em" data-id="{{ r.id }}" onClick="{{ openRes }}" style="display:flex;align-items:center;gap:14px;padding:13px 18px;border-bottom:1px solid #f5f2ea;cursor:pointer">
+              <img src="{{ r.img }}" style="width:64px;height:48px;border-radius:9px;object-fit:cover;flex:none">
+              <div style="flex:1;min-width:0"><div style="font-size:13.5px;font-weight:600;color:#14232e">{{ r.name }} <span style="font-size:11px;color:#9aa6ac;font-weight:400">· {{ r.suburb }}</span></div><div style="font-size:11.5px;color:#6c7a86;margin-top:2px">{{ r.guestLine }} · {{ r.owner }}</div></div>
+              <span style="font-size:10.5px;font-weight:700;color:#fff;background:{{ r.channelColor }};padding:3px 9px;border-radius:6px;flex:none">{{ r.channel }}</span>
+              <span style="font-size:11.5px;font-weight:600;color:{{ r.statusColor }};background:{{ r.statusBg }};padding:6px 13px;border-radius:20px;width:120px;text-align:center;flex:none">{{ r.status }}</span>
+              <span style="font-size:14px;color:#c3ccd2;flex:none">›</span>
+            </div>
+          </sc-for>
+        </div>
+        </sc-if>
+        <!-- Departures -->
+        <sc-if value="{{ isResDepartures }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden">
+          <div style="padding:14px 18px;border-bottom:1px solid #f0ece3;font-size:14px;font-weight:700;color:#0e2c46">Departures · Tuesday 30 June — clean status</div>
+          <sc-for list="{{ departuresData }}" as="r" hint-placeholder-count="4">
+            <div class="em" data-id="{{ r.id }}" onClick="{{ openRes }}" style="display:flex;align-items:center;gap:14px;padding:13px 18px;border-bottom:1px solid #f5f2ea;cursor:pointer">
+              <img src="{{ r.img }}" style="width:64px;height:48px;border-radius:9px;object-fit:cover;flex:none">
+              <div style="flex:1;min-width:0"><div style="font-size:13.5px;font-weight:600;color:#14232e">{{ r.name }} <span style="font-size:11px;color:#9aa6ac;font-weight:400">· {{ r.suburb }}</span></div><div style="font-size:11.5px;color:#6c7a86;margin-top:2px">{{ r.guestLine }} · {{ r.owner }}</div></div>
+              <span style="font-size:10.5px;font-weight:700;color:#fff;background:{{ r.channelColor }};padding:3px 9px;border-radius:6px;flex:none">{{ r.channel }}</span>
+              <span style="font-size:11.5px;font-weight:600;color:{{ r.statusColor }};background:{{ r.statusBg }};padding:6px 13px;border-radius:20px;width:120px;text-align:center;flex:none">{{ r.status }}</span>
+              <span style="font-size:14px;color:#c3ccd2;flex:none">›</span>
+            </div>
+          </sc-for>
+        </div>
+        </sc-if>
+        <!-- In stay -->
+        <sc-if value="{{ isResInStay }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden">
+          <div style="padding:14px 18px;border-bottom:1px solid #f0ece3;font-size:14px;font-weight:700;color:#0e2c46">Currently in stay</div>
+          <sc-for list="{{ inStayData }}" as="r" hint-placeholder-count="4">
+            <div class="em" data-id="{{ r.id }}" onClick="{{ openRes }}" style="display:flex;align-items:center;gap:14px;padding:13px 18px;border-bottom:1px solid #f5f2ea;cursor:pointer">
+              <img src="{{ r.img }}" style="width:64px;height:48px;border-radius:9px;object-fit:cover;flex:none">
+              <div style="flex:1;min-width:0"><div style="font-size:13.5px;font-weight:600;color:#14232e">{{ r.name }} <span style="font-size:11px;color:#9aa6ac;font-weight:400">· {{ r.suburb }}</span></div><div style="font-size:11.5px;color:#6c7a86;margin-top:2px">{{ r.guestLine }} · {{ r.owner }}</div></div>
+              <span style="font-size:10.5px;font-weight:700;color:#fff;background:{{ r.channelColor }};padding:3px 9px;border-radius:6px;flex:none">{{ r.channel }}</span>
+              <span style="font-size:11.5px;font-weight:600;color:{{ r.statusColor }};background:{{ r.statusBg }};padding:6px 13px;border-radius:20px;width:120px;text-align:center;flex:none">{{ r.status }}</span>
+              <span style="font-size:14px;color:#c3ccd2;flex:none">›</span>
+            </div>
+          </sc-for>
+        </div>
+        </sc-if>
+        <!-- Calendar -->
+        <sc-if value="{{ isResCalendar }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden">
+          <div style="padding:14px 18px;border-bottom:1px solid #f0ece3;display:flex;align-items:center;justify-content:space-between"><div style="font-size:14px;font-weight:700;color:#0e2c46">Calendar · week of 30 June</div><div style="font-size:11.5px;color:#9aa6ac">6 homes · South Coast</div></div>
+          <div style="display:grid;grid-template-columns:172px 1fr;border-bottom:1px solid #f0ece3">
+            <div style="padding:9px 16px;font-size:11px;color:#9aa6ac;font-weight:600">Property</div>
+            <div style="display:grid;grid-template-columns:repeat(7,1fr)">
+              <sc-for list="{{ calDays }}" as="d" hint-placeholder-count="7"><div style="padding:9px 4px;text-align:center;font-size:11px;color:#9aa6ac;font-weight:600;border-left:1px solid #f5f2ea">{{ d }}</div></sc-for>
+            </div>
+          </div>
+          <sc-for list="{{ calRows }}" as="row" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:172px 1fr;border-bottom:1px solid #f5f2ea;align-items:center">
+              <div style="display:flex;align-items:center;gap:9px;padding:10px 16px"><img src="{{ row.img }}" style="width:34px;height:26px;border-radius:5px;object-fit:cover;flex:none"><span style="font-size:12px;font-weight:600;color:#14232e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ row.name }}</span></div>
+              <div style="position:relative;height:52px;border-left:1px solid #f5f2ea">
+                <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(7,1fr)"><div style="border-right:1px solid #f7f4ee"></div><div style="border-right:1px solid #f7f4ee"></div><div style="border-right:1px solid #f7f4ee"></div><div style="border-right:1px solid #f7f4ee"></div><div style="border-right:1px solid #f7f4ee"></div><div style="border-right:1px solid #f7f4ee"></div><div></div></div>
+                <sc-for list="{{ row.bars }}" as="b" hint-placeholder-count="1">
+                  <div style="position:absolute;top:11px;height:30px;left:{{ b.leftPct }};width:{{ b.widthPct }};padding:0 4px;display:flex;align-items:center">
+                    <div style="width:100%;height:100%;border-radius:7px;background:{{ b.barBg }};color:{{ b.txtColor }};font-size:11px;font-weight:600;display:flex;align-items:center;padding:0 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ b.label }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        </sc-if>
+      </div>
+      </sc-if>
+
+      <!-- ============ HOUSEKEEPING & LAUNDRY ============ -->
+      <sc-if value="{{ isHousekeeping }}" hint-placeholder-val="{{ false }}">
+      <div class="screen">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:16px">
+          <div class="lift" data-msg="14 turnovers today — 9 done, 5 pending" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Turnovers today ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">14</div><div style="font-size:10.5px;color:#1a9e6a;margin-top:1px">9 done · 5 pending</div></div>
+          <div class="lift" data-msg="Avg turnaround 3.2h — 18 min faster than target" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Avg turnaround ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">3.2h</div><div style="font-size:10.5px;color:#1a9e6a;margin-top:1px">▼ 18 min</div></div>
+          <div class="lift" data-msg="148 linen sets out — 32 due back" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Linen sets out ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">148</div><div style="font-size:10.5px;color:#c98a1a;margin-top:1px">32 due back</div></div>
+          <div class="lift" data-msg="6 laundry tags queued for this run" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Tags to print ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">6</div><div style="font-size:10.5px;color:#6c7a86;margin-top:1px">this run</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 380px;gap:16px;align-items:start">
+          <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden">
+            <div style="padding:14px 18px;border-bottom:1px solid #f0ece3;font-size:14px;font-weight:700;color:#0e2c46">Today's turnovers</div>
+            <sc-for list="{{ turnovers }}" as="t" hint-placeholder-count="5">
+              <div style="display:flex;align-items:center;gap:13px;padding:12px 18px;border-bottom:1px solid #f5f2ea">
+                <img src="{{ t.img }}" style="width:48px;height:38px;border-radius:7px;object-fit:cover;flex:none">
+                <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;color:#14232e">{{ t.name }}</div><div style="font-size:11px;color:#6c7a86">{{ t.team }} · check-in {{ t.checkin }}</div></div>
+                <span style="font-size:11px;font-weight:600;color:{{ t.statusColor }};background:{{ t.statusBg }};padding:5px 12px;border-radius:20px;flex:none">{{ t.status }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <!-- laundry tag -->
+          <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden">
+            <div style="padding:14px 18px;border-bottom:1px solid #f0ece3;display:flex;align-items:center;justify-content:space-between"><div style="font-size:14px;font-weight:700;color:#0e2c46">Laundry tag preview</div><div class="btn" style="height:30px;padding:0 12px;background:#0e2c46;color:#fff;border-radius:8px;font-size:11.5px;font-weight:600;display:flex;align-items:center;gap:6px;cursor:pointer" data-msg="6 laundry tags sent to the label printer" onClick="{{ simpleToast }}">🖶 Print run (6)</div></div>
+            <div style="padding:16px">
+              <!-- tag -->
+              <div style="border:2px dashed #c9bfa8;border-radius:12px;padding:15px;font-family:'IBM Plex Mono',monospace">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start">
+                  <div><div style="font-size:15px;font-weight:700;color:#0e2c46;font-family:'IBM Plex Sans'">Island Oasis</div><div style="font-size:11px;color:#6c7a86">Shoalhaven · Owner: The Whitfields</div></div>
+                  <div style="width:52px;height:52px;background:repeating-linear-gradient(90deg,#0e2c46,#0e2c46 3px,#fff 3px,#fff 5px);border-radius:4px"></div>
+                </div>
+                <div style="height:1px;background:#eee6d5;margin:12px 0"></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px">
+                  <div><span style="color:#9aa6ac">Set</span> <b>King ×2, Queen ×1</b></div>
+                  <div><span style="color:#9aa6ac">Bath</span> <b>Towels ×8</b></div>
+                  <div><span style="color:#9aa6ac">Run</span> <b>#L-3084</b></div>
+                  <div><span style="color:#9aa6ac">Out</span> <b>30 Jun</b></div>
+                </div>
+                <div style="margin-top:12px;font-size:22px;letter-spacing:5px;text-align:center;color:#0e2c46">▊▍▊▎▍▊▎▊▍▎▊</div>
+                <div style="text-align:center;font-size:11px;color:#6c7a86;margin-top:2px">HRS-ISO-3084-30JUN</div>
+              </div>
+              <div style="font-size:11px;color:#9aa6ac;margin-top:12px;line-height:1.5">Tags generate from the turnover schedule — property, linen set, run number and barcode print straight to the laundry label printer. Scanned back in on return.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ Q&A / AUDITS ============ -->
+      <sc-if value="{{ isQa }}" hint-placeholder-val="{{ false }}">
+      <div class="screen">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:16px">
+          <div class="lift" data-msg="92% audit pass rate across 248 audits" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Audit pass rate ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">92%</div></div>
+          <div class="lift" data-msg="210 desktop audits completed this month" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Desktop audits ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">210</div></div>
+          <div class="lift" data-msg="38 physical audits completed this month" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Physical audits ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">38</div></div>
+          <div class="lift" data-msg="7 quality flags raised this week" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Flags this week ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#c0392b">7</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start">
+          <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden">
+            <div style="padding:14px 18px;border-bottom:1px solid #f0ece3;display:flex;justify-content:space-between;align-items:center"><div style="font-size:14px;font-weight:700;color:#0e2c46">Physical audit — Belvedere Bayfront</div><span style="font-size:11px;font-weight:700;color:#1a9e6a;background:#e4f4ec;padding:3px 10px;border-radius:20px">Score 94</span></div>
+            <div style="padding:8px 18px 16px">
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f5f2ea"><span style="width:20px;height:20px;border-radius:6px;background:#e4f4ec;color:#1a9e6a;display:flex;align-items:center;justify-content:center;font-size:12px">✓</span><span style="flex:1;font-size:12.5px;color:#3a4b56">Cleanliness — all rooms</span><span style="font-size:12px;font-weight:600;color:#1a9e6a">10/10</span></div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f5f2ea"><span style="width:20px;height:20px;border-radius:6px;background:#e4f4ec;color:#1a9e6a;display:flex;align-items:center;justify-content:center;font-size:12px">✓</span><span style="flex:1;font-size:12.5px;color:#3a4b56">Presentation &amp; staging</span><span style="font-size:12px;font-weight:600;color:#1a9e6a">9/10</span></div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f5f2ea"><span style="width:20px;height:20px;border-radius:6px;background:#fbeed3;color:#c98a1a;display:flex;align-items:center;justify-content:center;font-size:12px">!</span><span style="flex:1;font-size:12.5px;color:#3a4b56">Amenities restocked <span style="color:#c98a1a">— coffee pods low</span></span><span style="font-size:12px;font-weight:600;color:#c98a1a">7/10</span></div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f5f2ea"><span style="width:20px;height:20px;border-radius:6px;background:#e4f4ec;color:#1a9e6a;display:flex;align-items:center;justify-content:center;font-size:12px">✓</span><span style="flex:1;font-size:12.5px;color:#3a4b56">Outdoor / BBQ area</span><span style="font-size:12px;font-weight:600;color:#1a9e6a">10/10</span></div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 0"><span style="width:20px;height:20px;border-radius:6px;background:#fdece9;color:#c0392b;display:flex;align-items:center;justify-content:center;font-size:12px">✕</span><span style="flex:1;font-size:12.5px;color:#3a4b56">Maintenance flags <span style="color:#c0392b">— aircon logged as WO #1042</span></span><span style="font-size:12px;font-weight:600;color:#c0392b">Fix</span></div>
+            </div>
+          </div>
+          <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden">
+            <div style="padding:14px 18px;border-bottom:1px solid #f0ece3;font-size:14px;font-weight:700;color:#0e2c46">Contractor scorecards</div>
+            <div style="display:grid;grid-template-columns:1fr 54px 60px 46px;font-size:10px;font-weight:600;color:#9aa6ac;text-transform:uppercase;letter-spacing:.04em;padding:10px 18px 8px;border-bottom:1px solid #f0ece3"><div>Team</div><div style="text-align:right">Jobs</div><div style="text-align:right">On-time</div><div style="text-align:right">Grade</div></div>
+            <sc-for list="{{ scorecards }}" as="s" hint-placeholder-count="5">
+              <div style="display:grid;grid-template-columns:1fr 54px 60px 46px;align-items:center;padding:11px 18px;border-bottom:1px solid #f5f2ea">
+                <div style="font-size:12.5px;font-weight:600;color:#14232e">{{ s.name }}</div>
+                <div style="text-align:right;font-size:12px;color:#4a5b66">{{ s.jobs }}</div>
+                <div style="text-align:right;font-size:12px;color:{{ s.otColor }}">{{ s.ontime }}</div>
+                <div style="text-align:right;font-size:12.5px;font-weight:700;color:{{ s.gradeColor }}">{{ s.grade }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ INVOICING ============ -->
+      <sc-if value="{{ isInvoicing }}" hint-placeholder-val="{{ false }}">
+      <div class="screen">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:16px">
+          <div class="lift" data-msg="$186,400 invoiced this month" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Invoiced MTD ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">$186,400</div></div>
+          <div class="lift" data-msg="Showing paid invoices — $171,900" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Paid ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#1a9e6a">$171,900</div></div>
+          <div class="lift" data-msg="Showing outstanding invoices — $14,500" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Outstanding ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#c98a1a">$14,500</div></div>
+          <div class="lift" data-msg="1 overdue invoice — INV-2079, $2,180" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Overdue ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#c0392b">$2,180</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:16px;align-items:start">
+          <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden">
+            <div style="padding:14px 18px;border-bottom:1px solid #f0ece3;display:flex;justify-content:space-between;align-items:center"><div style="font-size:14px;font-weight:700;color:#0e2c46">Recent invoices</div><div class="btn" style="height:30px;padding:0 12px;background:#cf9a34;color:#0e2c46;border-radius:8px;font-size:11.5px;font-weight:700;display:flex;align-items:center;cursor:pointer" data-msg="New invoice draft opened" onClick="{{ simpleToast }}">+ New</div></div>
+            <div style="display:grid;grid-template-columns:74px 1fr 90px 88px;font-size:10px;font-weight:600;color:#9aa6ac;text-transform:uppercase;letter-spacing:.04em;padding:10px 18px 8px;border-bottom:1px solid #f0ece3"><div>No.</div><div>To / for</div><div style="text-align:right">Amount</div><div style="text-align:right">Status</div></div>
+            <sc-for list="{{ invoices }}" as="i" hint-placeholder-count="6">
+              <div style="display:grid;grid-template-columns:74px 1fr 90px 88px;align-items:center;padding:11px 18px;border-bottom:1px solid #f5f2ea">
+                <div style="font-size:11.5px;color:#9aa6ac;font-family:'IBM Plex Mono'">{{ i.no }}</div>
+                <div style="min-width:0"><div style="font-size:12.5px;font-weight:600;color:#14232e">{{ i.to }}</div><div style="font-size:10.5px;color:#9aa6ac">{{ i.for }}</div></div>
+                <div style="text-align:right;font-size:12.5px;font-weight:600;color:#0e2c46">{{ i.amount }}</div>
+                <div style="text-align:right"><span style="font-size:10.5px;font-weight:600;color:{{ i.statusColor }};background:{{ i.statusBg }};padding:3px 9px;border-radius:6px">{{ i.status }}</span></div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);padding:18px 20px">
+            <div style="font-size:12px;color:#6c7a86;font-weight:600;margin-bottom:2px">Invoice INV-2084</div>
+            <div style="font-family:'Spectral',serif;font-size:20px;font-weight:600;color:#0e2c46">D. Callaghan</div>
+            <div style="font-size:11.5px;color:#9aa6ac;margin-bottom:16px">Management &amp; services · June 2026</div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:8px 0;border-bottom:1px solid #f5f2ea"><span style="color:#4a5b66">Management fee (15%)</span><span style="font-weight:600;color:#14232e">$1,263</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:8px 0;border-bottom:1px solid #f5f2ea"><span style="color:#4a5b66">Cleaning ×4 turnovers</span><span style="font-weight:600;color:#14232e">$720</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:8px 0;border-bottom:1px solid #f5f2ea"><span style="color:#4a5b66">Linen hire</span><span style="font-weight:600;color:#14232e">$186</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:8px 0;border-bottom:1px solid #f5f2ea"><span style="color:#4a5b66">Aircon repair (WO-1042)</span><span style="font-weight:600;color:#14232e">$340</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:8px 0"><span style="color:#4a5b66">GST</span><span style="font-weight:600;color:#14232e">$251</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:12px;border-top:2px solid #0e2c46"><span style="font-size:13px;font-weight:700;color:#0e2c46">Total inc GST</span><span style="font-family:'Spectral',serif;font-size:22px;font-weight:600;color:#0e2c46">$2,760</span></div>
+            <div style="font-size:11px;color:#6c7a86;margin-top:12px;line-height:1.5">Built automatically from work orders, turnovers &amp; the fee schedule — reconciled against trust before owner disbursement.</div>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ TRUST ACCOUNTING ============ -->
+      <sc-if value="{{ isTrust }}" hint-placeholder-val="{{ false }}">
+      <div class="screen">
+        <div style="display:flex;align-items:center;gap:10px;background:#eef3f6;border:1px solid #d5e3ea;border-radius:12px;padding:12px 16px;margin-bottom:16px">
+          <span style="font-size:16px">⛁</span><div style="font-size:12px;color:#2f6076;line-height:1.5"><b>Statutory trust account</b> — guest funds held separately, reconciled daily, disbursed to owners per NSW agency rules. Every movement is auditable.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:16px">
+          <div class="lift" data-msg="Trust balance $482,140 — reconciled today" onClick="{{ simpleToast }}" style="background:#0e2c46;border-radius:13px;padding:15px 17px;color:#fff;cursor:pointer"><div style="font-size:11px;color:#8fa9bf">Trust balance ›</div><div style="font-family:'Spectral',serif;font-size:25px;font-weight:600;margin-top:3px">$482,140</div></div>
+          <div class="lift" data-msg="$318,600 held against future stays" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:15px 17px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Held (future stays) ›</div><div style="font-family:'Spectral',serif;font-size:25px;font-weight:600;color:#0e2c46;margin-top:3px">$318,600</div></div>
+          <div class="lift" data-msg="$147,900 cleared and ready to disburse" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:15px 17px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Cleared to disburse ›</div><div style="font-family:'Spectral',serif;font-size:25px;font-weight:600;color:#1a9e6a;margin-top:3px">$147,900</div></div>
+          <div class="lift" data-msg="Trust reconciled today — all movements matched" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:15px 17px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Reconciled ›</div><div style="font-family:'Spectral',serif;font-size:25px;font-weight:600;color:#0e2c46;margin-top:3px">✓ Today</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:16px;align-items:start">
+          <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden">
+            <div style="padding:14px 18px;border-bottom:1px solid #f0ece3;font-size:14px;font-weight:700;color:#0e2c46">Trust ledger — recent movements</div>
+            <div style="display:grid;grid-template-columns:70px 1fr 80px 96px;font-size:10px;font-weight:600;color:#9aa6ac;text-transform:uppercase;letter-spacing:.04em;padding:10px 18px 8px;border-bottom:1px solid #f0ece3"><div>Date</div><div>Description</div><div style="text-align:right">Amount</div><div style="text-align:right">Balance</div></div>
+            <sc-for list="{{ ledger }}" as="l" hint-placeholder-count="6">
+              <div style="display:grid;grid-template-columns:70px 1fr 80px 96px;align-items:center;padding:10px 18px;border-bottom:1px solid #f5f2ea">
+                <div style="font-size:11px;color:#9aa6ac;font-family:'IBM Plex Mono'">{{ l.date }}</div>
+                <div style="font-size:12px;color:#3a4b56">{{ l.desc }}</div>
+                <div style="text-align:right;font-size:12px;font-weight:600;color:{{ l.amtColor }}">{{ l.amount }}</div>
+                <div style="text-align:right;font-size:12px;color:#6c7a86;font-family:'IBM Plex Mono'">{{ l.balance }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);padding:18px 20px">
+            <div style="font-size:14px;font-weight:700;color:#0e2c46;margin-bottom:14px">Owner disbursement run</div>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:12.5px;font-weight:600;color:#14232e">The Whitfields</div><div style="font-size:10.5px;color:#9aa6ac">5 homes · net of fees</div></div><span style="font-family:'Spectral',serif;font-size:16px;color:#0e2c46">$14,160</span></div>
+              <div style="height:1px;background:#f5f2ea"></div>
+              <div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:12.5px;font-weight:600;color:#14232e">D. Callaghan</div><div style="font-size:10.5px;color:#9aa6ac">3 homes · net of fees</div></div><span style="font-family:'Spectral',serif;font-size:16px;color:#0e2c46">$8,420</span></div>
+              <div style="height:1px;background:#f5f2ea"></div>
+              <div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:12.5px;font-weight:600;color:#14232e">P. & L. Mercer</div><div style="font-size:10.5px;color:#9aa6ac">2 homes · net of fees</div></div><span style="font-family:'Spectral',serif;font-size:16px;color:#0e2c46">$6,030</span></div>
+            </div>
+            <sc-if value="{{ notDisbursed }}" hint-placeholder-val="{{ true }}">
+            <div class="btn" onClick="{{ approveDisbursement }}" style="height:38px;margin-top:16px;background:#1a9e6a;color:#fff;border-radius:9px;font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer">✓ Approve disbursement · $28,610</div>
+            <div style="font-size:11px;color:#9aa6ac;text-align:center;margin-top:8px">Statements auto-issued to owner portal</div>
+            </sc-if>
+            <sc-if value="{{ disbursed }}" hint-placeholder-val="{{ false }}">
+            <div style="height:38px;margin-top:16px;background:#e4f4ec;color:#137a4f;border-radius:9px;font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:7px">✓ Disbursed · statements issued</div>
+            <div style="font-size:11px;color:#9aa6ac;text-align:center;margin-top:8px">3 owners paid · trust reconciled</div>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ OWNERS ============ -->
+      <sc-if value="{{ isOwners }}" hint-placeholder-val="{{ false }}">
+      <div class="screen">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px"><div style="font-family:'Spectral',serif;font-size:20px;font-weight:600;color:#0e2c46">Owners &amp; clients</div><div class="btn" style="height:34px;padding:0 14px;background:#cf9a34;color:#0e2c46;border-radius:9px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer" data-msg="Add-owner form opened" onClick="{{ simpleToast }}">+ Add owner</div></div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+          <sc-for list="{{ owners }}" as="o" hint-placeholder-count="6">
+            <div class="lift" style="background:#fff;border-radius:14px;box-shadow:0 1px 3px rgba(16,49,78,.05);padding:16px 18px">
+              <div style="display:flex;align-items:center;gap:11px;margin-bottom:12px"><div style="width:40px;height:40px;border-radius:11px;background:{{ o.avatarBg }};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;font-family:'Spectral',serif">{{ o.initials }}</div><div><div style="font-size:14px;font-weight:700;color:#0e2c46">{{ o.name }}</div><div style="font-size:11px;color:#9aa6ac">{{ o.homes }} homes · {{ o.region }}</div></div></div>
+              <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:12px"><span style="color:#9aa6ac">Revenue MTD</span><span style="font-weight:600;color:#14232e">{{ o.rev }}</span></div>
+              <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:12px"><span style="color:#9aa6ac">Occupancy</span><span style="font-weight:600;color:#14232e">{{ o.occ }}</span></div>
+              <div style="display:flex;justify-content:space-between;padding:6px 0 12px;font-size:12px"><span style="color:#9aa6ac">Payout due</span><span style="font-weight:700;color:#1a9e6a">{{ o.payout }}</span></div>
+              <div class="btn" data-screen="ownerportal" onClick="{{ nav }}" style="height:32px;background:#f2eee6;color:#0e2c46;border-radius:8px;font-size:11.5px;font-weight:600;display:flex;align-items:center;justify-content:center;cursor:pointer">View owner portal →</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ WORK ORDERS ============ -->
+      <sc-if value="{{ isWorkorders }}" hint-placeholder-val="{{ false }}">
+      <div class="screen">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px"><div style="font-family:'Spectral',serif;font-size:20px;font-weight:600;color:#0e2c46">Work orders</div><div class="btn" style="height:34px;padding:0 14px;background:#cf9a34;color:#0e2c46;border-radius:9px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer" data-msg="New work order created" onClick="{{ simpleToast }}">+ New work order</div></div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px">
+          <div class="lift" data-msg="Filtered to 4 high-priority work orders" onClick="{{ simpleToast }}" style="background:#fdece9;border-radius:12px;padding:13px 15px;cursor:pointer"><div style="font-size:11px;color:#a5352a;font-weight:600">High priority ›</div><div style="font-family:'Spectral',serif;font-size:23px;font-weight:600;color:#c0392b">4</div></div>
+          <div class="lift" data-msg="Filtered to 9 scheduled work orders" onClick="{{ simpleToast }}" style="background:#fbf1db;border-radius:12px;padding:13px 15px;cursor:pointer"><div style="font-size:11px;color:#9a6c14;font-weight:600">Scheduled ›</div><div style="font-family:'Spectral',serif;font-size:23px;font-weight:600;color:#c98a1a">9</div></div>
+          <div class="lift" data-msg="Filtered to 7 in-progress work orders" onClick="{{ simpleToast }}" style="background:#e7f0f4;border-radius:12px;padding:13px 15px;cursor:pointer"><div style="font-size:11px;color:#2f6076;font-weight:600">In progress ›</div><div style="font-family:'Spectral',serif;font-size:23px;font-weight:600;color:#2f7d94">7</div></div>
+          <div class="lift" data-msg="Showing 31 completed this week" onClick="{{ simpleToast }}" style="background:#e4f4ec;border-radius:12px;padding:13px 15px;cursor:pointer"><div style="font-size:11px;color:#137a4f;font-weight:600">Done this week ›</div><div style="font-family:'Spectral',serif;font-size:23px;font-weight:600;color:#1a9e6a">31</div></div>
+        </div>
+        <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden">
+          <div style="display:grid;grid-template-columns:56px 1fr 130px 110px 92px;font-size:10px;font-weight:600;color:#9aa6ac;text-transform:uppercase;letter-spacing:.04em;padding:12px 18px 9px;border-bottom:1px solid #f0ece3"><div>ID</div><div>Issue / property</div><div>Owner</div><div>Assignee</div><div>Status</div></div>
+          <sc-for list="{{ workorders }}" as="w" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:56px 1fr 130px 110px 92px;align-items:center;padding:12px 18px;border-bottom:1px solid #f5f2ea">
+              <div style="font-family:'IBM Plex Mono';font-size:11.5px;color:#9aa6ac">{{ w.id }}</div>
+              <div><div style="font-size:12.5px;color:#14232e"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:{{ w.dot }};margin-right:8px"></span>{{ w.issue }} · <b>{{ w.property }}</b></div><div style="font-size:10.5px;color:#9aa6ac;margin-left:15px">{{ w.note }}</div></div>
+              <div style="font-size:11.5px;color:#4a5b66">{{ w.owner }}</div>
+              <div style="font-size:11.5px;color:{{ w.assigneeColor }}">{{ w.assignee }}</div>
+              <div><span style="font-size:10.5px;font-weight:600;color:{{ w.statusColor }};background:{{ w.statusBg }};padding:3px 9px;border-radius:6px">{{ w.status }}</span></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ OWNER PORTAL ============ -->
+      <sc-if value="{{ isOwnerPortal }}" hint-placeholder-val="{{ false }}">
+      <div class="screen">
+        <div style="background:linear-gradient(120deg,#0e2c46,#20507a);border-radius:16px;padding:22px 24px;margin-bottom:16px;color:#fff;position:relative;overflow:hidden">
+          <div style="font-size:11px;color:#9fb8cc;letter-spacing:.05em;text-transform:uppercase;font-weight:600">Owner portal · read-only preview</div>
+          <div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;margin-top:5px">Welcome back, James.</div>
+          <div style="font-size:12.5px;color:#bcd0e0;margin-top:3px">5 homes with HRS · Shoalhaven &amp; South Coast</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:16px">
+          <div style="background:#fff;border-radius:13px;padding:15px 17px;box-shadow:0 1px 3px rgba(16,49,78,.05)"><div style="font-size:11px;color:#6c7a86">Earnings MTD (net)</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">$14,160</div></div>
+          <div style="background:#fff;border-radius:13px;padding:15px 17px;box-shadow:0 1px 3px rgba(16,49,78,.05)"><div style="font-size:11px;color:#6c7a86">Occupancy</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">91%</div></div>
+          <div style="background:#fff;border-radius:13px;padding:15px 17px;box-shadow:0 1px 3px rgba(16,49,78,.05)"><div style="font-size:11px;color:#6c7a86">Nights booked</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">128</div></div>
+          <div style="background:#fff;border-radius:13px;padding:15px 17px;box-shadow:0 1px 3px rgba(16,49,78,.05)"><div style="font-size:11px;color:#6c7a86">Guest rating</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">4.9</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 340px;gap:16px;align-items:start">
+          <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden">
+            <div style="padding:14px 18px;border-bottom:1px solid #f0ece3;font-size:14px;font-weight:700;color:#0e2c46">Your homes</div>
+            <div style="display:flex;align-items:center;gap:14px;padding:13px 18px;border-bottom:1px solid #f5f2ea"><img src="images/island-oasis.jpg" style="width:64px;height:48px;border-radius:9px;object-fit:cover"><div style="flex:1"><div style="font-size:13px;font-weight:600;color:#14232e">Island Oasis</div><div style="font-size:11px;color:#6c7a86">Shoalhaven · 94% occ · $9,840 MTD</div></div><span style="font-size:11px;font-weight:600;color:#137a4f;background:#e4f4ec;padding:5px 12px;border-radius:20px">In stay</span></div>
+            <div style="display:flex;align-items:center;gap:14px;padding:13px 18px;border-bottom:1px solid #f5f2ea"><img src="images/grants-retreat.jpg" style="width:64px;height:48px;border-radius:9px;object-fit:cover"><div style="flex:1"><div style="font-size:13px;font-weight:600;color:#14232e">Grants Retreat</div><div style="font-size:11px;color:#6c7a86">Shoalhaven · 91% occ · $12,400 MTD</div></div><span style="font-size:11px;font-weight:600;color:#137a4f;background:#e4f4ec;padding:5px 12px;border-radius:20px">In stay</span></div>
+            <div style="display:flex;align-items:center;gap:14px;padding:13px 18px"><img src="images/sea-light.jpg" style="width:64px;height:48px;border-radius:9px;object-fit:cover"><div style="flex:1"><div style="font-size:13px;font-weight:600;color:#14232e">Sea Light</div><div style="font-size:11px;color:#6c7a86">Culburra · 88% occ · $7,900 MTD</div></div><span style="font-size:11px;font-weight:600;color:#9a6c14;background:#fbf1db;padding:5px 12px;border-radius:20px">Arrives 2pm</span></div>
+          </div>
+          <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);padding:18px 20px">
+            <div style="font-size:14px;font-weight:700;color:#0e2c46;margin-bottom:4px">June statement</div>
+            <div style="font-size:11px;color:#9aa6ac;margin-bottom:14px">Auto-issued 1 July</div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:7px 0;border-bottom:1px solid #f5f2ea"><span style="color:#4a5b66">Gross bookings</span><span style="font-weight:600">$17,890</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:7px 0;border-bottom:1px solid #f5f2ea"><span style="color:#4a5b66">Management &amp; cleaning</span><span style="font-weight:600">−$3,730</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:7px 0;border-bottom:2px solid #0e2c46"><span style="color:#4a5b66">Net to you</span><span style="font-weight:700;color:#1a9e6a">$14,160</span></div>
+            <div class="btn" style="height:36px;margin-top:14px;background:#0e2c46;color:#fff;border-radius:9px;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer" data-msg="June statement PDF downloaded" onClick="{{ simpleToast }}">⭳ Download statement (PDF)</div>
+            <div class="btn" style="height:34px;margin-top:8px;background:#f2eee6;color:#0e2c46;border-radius:9px;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer" data-msg="Message sent to your Holiday Manager" onClick="{{ simpleToast }}">✉ Message my manager</div>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ CONTRACTOR PORTAL ============ -->
+      <sc-if value="{{ isContractorPortal }}" hint-placeholder-val="{{ false }}">
+      <div class="screen">
+        <div style="background:linear-gradient(120deg,#164066,#2f7d94);border-radius:16px;padding:22px 24px;margin-bottom:16px;color:#fff">
+          <div style="font-size:11px;color:#cfe4ec;letter-spacing:.05em;text-transform:uppercase;font-weight:600">Contractor portal · read-only preview</div>
+          <div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;margin-top:5px">Coastal Electrical</div>
+          <div style="font-size:12.5px;color:#d3e7ee;margin-top:3px">Preferred contractor · 4.9 ★ · 128 jobs completed</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:16px">
+          <div style="background:#fff;border-radius:13px;padding:15px 17px;box-shadow:0 1px 3px rgba(16,49,78,.05)"><div style="font-size:11px;color:#6c7a86">Jobs assigned</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">3</div></div>
+          <div style="background:#fff;border-radius:13px;padding:15px 17px;box-shadow:0 1px 3px rgba(16,49,78,.05)"><div style="font-size:11px;color:#6c7a86">Awaiting invoice</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#c98a1a">2</div></div>
+          <div style="background:#fff;border-radius:13px;padding:15px 17px;box-shadow:0 1px 3px rgba(16,49,78,.05)"><div style="font-size:11px;color:#6c7a86">Paid MTD</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#1a9e6a">$3,180</div></div>
+        </div>
+        <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden">
+          <div style="padding:14px 18px;border-bottom:1px solid #f0ece3;font-size:14px;font-weight:700;color:#0e2c46">Assigned jobs</div>
+          <div style="display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid #f5f2ea">
+            <div style="width:44px;height:44px;border-radius:11px;background:#fdece9;color:#c0392b;display:flex;align-items:center;justify-content:center;font-size:18px;flex:none">⚡</div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:#14232e">Aircon not cooling — Belvedere Bayfront</div><div style="font-size:11px;color:#6c7a86">Nelson Bay · WO-1042 · guest in-house · <b style="color:#c0392b">High priority</b></div></div>
+            <sc-if value="{{ job1042Open }}" hint-placeholder-val="{{ true }}"><div class="btn" data-id="1042" onClick="{{ acceptJob }}" style="height:32px;padding:0 14px;background:#1a9e6a;color:#fff;border-radius:8px;font-size:11.5px;font-weight:600;display:flex;align-items:center;cursor:pointer">Accept job</div></sc-if>
+            <sc-if value="{{ job1042Accepted }}" hint-placeholder-val="{{ false }}"><div style="height:32px;padding:0 14px;background:#e4f4ec;color:#137a4f;border-radius:8px;font-size:11.5px;font-weight:700;display:flex;align-items:center;gap:5px">✓ Accepted</div></sc-if>
+            <div class="btn" data-msg="Job details opened" onClick="{{ simpleToast }}" style="height:32px;padding:0 13px;background:#f2eee6;color:#0e2c46;border-radius:8px;font-size:11.5px;font-weight:600;display:flex;align-items:center;cursor:pointer">Details</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid #f5f2ea">
+            <div style="width:44px;height:44px;border-radius:11px;background:#e7f0f4;color:#2f7d94;display:flex;align-items:center;justify-content:center;font-size:18px;flex:none">💡</div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:#14232e">Bedroom light flickering — Burrangarra</div><div style="font-size:11px;color:#6c7a86">Callala Beach · WO-1039 · en route · ETA 1:30pm</div></div>
+            <sc-if value="{{ job1039Open }}" hint-placeholder-val="{{ true }}"><span style="font-size:11px;font-weight:600;color:#2f7d94;background:#e7f0f4;padding:6px 13px;border-radius:20px">In progress</span>
+            <div class="btn" data-id="1039" onClick="{{ doneJob }}" style="height:32px;padding:0 13px;background:#cf9a34;color:#0e2c46;border-radius:8px;font-size:11.5px;font-weight:700;display:flex;align-items:center;cursor:pointer">Mark done + photo</div></sc-if>
+            <sc-if value="{{ job1039Done }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;font-weight:700;color:#137a4f;background:#e4f4ec;padding:6px 13px;border-radius:20px">✓ Completed</span></sc-if>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:14px 18px">
+            <div style="width:44px;height:44px;border-radius:11px;background:#e4f4ec;color:#1a9e6a;display:flex;align-items:center;justify-content:center;font-size:18px;flex:none">✓</div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:600;color:#14232e">Safety switch replacement — Sea Light</div><div style="font-size:11px;color:#6c7a86">Culburra · WO-1031 · completed · invoice submitted</div></div>
+            <span style="font-size:11px;font-weight:600;color:#137a4f;background:#e4f4ec;padding:6px 13px;border-radius:20px">Awaiting payment</span>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ PROPERTY PERFORMANCE ============ -->
+      <sc-if value="{{ isPerformance }}" hint-placeholder-val="{{ false }}">
+      <div class="screen">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px"><div style="font-family:'Spectral',serif;font-size:20px;font-weight:600;color:#0e2c46">Property performance · all homes</div><div style="display:flex;gap:8px"><div style="height:34px;padding:0 13px;background:#fff;border:1px solid #e2dccf;border-radius:9px;font-size:12px;color:#0e2c46;font-weight:600;display:flex;align-items:center;gap:6px">Sort: Revenue ▾</div><div class="btn" style="height:34px;padding:0 14px;background:#cf9a34;color:#0e2c46;border-radius:9px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;cursor:pointer" data-msg="Property performance report exported" onClick="{{ simpleToast }}">⭳ Export</div></div></div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+          <sc-for list="{{ allProps }}" as="p" hint-placeholder-count="8">
+            <div class="lift" style="background:#fff;border-radius:14px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden">
+              <div style="position:relative"><img src="{{ p.img }}" style="width:100%;height:118px;object-fit:cover;display:block"><span style="position:absolute;top:9px;left:9px;font-size:10px;font-weight:700;color:#fff;background:rgba(14,44,70,.82);padding:3px 9px;border-radius:20px">{{ p.status }}</span></div>
+              <div style="padding:13px 15px">
+                <div style="font-size:13.5px;font-weight:700;color:#0e2c46">{{ p.name }}</div>
+                <div style="font-size:11px;color:#9aa6ac;margin-top:1px">{{ p.sub }}</div>
+                <div style="display:flex;justify-content:space-between;margin-top:11px;font-size:11.5px"><span style="color:#6c7a86">Rev MTD</span><span style="font-weight:700;color:#14232e">{{ p.rev }}</span></div>
+                <div style="display:flex;justify-content:space-between;margin-top:5px;font-size:11.5px"><span style="color:#6c7a86">Occupancy</span><span style="font-weight:600;color:#14232e">{{ p.occ }}</span></div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:9px;padding-top:9px;border-top:1px solid #f5f2ea"><span style="font-size:11px;color:#9aa6ac">★ {{ p.rating }}</span><span style="font-size:11px;color:#2f7d94;font-weight:600">Details →</span></div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+
+    </main>
+  </div>
+</div>
+
+<!-- ===== AI DRAWER ===== -->
+<sc-if value="{{ aiOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeAi }}" style="position:fixed;inset:0;z-index:95;background:rgba(14,44,70,.34)"></div>
+  <div style="position:fixed;top:0;right:0;bottom:0;width:420px;z-index:96;background:#f6f2ea;box-shadow:-14px 0 40px rgba(14,44,70,.24);display:flex;flex-direction:column">
+    <div style="background:#0e2c46;padding:18px 20px;display:flex;align-items:center;gap:11px">
+      <span style="width:34px;height:34px;border-radius:10px;background:#cf9a34;color:#0e2c46;display:flex;align-items:center;justify-content:center;font-size:16px;flex:none">✦</span>
+      <div style="flex:1"><div style="font-size:14px;font-weight:700;color:#fff">HRS Assistant</div><div style="font-size:11px;color:#8fa9bf">Knows your portfolio, live</div></div>
+      <div onClick="{{ closeAi }}" style="width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer">✕</div>
+    </div>
+    <div id="ai-scroll" style="flex:1;overflow-y:auto;padding:18px 18px 8px;display:flex;flex-direction:column;gap:12px">
+      <sc-for list="{{ aiMsgs }}" as="m" hint-placeholder-count="1">
+        <div style="align-self:{{ m.align }};max-width:86%;background:{{ m.bg }};color:{{ m.color }};padding:11px 14px;border-radius:{{ m.radius }};font-size:13px;line-height:1.5;box-shadow:0 1px 3px rgba(16,49,78,.06);white-space:pre-line">{{ m.text }}</div>
+      </sc-for>
+      <sc-if value="{{ aiBusy }}" hint-placeholder-val="{{ false }}">
+        <div style="align-self:flex-start;background:#fff;color:#9aa6ac;padding:11px 14px;border-radius:14px 14px 14px 4px;font-size:13px;box-shadow:0 1px 3px rgba(16,49,78,.06)">Thinking…</div>
+      </sc-if>
+    </div>
+    <div style="padding:10px 16px 6px;display:flex;gap:7px;flex-wrap:wrap">
+      <span class="btn" data-q="What needs my attention today?" onClick="{{ askAi }}" style="font-size:11px;color:#0e2c46;background:#fff;border:1px solid #e2dccf;border-radius:16px;padding:6px 11px;cursor:pointer">What needs my attention?</span>
+      <span class="btn" data-q="Draft a reply to the aircon complaint at Belvedere Bayfront" onClick="{{ askAi }}" style="font-size:11px;color:#0e2c46;background:#fff;border:1px solid #e2dccf;border-radius:16px;padding:6px 11px;cursor:pointer">Draft the aircon reply</span>
+      <span class="btn" data-q="How is The Whitfields' portfolio performing this month?" onClick="{{ askAi }}" style="font-size:11px;color:#0e2c46;background:#fff;border:1px solid #e2dccf;border-radius:16px;padding:6px 11px;cursor:pointer">Whitfields' performance</span>
+    </div>
+    <div style="padding:8px 16px 16px;display:flex;gap:9px;align-items:flex-end">
+      <textarea id="ai-input" onKeyDown="{{ aiKey }}" rows="1" placeholder="Ask the assistant…" style="flex:1;resize:none;border:1px solid #e2dccf;border-radius:11px;padding:11px 13px;font-size:13px;font-family:'IBM Plex Sans',sans-serif;color:#14232e;background:#fff;outline:none;max-height:120px"></textarea>
+      <div class="btn" onClick="{{ sendAi }}" style="width:42px;height:42px;flex:none;border-radius:11px;background:#0e2c46;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer">➤</div>
+    </div>
+  </div>
+</sc-if>
+
+<!-- ===== TOAST ===== -->
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;bottom:26px;left:50%;transform:translateX(-50%);z-index:100;background:#0e2c46;color:#fff;padding:12px 20px;border-radius:11px;font-size:13px;font-weight:600;box-shadow:0 12px 34px rgba(14,44,70,.34);display:flex;align-items:center;gap:9px">{{ toastMsg }}</div>
+</sc-if>
+
+<!-- ===== RESERVATION MODAL ===== -->
+<sc-if value="{{ hasRes }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeRes }}" style="position:fixed;inset:0;z-index:90;background:rgba(14,44,70,.44);display:flex;align-items:center;justify-content:center;padding:24px">
+    <div onClick="{{ stop }}" style="width:520px;max-width:100%;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 24px 60px rgba(14,44,70,.4)">
+      <div style="position:relative"><img src="{{ selRes.img }}" style="width:100%;height:170px;object-fit:cover;display:block">
+        <div onClick="{{ closeRes }}" style="position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:50%;background:rgba(14,44,70,.6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer">✕</div>
+        <div style="position:absolute;bottom:12px;left:16px;color:#fff"><div style="font-family:'Spectral',serif;font-size:20px;font-weight:600;text-shadow:0 1px 6px rgba(0,0,0,.4)">{{ selRes.name }}</div><div style="font-size:12px;opacity:.9">{{ selRes.suburb }}</div></div>
+        <span style="position:absolute;top:14px;left:16px;font-size:10.5px;font-weight:700;color:#fff;background:{{ selRes.channelColor }};padding:3px 10px;border-radius:20px">{{ selRes.channel }}</span>
+      </div>
+      <div style="padding:18px 20px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 20px">
+          <div><div style="font-size:10.5px;color:#9aa6ac;text-transform:uppercase;letter-spacing:.04em">Guest</div><div style="font-size:13.5px;font-weight:600;color:#14232e;margin-top:2px">{{ selRes.guest }}</div><div style="font-size:11.5px;color:#6c7a86">{{ selRes.phone }}</div></div>
+          <div><div style="font-size:10.5px;color:#9aa6ac;text-transform:uppercase;letter-spacing:.04em">Owner</div><div style="font-size:13.5px;font-weight:600;color:#14232e;margin-top:2px">{{ selRes.owner }}</div></div>
+          <div><div style="font-size:10.5px;color:#9aa6ac;text-transform:uppercase;letter-spacing:.04em">Stay</div><div style="font-size:13.5px;font-weight:600;color:#14232e;margin-top:2px">{{ selRes.stay }}</div><div style="font-size:11.5px;color:#6c7a86">{{ selRes.nights }} · {{ selRes.pax }}</div></div>
+          <div><div style="font-size:10.5px;color:#9aa6ac;text-transform:uppercase;letter-spacing:.04em">Booking value</div><div style="font-family:'Spectral',serif;font-size:18px;font-weight:600;color:#0e2c46;margin-top:2px">{{ selRes.value }}</div></div>
+        </div>
+        <div style="display:flex;gap:9px;margin-top:18px">
+          <div class="btn" data-msg="✉ Check-in details sent to guest" onClick="{{ simpleToast }}" style="flex:1;height:38px;background:#cf9a34;color:#0e2c46;border-radius:9px;font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer">✉ Send check-in info</div>
+          <div class="btn" data-msg="⊘ Turnover scheduled with Sparkle Co." onClick="{{ simpleToast }}" style="flex:1;height:38px;background:#f2eee6;color:#0e2c46;border-radius:9px;font-size:12.5px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer">⊘ Schedule clean</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if></x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:880}}">
+class Component extends DCLogic {
+  state = { screen: 'dashboard', selectedEmailId: 'e1', range: 'month', toast: null,
+    processedEmails: {}, selectedResId: null, acceptedJobs: {}, doneJobs: {}, disbursed: false,
+    resTab: 'arrivals', aiOpen: false, aiBusy: false,
+    aiMsgs: [{ role:'ai', text:"Morning, Dana. I've read 12 emails, drafted 4 tasks and auto-replied to 8. Ask me anything — a property, an owner, today's arrivals, or what needs your attention." }] };
+
+  _toastTimer = null;
+  toast = (msg) => {
+    clearTimeout(this._toastTimer);
+    this.setState({ toast: msg });
+    this._toastTimer = setTimeout(() => this.setState({ toast: null }), 2600);
+  };
+
+  nav = (e) => {
+    const s = e.currentTarget.dataset.screen;
+    if (s) { this.setState({ screen: s }); const m = document.querySelector('main'); if (m) m.scrollTop = 0; }
+  };
+  selectEmail = (e) => {
+    const id = e.currentTarget.dataset.id;
+    if (id) this.setState({ selectedEmailId: id });
+  };
+  setRange = (e) => { const r = e.currentTarget.dataset.range; if (r) this.setState({ range: r }); };
+  processEmail = (e) => {
+    const id = this.state.selectedEmailId;
+    const label = e.currentTarget.dataset.label || 'Done';
+    this.setState({ processedEmails: { ...this.state.processedEmails, [id]: true } });
+    this.toast('✓ ' + label + ' — email processed & filed');
+  };
+  openRes = (e) => { const id = e.currentTarget.dataset.id; if (id) this.setState({ selectedResId: id }); };
+  closeRes = () => this.setState({ selectedResId: null });
+  stop = (e) => e.stopPropagation();
+  acceptJob = (e) => { const id = e.currentTarget.dataset.id; this.setState({ acceptedJobs: { ...this.state.acceptedJobs, [id]: true } }); this.toast('✓ Job accepted — owner & guest notified'); };
+  doneJob = (e) => { const id = e.currentTarget.dataset.id; this.setState({ doneJobs: { ...this.state.doneJobs, [id]: true } }); this.toast('✓ Marked complete — photo logged, invoice drafted'); };
+  approveDisbursement = () => { if (this.state.disbursed) return; this.setState({ disbursed: true }); this.toast('✓ Disbursement approved — $28,610 to 3 owners · statements issued'); };
+  simpleToast = (e) => { this.toast(e.currentTarget.dataset.msg || 'Done'); };
+  setResTab = (e) => { const t = e.currentTarget.dataset.tab; if (t) this.setState({ resTab: t }); };
+  openAi = () => this.setState({ aiOpen: true });
+  closeAi = () => this.setState({ aiOpen: false });
+  askAi = (e) => { const q = e.currentTarget.dataset.q; if (q) this.runAi(q); };
+  sendAi = () => {
+    const inp = document.getElementById('ai-input');
+    const q = inp ? inp.value.trim() : '';
+    if (q) { if (inp) inp.value = ''; this.runAi(q); }
+  };
+  aiKey = (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.sendAi(); } };
+  runAi = async (q) => {
+    const msgs = [...this.state.aiMsgs, { role:'user', text:q }];
+    this.setState({ aiMsgs: msgs, aiBusy: true });
+    setTimeout(() => { const b = document.getElementById('ai-scroll'); if (b) b.scrollTop = b.scrollHeight; }, 30);
+    const context = `You are the HRS PMS assistant for Holiday Rental Specialists, a holiday-letting manager across the NSW Southern Highlands, South Coast and Port Stephens (387 homes). Today is Tuesday 30 June. Portfolio: 82% occupancy, $1.49M revenue MTD, ADR $385, guest rating 4.7. Today: 6 arrivals, 4 departures, 143 guests in-house, 9 new enquiries. Open work orders: 23 (4 high priority) — the urgent one is aircon not cooling at Belvedere Bayfront (Nelson Bay, owner D. Callaghan), guest in-house, best trade Coastal Electrical. Owners: The Whitfields (5 homes, Shoalhaven), D. Callaghan, The Ashby Family, P. & L. Mercer, S. Voss, The Tan Family. Top homes: Grants Retreat, Island Oasis, Belvedere Bayfront. Housekeeping this week: 96% on-time, 3.2h avg turnaround. Answer as a concise, warm operations assistant in 2-4 sentences. Be specific and practical. Use plain text only — no markdown, asterisks or bullet symbols.`;
+    let answer = '';
+    try {
+      if (window.claude && window.claude.complete) {
+        // Inside the Claude preview: use the built-in bridge
+        answer = await window.claude.complete(context + '\n\nManager asks: ' + q + '\n\nAssistant:');
+      } else {
+        // Deployed (e.g. Netlify): call our own serverless function
+        const resp = await fetch('/.netlify/functions/ai', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ system: context, question: q })
+        });
+        if (resp.ok) { const d = await resp.json(); answer = (d && d.text) || ''; }
+      }
+    } catch (err) { answer = ''; }
+    if (!answer) answer = "I couldn't reach the assistant just now — check the API key is set in Netlify, then try again.";
+    this.setState({ aiMsgs: [...msgs, { role:'ai', text: answer.trim() }], aiBusy: false });
+    setTimeout(() => { const b = document.getElementById('ai-scroll'); if (b) b.scrollTop = b.scrollHeight; }, 30);
+  };
+
+  get emailData() {
+    return [
+      { id:'e1', channel:'Airbnb', channelColor:'#ff5a5f', name:'The Hargreaves', time:'9:12am',
+        subject:'Reservation confirmed — HMABCX3 · Belvedere Bayfront', fromLine:'Airbnb <automated@airbnb.com>',
+        kind:'New booking', kindColor:'#1a9e6a', confidence:'96%', primaryAction:'Create reservation', secondaryAction:'Edit details',
+        body:'You have a confirmed booking!\n\nGuest: Michael Hargreaves\nProperty: Belvedere Bayfront (Nelson Bay)\nCheck-in: Tue 30 Jun 2026\nCheck-out: Sun 5 Jul 2026\nGuests: 4 (2 adults, 2 children)\nTotal payout: AUD $2,140.00\nConfirmation code: HMABCX3',
+        fields:[{k:'Property',v:'Belvedere Bayfront'},{k:'Guest',v:'Michael Hargreaves'},{k:'Dates',v:'30 Jun – 5 Jul (5 nts)'},{k:'Guests',v:'4'},{k:'Channel payout',v:'$2,140.00'},{k:'Owner',v:'D. Callaghan'}] },
+      { id:'e2', channel:'Guest', channelColor:'#c98a1a', name:'guest@bayfront-stay', time:'9:31am',
+        subject:'Aircon not cooling in main bedroom', fromLine:'m.hargreaves@gmail.com',
+        kind:'Maintenance', kindColor:'#c0392b', confidence:'93%', primaryAction:'Raise work order', secondaryAction:'Reply to guest',
+        body:'Hi, we checked in yesterday at Belvedere Bayfront and the air conditioner in the main bedroom is running but not cooling at all. It was a warm night. Could someone take a look today? Thanks, Michael.',
+        fields:[{k:'Type',v:'Maintenance — HVAC'},{k:'Property',v:'Belvedere Bayfront'},{k:'Priority',v:'High (guest in-house)'},{k:'Reported by',v:'Guest — M. Hargreaves'},{k:'Suggested trade',v:'Coastal Electrical'},{k:'Links to',v:'Reservation HMABCX3'}] },
+      { id:'e3', channel:'Owner', channelColor:'#0e2c46', name:'The Whitfields (owner)', time:'8:48am',
+        subject:'Query on June statement — Island Oasis', fromLine:'j.whitfield@bigpond.com',
+        kind:'Owner query', kindColor:'#2f7d94', confidence:'90%', primaryAction:'Open owner ledger', secondaryAction:'Draft reply',
+        body:'Morning team, can you confirm the cleaning charges on the June statement for Island Oasis? We had 6 turnovers but I count 7 cleaning lines. Also when is the payout landing? Cheers.',
+        fields:[{k:'Type',v:'Owner — billing query'},{k:'Owner',v:'The Whitfields'},{k:'Property',v:'Island Oasis'},{k:'Re',v:'June statement · cleaning'},{k:'Payout status',v:'Cleared — $14,160'},{k:'Action',v:'Reconcile turnover count'}] },
+      { id:'e4', channel:'Stayz', channelColor:'#2f7d94', name:'New enquiry — J. Patel', time:'7:55am',
+        subject:'Availability request — 7 nights, Shoalhaven', fromLine:'enquiries@stayz.com.au',
+        kind:'Enquiry / lead', kindColor:'#c98a1a', confidence:'88%', primaryAction:'Send quote', secondaryAction:'Add to pipeline',
+        body:'Hi, looking for a waterfront home in Shoalhaven for 8 guests, 7 nights from 12 July. Budget around $600/night. Do you have anything with a pool and boat ramp? Regards, Jay Patel.',
+        fields:[{k:'Type',v:'Enquiry — new lead'},{k:'Guests',v:'8'},{k:'Region',v:'Shoalhaven (waterfront)'},{k:'Dates',v:'12–19 Jul (7 nts)'},{k:'Budget',v:'~$600 / night'},{k:'Best match',v:'Island Oasis · Grants Retreat'}] },
+      { id:'e5', channel:'Booking', channelColor:'#8aa0b2', name:'Booking.com', time:'Yesterday',
+        subject:'Cancellation — 2384119 · Hillside Retreat', fromLine:'noreply@booking.com',
+        kind:'Cancellation', kindColor:'#c0392b', confidence:'95%', primaryAction:'Release dates', secondaryAction:'Notify owner',
+        body:'A reservation has been cancelled.\n\nProperty: Hillside Retreat (Bowral)\nGuest: R. Turner\nDates: 4–7 Jul\nReason: Guest cancelled\nCancellation fee applies: $180 (per policy)',
+        fields:[{k:'Type',v:'Cancellation'},{k:'Property',v:'Hillside Retreat'},{k:'Dates freed',v:'4–7 Jul (3 nts)'},{k:'Cancellation fee',v:'$180'},{k:'Owner',v:"P. & L. Mercer"},{k:'Action',v:'Re-open on channels'}] },
+    ];
+  }
+
+  get propData() {
+    const rc = (r) => r >= 4.7 ? '#1a9e6a' : (r >= 4.4 ? '#c98a1a' : '#c0392b');
+    return [
+      { name:'Grants Retreat', sub:'Shoalhaven · The Whitfields', img:'images/grants-retreat.jpg', rev:'$12,400', occ:'91%', rating:'4.9', status:'In stay' },
+      { name:'Island Oasis', sub:'Shoalhaven · The Whitfields', img:'images/island-oasis.jpg', rev:'$9,840', occ:'94%', rating:'4.9', status:'In stay' },
+      { name:'Belvedere Bayfront', sub:'Nelson Bay · D. Callaghan', img:'images/belvedere.jpg', rev:'$8,610', occ:'89%', rating:'4.8', status:'Arrives 3pm' },
+      { name:'Sea Light', sub:'Culburra · D. Callaghan', img:'images/sea-light.jpg', rev:'$7,900', occ:'88%', rating:'4.8', status:'Arrives 2pm' },
+      { name:'Palm Oasis', sub:'Gerringong · The Ashby Family', img:'images/palm-oasis.jpg', rev:'$7,250', occ:'86%', rating:'4.7', status:'In stay' },
+      { name:'Sandy Paws', sub:'Huskisson · The Ashby Family', img:'images/sandy-paws.jpg', rev:'$6,340', occ:'82%', rating:'4.6', status:'Departing' },
+      { name:'Burrangarra', sub:'Callala Beach · S. Voss', img:'images/burrangarra.jpg', rev:'$5,120', occ:'71%', rating:'4.4', status:'Arrives 4pm' },
+      { name:'Hillside Retreat', sub:"Bowral · P. & L. Mercer", img:'images/hillside.jpg', rev:'$3,980', occ:'58%', rating:'4.1', status:'Vacant' },
+    ].map(p => ({ ...p, ratingColor: rc(parseFloat(p.rating)) }));
+  }
+
+  renderVals() {
+    const s = this.state.screen;
+    const props = this.propData;
+    const sel = this.emailData.find(e => e.id === this.state.selectedEmailId) || this.emailData[0];
+    const titles = { dashboard:'Dashboard', performance:'Property performance', reservations:'Reservations', owners:'Owners & clients', inbox:'Inbox & enquiries', workorders:'Work orders', housekeeping:'Housekeeping & laundry', qa:'Q&A / audits', invoicing:'Invoicing', trust:'Trust accounting', ownerportal:'Owner portal', contractorportal:'Contractor portal' };
+
+    const kpiSets = {
+      week:  { rev:'$342k', occ:'79%', adr:'$372', revpar:'$294', revNote:'▲ 6.1% vs last wk', occNote:'▲ 2.1 pts', note:'This week' },
+      month: { rev:'$1.49M', occ:'82%', adr:'$385', revpar:'$316', revNote:'▲ 11.2% vs last June', occNote:'▲ 4.0 pts', note:'Rolling 12 months' },
+      ytd:   { rev:'$8.74M', occ:'80%', adr:'$379', revpar:'$303', revNote:'▲ 14.3% YoY', occNote:'▲ 3.4 pts', note:'Year to date' },
+    };
+    const K = kpiSets[this.state.range] || kpiSets.month;
+    const rBg = (r) => this.state.range===r ? '#0e2c46' : 'transparent';
+    const rCol = (r) => this.state.range===r ? '#fff' : '#6c7a86';
+    const reservationsData = [
+      { id:'r1', name:'Belvedere Bayfront', suburb:'Nelson Bay', img:'images/belvedere.jpg', guest:'The Hargreaves', guestLine:'The Hargreaves · 4 guests · 5 nts', pax:'4 guests', stay:'30 Jun – 5 Jul', nights:'5 nights', owner:'D. Callaghan', channel:'Airbnb', channelColor:'#ff5a5f', status:'Arrives 3pm', statusColor:'#137a4f', statusBg:'#e4f4ec', value:'$2,140', phone:'0412 884 201' },
+      { id:'r2', name:'Burrangarra', suburb:'Callala Beach', img:'images/burrangarra.jpg', guest:'M. Nguyen', guestLine:'M. Nguyen · 6 guests · 3 nts', pax:'6 guests', stay:'30 Jun – 3 Jul', nights:'3 nights', owner:'S. Voss', channel:'Booking', channelColor:'#8aa0b2', status:'Arrives 4pm', statusColor:'#137a4f', statusBg:'#e4f4ec', value:'$1,485', phone:'0421 550 138' },
+      { id:'r3', name:'Sea Light', suburb:'Culburra', img:'images/sea-light.jpg', guest:'The Alonso family', guestLine:'The Alonso family · 5 guests · 6 nts', pax:'5 guests', stay:'30 Jun – 6 Jul', nights:'6 nights', owner:'D. Callaghan', channel:'Direct', channelColor:'#0e2c46', status:'Arrives 2pm', statusColor:'#137a4f', statusBg:'#e4f4ec', value:'$2,760', phone:'0438 227 906' },
+      { id:'r4', name:'Island Oasis', suburb:'Shoalhaven', img:'images/island-oasis.jpg', guest:'The Patels', guestLine:'The Patels · 8 guests · 7 nts', pax:'8 guests', stay:'30 Jun – 7 Jul', nights:'7 nights', owner:'The Whitfields', channel:'Stayz', channelColor:'#2f7d94', status:'Self check-in', statusColor:'#9a6c14', statusBg:'#fbf1db', value:'$4,690', phone:'0455 812 340' },
+      { id:'r5', name:'Sunshine Retreat', suburb:'Culburra', img:'images/sunshine.jpg', guest:'K. Brooks', guestLine:'K. Brooks · 4 guests · 4 nts', pax:'4 guests', stay:'30 Jun – 4 Jul', nights:'4 nights', owner:'The Ashby Family', channel:'Airbnb', channelColor:'#ff5a5f', status:'Arrives 4pm', statusColor:'#137a4f', statusBg:'#e4f4ec', value:'$1,720', phone:'0402 119 573' },
+      { id:'r6', name:'Arcadia Cottage', suburb:'Southern Highlands', img:'images/arcadia.jpg', guest:'D. Fraser', guestLine:'D. Fraser · 2 guests · 2 nts', pax:'2 guests', stay:'30 Jun – 2 Jul', nights:'2 nights', owner:'P. & L. Mercer', channel:'Direct', channelColor:'#0e2c46', status:'Arrives 3pm', statusColor:'#137a4f', statusBg:'#e4f4ec', value:'$980', phone:'0417 665 002' },
+    ];
+    const selRes = reservationsData.find(r => r.id===this.state.selectedResId) || null;
+    const selProcessed = !!this.state.processedEmails[this.state.selectedEmailId];
+    const rt = this.state.resTab;
+    const tabBg = (t) => rt===t ? '#0e2c46' : '#fff';
+    const tabCol = (t) => rt===t ? '#fff' : '#6c7a86';
+    const tabBd = (t) => rt===t ? '#0e2c46' : '#e8e2d6';
+    const departuresData = [
+      { id:'r3', name:'Palm Oasis', suburb:'Gerringong', img:'images/palm-oasis.jpg', guestLine:'The Reddy family · 6 guests · departed', owner:'The Ashby Family', channel:'Airbnb', channelColor:'#ff5a5f', status:'Cleaned', statusColor:'#137a4f', statusBg:'#e4f4ec', value:'$3,120', guest:'The Reddy family', pax:'6 guests', stay:'25–30 Jun', nights:'5 nights', phone:'0410 553 921' },
+      { id:'r2', name:'Sandy Paws', suburb:'Huskisson', img:'images/sandy-paws.jpg', guestLine:'M. Okafor · 4 guests · departed 10am', owner:'The Ashby Family', channel:'Direct', channelColor:'#0e2c46', status:'Clean 2pm', statusColor:'#9a6c14', statusBg:'#fbf1db', value:'$1,880', guest:'M. Okafor', pax:'4 guests', stay:'27–30 Jun', nights:'3 nights', phone:'0419 662 044' },
+      { id:'r4', name:'Hillside Retreat', suburb:'Bowral', img:'images/hillside.jpg', guestLine:'D. Cheng · 2 guests · departed 10am', owner:'P. & L. Mercer', channel:'Stayz', channelColor:'#2f7d94', status:'Inspect', statusColor:'#2f6076', statusBg:'#e7f0f4', value:'$960', guest:'D. Cheng', pax:'2 guests', stay:'28–30 Jun', nights:'2 nights', phone:'0402 887 130' },
+      { id:'r1', name:'Arcadia Cottage', suburb:'Sthn Highlands', img:'images/arcadia.jpg', guestLine:'The Bianchi family · 5 guests · departed', owner:'P. & L. Mercer', channel:'Airbnb', channelColor:'#ff5a5f', status:'Cleaned', statusColor:'#137a4f', statusBg:'#e4f4ec', value:'$2,240', guest:'The Bianchi family', pax:'5 guests', stay:'23–30 Jun', nights:'7 nights', phone:'0433 209 776' },
+    ];
+    const inStayData = [
+      { id:'r4', name:'Island Oasis', suburb:'Shoalhaven', img:'images/island-oasis.jpg', guestLine:'The Patels · 8 guests · night 3 of 7', owner:'The Whitfields', channel:'Stayz', channelColor:'#2f7d94', status:'Night 3/7', statusColor:'#2f6076', statusBg:'#e7f0f4', value:'$4,690', guest:'The Patels', pax:'8 guests', stay:'28 Jun–5 Jul', nights:'7 nights', phone:'0455 812 340' },
+      { id:'r1', name:'Grants Retreat', suburb:'Shoalhaven', img:'images/grants-retreat.jpg', guestLine:'The Hoffman party · 10 guests · night 2 of 5', owner:'The Whitfields', channel:'Direct', channelColor:'#0e2c46', status:'Night 2/5', statusColor:'#2f6076', statusBg:'#e7f0f4', value:'$8,900', guest:'The Hoffman party', pax:'10 guests', stay:'29 Jun–4 Jul', nights:'5 nights', phone:'0417 330 218' },
+      { id:'r3', name:'Sea Light', suburb:'Culburra', img:'images/sea-light.jpg', guestLine:'J. Marsden · 4 guests · night 5 of 6', owner:'D. Callaghan', channel:'Airbnb', channelColor:'#ff5a5f', status:'Departs tmrw', statusColor:'#9a6c14', statusBg:'#fbf1db', value:'$3,540', guest:'J. Marsden', pax:'4 guests', stay:'25 Jun–1 Jul', nights:'6 nights', phone:'0438 990 145' },
+      { id:'r2', name:'Sunshine Retreat', suburb:'Culburra', img:'images/sunshine.jpg', guestLine:'The Novak family · 5 guests · night 1 of 4', owner:'The Ashby Family', channel:'Booking', channelColor:'#8aa0b2', status:'Night 1/4', statusColor:'#2f6076', statusBg:'#e7f0f4', value:'$1,720', guest:'The Novak family', pax:'5 guests', stay:'29 Jun–3 Jul', nights:'4 nights', phone:'0402 119 573' },
+    ];
+    const calDays = ['Mon 30','Tue 1','Wed 2','Thu 3','Fri 4','Sat 5','Sun 6'];
+    const calRows = [
+      { name:'Island Oasis', img:'images/island-oasis.jpg', bars:[{label:'The Patels',left:0,span:5,color:'#2f7d94'}] },
+      { name:'Grants Retreat', img:'images/grants-retreat.jpg', bars:[{label:'Hoffman party',left:0,span:4,color:'#0e2c46'},{label:'Nguyen',left:5,span:2,color:'#cf9a34'}] },
+      { name:'Belvedere Bayfront', img:'images/belvedere.jpg', bars:[{label:'Hargreaves',left:0,span:5,color:'#ff5a5f'}] },
+      { name:'Sea Light', img:'images/sea-light.jpg', bars:[{label:'Marsden',left:0,span:2,color:'#ff5a5f'},{label:'Open',left:2,span:3,color:'#dfe6ea',ghost:true},{label:'Alonso',left:5,span:2,color:'#0e2c46'}] },
+      { name:'Palm Oasis', img:'images/palm-oasis.jpg', bars:[{label:'Open',left:0,span:2,color:'#dfe6ea',ghost:true},{label:'Reddy',left:2,span:4,color:'#2f7d94'}] },
+      { name:'Sunshine Retreat', img:'images/sunshine.jpg', bars:[{label:'Novak family',left:0,span:4,color:'#8aa0b2'}] },
+    ].map(r => ({ ...r, bars: r.bars.map(b => ({ ...b, leftPct: (b.left/7*100)+'%', widthPct: (b.span/7*100)+'%', txtColor: b.ghost ? '#8a97a0' : '#fff', barBg: b.color })) }));
+    return {
+      nav: this.nav,
+      selectEmail: this.selectEmail,
+      setRange: this.setRange, processEmail: this.processEmail, openRes: this.openRes, closeRes: this.closeRes,
+      acceptJob: this.acceptJob, doneJob: this.doneJob, approveDisbursement: this.approveDisbursement, simpleToast: this.simpleToast, stop: this.stop,
+      toastMsg: this.state.toast, hasToast: !!this.state.toast,
+      kRev:K.rev, kOcc:K.occ, kAdr:K.adr, kRevpar:K.revpar, kRevNote:K.revNote, kOccNote:K.occNote, chartNote:K.note,
+      rWeekBg:rBg('week'), rWeekCol:rCol('week'), rMonthBg:rBg('month'), rMonthCol:rCol('month'), rYtdBg:rBg('ytd'), rYtdCol:rCol('ytd'),
+      selRes, hasRes: !!selRes,
+      reservationsData,
+      setResTab: this.setResTab,
+      isResArrivals: rt==='arrivals', isResDepartures: rt==='departures', isResInStay: rt==='instay', isResCalendar: rt==='calendar',
+      tabArrBg:tabBg('arrivals'), tabArrCol:tabCol('arrivals'), tabArrBd:tabBd('arrivals'),
+      tabDepBg:tabBg('departures'), tabDepCol:tabCol('departures'), tabDepBd:tabBd('departures'),
+      tabStayBg:tabBg('instay'), tabStayCol:tabCol('instay'), tabStayBd:tabBd('instay'),
+      tabCalBg:tabBg('calendar'), tabCalCol:tabCol('calendar'), tabCalBd:tabBd('calendar'),
+      departuresData, inStayData, calDays, calRows,
+      openAi: this.openAi, closeAi: this.closeAi, sendAi: this.sendAi, askAi: this.askAi, aiKey: this.aiKey,
+      aiOpen: this.state.aiOpen, aiBusy: this.state.aiBusy,
+      aiMsgs: this.state.aiMsgs.map(m => m.role==='user'
+        ? { ...m, align:'flex-end', bg:'#0e2c46', color:'#fff', radius:'14px 14px 4px 14px' }
+        : { ...m, align:'flex-start', bg:'#fff', color:'#2a3944', radius:'14px 14px 14px 4px' }),
+      selProcessed, notProcessed: !selProcessed,
+      job1042Open: !this.state.acceptedJobs['1042'], job1042Accepted: !!this.state.acceptedJobs['1042'],
+      job1039Open: !this.state.doneJobs['1039'], job1039Done: !!this.state.doneJobs['1039'],
+      disbursed: this.state.disbursed, notDisbursed: !this.state.disbursed,
+      screenTitle: titles[s] || 'Dashboard',
+      isDashboard: s==='dashboard', isPerformance: s==='performance', isReservations: s==='reservations',
+      isOwners: s==='owners', isInbox: s==='inbox', isWorkorders: s==='workorders', isHousekeeping: s==='housekeeping',
+      isQa: s==='qa', isInvoicing: s==='invoicing', isTrust: s==='trust', isOwnerPortal: s==='ownerportal', isContractorPortal: s==='contractorportal',
+
+      topProps: props.slice(0,5),
+      allProps: props,
+
+      emails: this.emailData.map(e => ({ ...e, rowBg: e.id===this.state.selectedEmailId ? '#fbf6ea' : '#fff', processed: !!this.state.processedEmails[e.id] })),
+      selectedEmail: sel,
+
+      reservations: reservationsData,
+
+      turnovers: [
+        { name:'Palm Oasis', img:'images/palm-oasis.jpg', team:'Sparkle Co.', checkin:'3:00pm', status:'Cleaning', statusColor:'#2f7d94', statusBg:'#e7f0f4' },
+        { name:'Sandy Paws', img:'images/sandy-paws.jpg', team:'Coastal Cleans', checkin:'—', status:'Done', statusColor:'#137a4f', statusBg:'#e4f4ec' },
+        { name:'Belvedere Bayfront', img:'images/belvedere.jpg', team:'Bay Housekeeping', checkin:'3:00pm', status:'Pending', statusColor:'#9a6c14', statusBg:'#fbf1db' },
+        { name:'Island Oasis', img:'images/island-oasis.jpg', team:'Sparkle Co.', checkin:'Self', status:'Done', statusColor:'#137a4f', statusBg:'#e4f4ec' },
+        { name:'Sea Light', img:'images/sea-light.jpg', team:'Coastal Cleans', checkin:'2:00pm', status:'Cleaning', statusColor:'#2f7d94', statusBg:'#e7f0f4' },
+      ],
+
+      scorecards: [
+        { name:'Sparkle Co.', jobs:'42', ontime:'98%', otColor:'#137a4f', grade:'A+', gradeColor:'#1a9e6a' },
+        { name:'Coastal Cleans', jobs:'38', ontime:'94%', otColor:'#137a4f', grade:'A', gradeColor:'#1a9e6a' },
+        { name:'Coastal Electrical', jobs:'19', ontime:'95%', otColor:'#137a4f', grade:'A', gradeColor:'#1a9e6a' },
+        { name:'Bay Housekeeping', jobs:'31', ontime:'88%', otColor:'#9a6c14', grade:'B+', gradeColor:'#c98a1a' },
+        { name:'Highlands Home Care', jobs:'24', ontime:'79%', otColor:'#c0392b', grade:'C', gradeColor:'#c0392b' },
+      ],
+
+      invoices: [
+        { no:'INV-2084', to:'D. Callaghan', for:'Mgmt & services · June', amount:'$2,760', status:'Sent', statusColor:'#9a6c14', statusBg:'#fbf1db' },
+        { no:'INV-2083', to:'The Whitfields', for:'Mgmt & services · June', amount:'$5,420', status:'Paid', statusColor:'#137a4f', statusBg:'#e4f4ec' },
+        { no:'INV-2082', to:'The Ashby Family', for:'Mgmt & services · June', amount:'$3,180', status:'Paid', statusColor:'#137a4f', statusBg:'#e4f4ec' },
+        { no:'INV-2081', to:'Coastal Electrical', for:'Aircon repair · WO-1042', amount:'$340', status:'Approved', statusColor:'#2f6076', statusBg:'#e7f0f4' },
+        { no:'INV-2079', to:"P. & L. Mercer", for:'Mgmt & services · June', amount:'$2,180', status:'Overdue', statusColor:'#a5352a', statusBg:'#fdece9' },
+        { no:'INV-2078', to:'S. Voss', for:'Mgmt & services · June', amount:'$1,940', status:'Paid', statusColor:'#137a4f', statusBg:'#e4f4ec' },
+      ],
+
+      ledger: [
+        { date:'30 Jun', desc:'Booking receipt — Island Oasis (Stayz)', amount:'+$4,690', amtColor:'#1a9e6a', balance:'$482,140' },
+        { date:'30 Jun', desc:'Booking receipt — Belvedere (Airbnb)', amount:'+$2,140', amtColor:'#1a9e6a', balance:'$477,450' },
+        { date:'29 Jun', desc:'Owner disbursement — The Ashby Family', amount:'−$9,880', amtColor:'#c0392b', balance:'$475,310' },
+        { date:'29 Jun', desc:'Contractor payment — Coastal Electrical', amount:'−$340', amtColor:'#c0392b', balance:'$485,190' },
+        { date:'28 Jun', desc:'Booking receipt — Grants Retreat (Direct)', amount:'+$5,880', amtColor:'#1a9e6a', balance:'$485,530' },
+        { date:'28 Jun', desc:'Management fee sweep — June', amount:'−$18,400', amtColor:'#c0392b', balance:'$479,650' },
+      ],
+
+      owners: [
+        { name:'The Whitfields', initials:'JW', avatarBg:'#0e2c46', homes:'5', region:'Shoalhaven', rev:'$41,300', occ:'91%', payout:'$14,160' },
+        { name:'D. Callaghan', initials:'DC', avatarBg:'#2f7d94', homes:'3', region:'Nelson Bay', rev:'$24,800', occ:'88%', payout:'$8,420' },
+        { name:'The Ashby Family', initials:'AF', avatarBg:'#cf9a34', homes:'4', region:'Jervis Bay', rev:'$28,100', occ:'84%', payout:'$9,880' },
+        { name:"P. & L. Mercer", initials:'PM', avatarBg:'#7a5c9e', homes:'2', region:'Southern Highlands', rev:'$11,400', occ:'63%', payout:'$6,030' },
+        { name:'S. Voss', initials:'SV', avatarBg:'#3a7a5c', homes:'3', region:'Callala', rev:'$18,600', occ:'79%', payout:'$5,240' },
+        { name:'The Tan Family', initials:'TF', avatarBg:'#164066', homes:'2', region:'Culburra', rev:'$15,900', occ:'86%', payout:'$4,720' },
+      ],
+
+      workorders: [
+        { id:'1042', issue:'Aircon not cooling', property:'Belvedere Bayfront', note:'Nelson Bay · from guest email 9:31am', owner:'D. Callaghan', assignee:'Unassigned', assigneeColor:'#c0392b', dot:'#c0392b', status:'High', statusColor:'#a5352a', statusBg:'#fdece9' },
+        { id:'1041', issue:'Pool filter service', property:'Island Oasis', note:'Shoalhaven · scheduled 2:00pm', owner:'The Whitfields', assignee:'AquaPool Tech', assigneeColor:'#4a5b66', dot:'#c98a1a', status:'Scheduled', statusColor:'#9a6c14', statusBg:'#fbf1db' },
+        { id:'1039', issue:'Bedroom light flickering', property:'Burrangarra', note:'Callala Beach · electrician en route', owner:'S. Voss', assignee:'Coastal Elec.', assigneeColor:'#4a5b66', dot:'#2f7d94', status:'In prog', statusColor:'#2f6076', statusBg:'#e7f0f4' },
+        { id:'1038', issue:'Deep clean before turnover', property:'Palm Oasis', note:'Gerringong · check-in 3pm', owner:'The Ashby Family', assignee:'Sparkle Co.', assigneeColor:'#4a5b66', dot:'#2f7d94', status:'In prog', statusColor:'#2f6076', statusBg:'#e7f0f4' },
+        { id:'1036', issue:'Pest treatment — spiders', property:'Hillside Retreat', note:'Bowral · flagged at checkout', owner:"P. & L. Mercer", assignee:'PestGuard', assigneeColor:'#4a5b66', dot:'#c98a1a', status:'Scheduled', statusColor:'#9a6c14', statusBg:'#fbf1db' },
+        { id:'1034', issue:'Replace BBQ gas bottle', property:'Sandy Paws', note:'Huskisson · completed 11:40am', owner:'The Ashby Family', assignee:'J. Reyes', assigneeColor:'#4a5b66', dot:'#1a9e6a', status:'Done', statusColor:'#137a4f', statusBg:'#e4f4ec' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

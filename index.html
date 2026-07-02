@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HRS PMS — Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;background:#0e2c46;color:#fff;font-family:'IBM Plex Sans',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px}
+  .wrap{width:100%;max-width:920px}
+  .brand{display:flex;align-items:center;gap:14px;margin-bottom:38px}
+  .mark{width:48px;height:48px;border-radius:12px;background:#cf9a34;color:#0e2c46;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:23px;font-family:'Spectral',serif}
+  h1{font-family:'Spectral',serif;font-weight:600;font-size:44px;letter-spacing:-.01em;margin:0 0 10px}
+  .sub{color:#9fb8cc;font-size:18px;margin:0 0 40px;max-width:620px;line-height:1.5}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  a.card{display:block;text-decoration:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px 30px;transition:transform .16s ease,background .16s ease}
+  a.card:hover{transform:translateY(-3px);background:rgba(255,255,255,.1)}
+  .ico{font-size:26px;margin-bottom:14px}
+  .ct{font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#fff}
+  .cd{color:#9fb8cc;font-size:15px;margin-top:6px;line-height:1.5}
+  .go{color:#cf9a34;font-weight:600;font-size:14px;margin-top:16px;display:inline-block}
+  .foot{color:#5f7d97;font-size:13px;margin-top:40px}
+  @media(max-width:640px){.cards{grid-template-columns:1fr}h1{font-size:34px}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand"><div class="mark">H</div><div><div style="font-family:'Spectral',serif;font-weight:600;font-size:19px">Holiday Rental Specialists</div><div style="color:#7f9bb2;font-size:13px;letter-spacing:.06em">PMS · PROTOTYPE DEMO</div></div></div>
+    <h1>An AI letting platform, built the way you work.</h1>
+    <p class="sub">A working prototype and pitch, shaped around the HRS operation. Choose where to start.</p>
+    <div class="cards">
+      <a class="card" href="./app.html">
+        <div class="ico">🖥️</div>
+        <div class="ct">The Platform</div>
+        <div class="cd">Clickable prototype — dashboard, reservations, email rendering, housekeeping, invoicing, trust, portals and a live AI assistant.</div>
+        <span class="go">Open the app →</span>
+      </a>
+      <a class="card" href="./deck.html">
+        <div class="ico">📊</div>
+        <div class="ct">The Pitch Deck</div>
+        <div class="cd">15 slides — the premise, the modules, and where the platform goes. Use arrow keys to present.</div>
+        <span class="go">Open the deck →</span>
+      </a>
+    </div>
+    <div class="foot">Southern Highlands · South Coast · Port Stephens</div>
+  </div>
+</body>
+</html>

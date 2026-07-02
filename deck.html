@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#0a0a0a}</style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+  <!-- 1 · TITLE -->
+  <section data-label="Title" data-speaker-notes="Open warmly. This is a working prototype we've built specifically around how HRS operates — not a generic product pitch. Frame: we've reverse-engineered a platform from your workflow." style="width:1920px;height:1080px;position:relative;overflow:hidden;font-family:'IBM Plex Sans',sans-serif;background:#0e2c46">
+    <div style="position:absolute;inset:0;background-image:url('images/belvedere.jpg');background-size:cover;background-position:center;opacity:.5"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,#0e2c46 30%,rgba(14,44,70,.55) 100%)"></div>
+    <div style="position:absolute;inset:0;padding:110px 120px;display:flex;flex-direction:column;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:16px">
+        <div style="width:54px;height:54px;border-radius:13px;background:#cf9a34;color:#0e2c46;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:26px;font-family:'Spectral',serif">H</div>
+        <div style="color:#fff;font-family:'Spectral',serif;font-size:23px;font-weight:600;letter-spacing:.01em">Holiday Rental Specialists</div>
+      </div>
+      <div>
+        <div style="color:#cf9a34;font-size:22px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;margin-bottom:26px">A proposed operating platform</div>
+        <div style="color:#fff;font-family:'Spectral',serif;font-size:92px;font-weight:600;line-height:1.03;letter-spacing:-.02em;max-width:1300px">The letting platform,<br>built the way<br>you already work.</div>
+        <div style="color:#bcd0e0;font-size:29px;margin-top:34px;max-width:1040px;line-height:1.5">An AI-assisted property-management system for holiday letting — shaped around HRS's operation, not the other way around.</div>
+      </div>
+      <div style="color:#7f9bb2;font-size:20px;letter-spacing:.02em">Prototype demonstration · Southern Highlands · South Coast · Port Stephens</div>
+    </div>
+  </section>
+
+  <!-- 2 · CONTEXT -->
+  <section data-label="Context" data-speaker-notes="Establish HRS as the leader and the difficulty of the asset class. Short-term letting is decentralised, non-uniform, guests expect five-star everything. That's exactly what software should absorb." style="width:1920px;height:1080px;font-family:'IBM Plex Sans',sans-serif;background:#0e2c46;padding:96px 120px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box">
+    <div style="color:#cf9a34;font-size:21px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:28px">The starting point</div>
+    <div style="color:#fff;font-family:'Spectral',serif;font-size:62px;font-weight:600;line-height:1.12;max-width:1440px;letter-spacing:-.01em">A market leader running the hardest asset class in real estate.</div>
+    <div style="color:#bcd0e0;font-size:28px;margin-top:30px;max-width:1180px;line-height:1.55">Short-term letting is decentralised, non-uniform, and guests expect five-star service at every touchpoint. The winners are the operators whose <span style="color:#fff;font-weight:600">systems absorb that complexity</span>.</div>
+    <div style="display:flex;gap:22px;margin-top:64px">
+      <div style="flex:1;background:rgba(255,255,255,.06);border-radius:18px;padding:30px 32px"><div style="font-family:'Spectral',serif;font-size:56px;font-weight:600;color:#cf9a34">387</div><div style="color:#9fb8cc;font-size:21px;margin-top:6px">homes under management</div></div>
+      <div style="flex:1;background:rgba(255,255,255,.06);border-radius:18px;padding:30px 32px"><div style="font-family:'Spectral',serif;font-size:56px;font-weight:600;color:#cf9a34">3</div><div style="color:#9fb8cc;font-size:21px;margin-top:6px">regions, one operation</div></div>
+      <div style="flex:1;background:rgba(255,255,255,.06);border-radius:18px;padding:30px 32px"><div style="font-family:'Spectral',serif;font-size:56px;font-weight:600;color:#cf9a34">1,000s</div><div style="color:#9fb8cc;font-size:21px;margin-top:6px">of emails, cleans &amp; jobs a month</div></div>
+      <div style="flex:1;background:rgba(255,255,255,.06);border-radius:18px;padding:30px 32px"><div style="font-family:'Spectral',serif;font-size:56px;font-weight:600;color:#cf9a34">1</div><div style="color:#9fb8cc;font-size:21px;margin-top:6px">team, stretched across it all</div></div>
+    </div>
+  </section>
+
+  <!-- 3 · PREMISE -->
+  <section data-label="Premise" data-speaker-notes="This is the core philosophy slide. Most PMS force you to change how you work. We did the opposite — we built modules to match how HRS already runs. Deliver this line slowly." style="width:1920px;height:1080px;font-family:'IBM Plex Sans',sans-serif;background:#f4efe6;padding:120px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box">
+    <div style="color:#a97e20;font-size:21px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:34px">Our premise</div>
+    <div style="font-family:'Spectral',serif;font-size:74px;font-weight:600;line-height:1.14;color:#0e2c46;letter-spacing:-.015em;max-width:1560px">We didn't adjust the business to suit the platform.<br><span style="color:#cf9a34">We built the platform around the business.</span></div>
+    <div style="display:flex;align-items:center;gap:20px;margin-top:56px;max-width:1300px">
+      <div style="width:6px;align-self:stretch;background:#cf9a34;border-radius:4px"></div>
+      <div style="color:#3a4b56;font-size:30px;line-height:1.5">Every module started with one question — <span style="color:#0e2c46;font-weight:600">"what takes the most time, and what's the biggest hassle?"</span> — then removed or reduced it.</div>
+    </div>
+  </section>
+
+  <!-- 4 · HASSLES -->
+  <section data-label="Hassles → wins" data-speaker-notes="Make it concrete. Three real time-sinks and how the platform kills them. Invite HRS to name their own during the demo — this framing is the sales hook." style="width:1920px;height:1080px;font-family:'IBM Plex Sans',sans-serif;background:#f4efe6;padding:92px 120px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box">
+    <div style="color:#a97e20;font-size:21px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:20px">What we eliminate</div>
+    <div style="font-family:'Spectral',serif;font-size:52px;font-weight:600;color:#0e2c46;margin-bottom:52px">The hassles that eat the day.</div>
+    <div style="display:flex;gap:26px">
+      <div style="flex:1;background:#fff;border-radius:20px;padding:38px 34px;box-shadow:0 2px 20px rgba(14,44,70,.06)">
+        <div style="font-size:15px;font-weight:700;color:#c0392b;letter-spacing:.05em;text-transform:uppercase">The hassle</div>
+        <div style="font-family:'Spectral',serif;font-size:30px;color:#0e2c46;margin:10px 0 22px;line-height:1.25">Re-typing every booking &amp; enquiry from the inbox</div>
+        <div style="height:1px;background:#eee6d5;margin-bottom:22px"></div>
+        <div style="font-size:15px;font-weight:700;color:#1a9e6a;letter-spacing:.05em;text-transform:uppercase">We remove it</div>
+        <div style="font-size:23px;color:#3a4b56;margin-top:10px;line-height:1.45">The platform reads the email and renders it into a booking or job — no API needed.</div>
+      </div>
+      <div style="flex:1;background:#fff;border-radius:20px;padding:38px 34px;box-shadow:0 2px 20px rgba(14,44,70,.06)">
+        <div style="font-size:15px;font-weight:700;color:#c0392b;letter-spacing:.05em;text-transform:uppercase">The hassle</div>
+        <div style="font-family:'Spectral',serif;font-size:30px;color:#0e2c46;margin:10px 0 22px;line-height:1.25">Chasing cleaners, contractors &amp; linen by phone</div>
+        <div style="height:1px;background:#eee6d5;margin-bottom:22px"></div>
+        <div style="font-size:15px;font-weight:700;color:#1a9e6a;letter-spacing:.05em;text-transform:uppercase">We remove it</div>
+        <div style="font-size:23px;color:#3a4b56;margin-top:10px;line-height:1.45">Turnovers, work orders and laundry tags dispatch and track themselves.</div>
+      </div>
+      <div style="flex:1;background:#fff;border-radius:20px;padding:38px 34px;box-shadow:0 2px 20px rgba(14,44,70,.06)">
+        <div style="font-size:15px;font-weight:700;color:#c0392b;letter-spacing:.05em;text-transform:uppercase">The hassle</div>
+        <div style="font-family:'Spectral',serif;font-size:30px;color:#0e2c46;margin:10px 0 22px;line-height:1.25">Month-end invoicing, trust &amp; owner statements</div>
+        <div style="height:1px;background:#eee6d5;margin-bottom:22px"></div>
+        <div style="font-size:15px;font-weight:700;color:#1a9e6a;letter-spacing:.05em;text-transform:uppercase">We remove it</div>
+        <div style="font-size:23px;color:#3a4b56;margin-top:10px;line-height:1.45">Invoices build from the work done; trust reconciles; statements issue themselves.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · MODULE MAP -->
+  <section data-label="What we've built" data-speaker-notes="The breadth slide. Nine modules, one system where everything talks to each other. Note the ones highlighted in gold are fully clickable in the live demo." style="width:1920px;height:1080px;font-family:'IBM Plex Sans',sans-serif;background:#f4efe6;padding:88px 120px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:44px">
+      <div><div style="color:#a97e20;font-size:21px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:18px">The platform</div><div style="font-family:'Spectral',serif;font-size:52px;font-weight:600;color:#0e2c46">One system. Every part talks to the others.</div></div>
+      <div style="color:#6c7a86;font-size:20px;text-align:right;max-width:360px;line-height:1.4">Gold = built &amp; clickable in today's demo</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+      <div style="background:#0e2c46;border-radius:18px;padding:28px 30px"><div style="font-size:30px;margin-bottom:12px">✉</div><div style="color:#fff;font-size:26px;font-weight:600;font-family:'Spectral',serif">Email rendering</div><div style="color:#9fb8cc;font-size:19px;margin-top:6px">Inbox → structured data, no API</div></div>
+      <div style="background:#0e2c46;border-radius:18px;padding:28px 30px"><div style="font-size:30px;margin-bottom:12px">⚙</div><div style="color:#fff;font-size:26px;font-weight:600;font-family:'Spectral',serif">Operations</div><div style="color:#9fb8cc;font-size:19px;margin-top:6px">Work orders · allocations · contractors</div></div>
+      <div style="background:#0e2c46;border-radius:18px;padding:28px 30px"><div style="font-size:30px;margin-bottom:12px">$</div><div style="color:#fff;font-size:26px;font-weight:600;font-family:'Spectral',serif">Invoicing</div><div style="color:#9fb8cc;font-size:19px;margin-top:6px">Outcomes built from the work done</div></div>
+      <div style="background:#cf9a34;border-radius:18px;padding:28px 30px"><div style="font-size:30px;margin-bottom:12px">⊘</div><div style="color:#0e2c46;font-size:26px;font-weight:600;font-family:'Spectral',serif">Housekeeping &amp; laundry</div><div style="color:#5a4a1e;font-size:19px;margin-top:6px">Turnovers → tag printing</div></div>
+      <div style="background:#cf9a34;border-radius:18px;padding:28px 30px"><div style="font-size:30px;margin-bottom:12px">✓</div><div style="color:#0e2c46;font-size:26px;font-weight:600;font-family:'Spectral',serif">Q&amp;A / audits</div><div style="color:#5a4a1e;font-size:19px;margin-top:6px">Desktop &amp; physical · scorecards</div></div>
+      <div style="background:#cf9a34;border-radius:18px;padding:28px 30px"><div style="font-size:30px;margin-bottom:12px">⛁</div><div style="color:#0e2c46;font-size:26px;font-weight:600;font-family:'Spectral',serif">Trust accounting</div><div style="color:#5a4a1e;font-size:19px;margin-top:6px">Held · reconciled · disbursed</div></div>
+      <div style="background:#0e2c46;border-radius:18px;padding:28px 30px"><div style="font-size:30px;margin-bottom:12px">◈</div><div style="color:#fff;font-size:26px;font-weight:600;font-family:'Spectral',serif">Owner &amp; contractor portals</div><div style="color:#9fb8cc;font-size:19px;margin-top:6px">Transparency, both sides</div></div>
+      <div style="background:#0e2c46;border-radius:18px;padding:28px 30px"><div style="font-size:30px;margin-bottom:12px">▤</div><div style="color:#fff;font-size:26px;font-weight:600;font-family:'Spectral',serif">Management cockpit</div><div style="color:#9fb8cc;font-size:19px;margin-top:6px">Performance, revenue, KPIs</div></div>
+      <div style="background:#0e2c46;border-radius:18px;padding:28px 30px;border:1.5px dashed #cf9a34"><div style="font-size:30px;margin-bottom:12px">⚡</div><div style="color:#fff;font-size:26px;font-weight:600;font-family:'Spectral',serif">NBN &amp; comms</div><div style="color:#9fb8cc;font-size:19px;margin-top:6px">Cluster automation · next phase</div></div>
+    </div>
+  </section>
+
+  <!-- 6 · EMAIL RENDERING -->
+  <section data-label="Email rendering" data-speaker-notes="This is the hero capability. The point: we utilise the information you already receive, without needing a channel API. Show the live inbox screen right after this slide." style="width:1920px;height:1080px;font-family:'IBM Plex Sans',sans-serif;background:#0e2c46;display:flex;box-sizing:border-box">
+    <div style="width:47%;padding:110px 80px 110px 120px;display:flex;flex-direction:column;justify-content:center">
+      <div style="color:#cf9a34;font-size:21px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:26px">01 · Email rendering</div>
+      <div style="color:#fff;font-family:'Spectral',serif;font-size:60px;font-weight:600;line-height:1.1;letter-spacing:-.01em">Use the information<br>you already get.</div>
+      <div style="color:#bcd0e0;font-size:27px;margin-top:28px;line-height:1.5">Bookings, enquiries, cancellations and guest issues arrive as plain emails. The platform reads them and renders structured records — <span style="color:#fff;font-weight:600">no channel API required.</span></div>
+      <div style="color:#9fb8cc;font-size:23px;margin-top:24px;line-height:1.5">And if an API is available, we'll use it too. Either way, the re-typing stops.</div>
+    </div>
+    <div style="width:53%;padding:110px 120px 110px 20px;display:flex;flex-direction:column;justify-content:center;gap:20px">
+      <div style="background:#0a2136;border:1px solid #22496b;border-radius:16px;padding:26px 30px">
+        <div style="color:#7f9bb2;font-size:17px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:12px">Raw email in</div>
+        <div style="color:#cdd9e4;font-family:'IBM Plex Mono',monospace;font-size:20px;line-height:1.6">Guest: Michael Hargreaves<br>Property: Belvedere Bayfront<br>Check-in: 30 Jun · 5 nights · 4 guests<br>Payout: AUD $2,140.00</div>
+      </div>
+      <div style="display:flex;justify-content:center;color:#cf9a34;font-size:30px">↓</div>
+      <div style="background:#fff;border-radius:16px;padding:24px 28px;border:2px solid #cf9a34">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px"><span style="color:#a97e20;font-size:17px;font-weight:700;letter-spacing:.05em;text-transform:uppercase">✦ Rendered record</span><span style="font-size:16px;color:#1a9e6a;font-weight:600">● 96% confidence</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 26px">
+          <div><div style="color:#9aa6ac;font-size:16px">Property</div><div style="color:#14232e;font-size:22px;font-weight:600">Belvedere Bayfront</div></div>
+          <div><div style="color:#9aa6ac;font-size:16px">Dates</div><div style="color:#14232e;font-size:22px;font-weight:600">30 Jun – 5 Jul</div></div>
+          <div><div style="color:#9aa6ac;font-size:16px">Guests</div><div style="color:#14232e;font-size:22px;font-weight:600">4</div></div>
+          <div><div style="color:#9aa6ac;font-size:16px">Value</div><div style="color:#14232e;font-size:22px;font-weight:600">$2,140</div></div>
+        </div>
+        <div style="margin-top:18px;height:44px;background:#cf9a34;color:#0e2c46;border-radius:10px;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center">✓ Create reservation</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · OPERATIONS -->
+  <section data-label="Operations" data-speaker-notes="Overview module. The nervous system: an issue becomes a work order, gets allocated to the right contractor, tracked to done. Contractors carry scorecards." style="width:1920px;height:1080px;font-family:'IBM Plex Sans',sans-serif;background:#f4efe6;padding:92px 120px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box">
+    <div style="color:#a97e20;font-size:21px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:20px">02 · Operations</div>
+    <div style="font-family:'Spectral',serif;font-size:56px;font-weight:600;color:#0e2c46;max-width:1300px;line-height:1.1">From "something's broken" to "it's fixed" — tracked.</div>
+    <div style="color:#3a4b56;font-size:27px;margin-top:24px;max-width:1180px;line-height:1.5">A flag becomes a work order, allocates to the right contractor, and is tracked to completion — with a photo and an invoice at the end.</div>
+    <div style="display:flex;align-items:stretch;gap:0;margin-top:60px">
+      <div style="flex:1;background:#fff;border-radius:18px 0 0 18px;padding:32px;border-right:1px solid #eee6d5"><div style="font-size:28px">📩</div><div style="font-family:'Spectral',serif;font-size:27px;color:#0e2c46;margin-top:12px">Issue flagged</div><div style="color:#6c7a86;font-size:20px;margin-top:6px">Guest email or audit</div></div>
+      <div style="display:flex;align-items:center;padding:0 4px;background:#fff;color:#cf9a34;font-size:26px">→</div>
+      <div style="flex:1;background:#fff;padding:32px;border-right:1px solid #eee6d5"><div style="font-size:28px">⚙</div><div style="font-family:'Spectral',serif;font-size:27px;color:#0e2c46;margin-top:12px">Work order</div><div style="color:#6c7a86;font-size:20px;margin-top:6px">Priority &amp; property set</div></div>
+      <div style="display:flex;align-items:center;padding:0 4px;background:#fff;color:#cf9a34;font-size:26px">→</div>
+      <div style="flex:1;background:#fff;padding:32px;border-right:1px solid #eee6d5"><div style="font-size:28px">⚒</div><div style="font-family:'Spectral',serif;font-size:27px;color:#0e2c46;margin-top:12px">Allocated</div><div style="color:#6c7a86;font-size:20px;margin-top:6px">Right contractor, nearest</div></div>
+      <div style="display:flex;align-items:center;padding:0 4px;background:#fff;color:#cf9a34;font-size:26px">→</div>
+      <div style="flex:1;background:#0e2c46;border-radius:0 18px 18px 0;padding:32px"><div style="font-size:28px">✓</div><div style="font-family:'Spectral',serif;font-size:27px;color:#fff;margin-top:12px">Done &amp; billed</div><div style="color:#9fb8cc;font-size:20px;margin-top:6px">Photo + invoice logged</div></div>
+    </div>
+  </section>
+
+  <!-- 8 · HOUSEKEEPING + LAUNDRY -->
+  <section data-label="Housekeeping &amp; laundry" data-speaker-notes="Show the full chain: reporting through to the physical printed tag. This is a great tangible example of building software around a real operational need." style="width:1920px;height:1080px;font-family:'IBM Plex Sans',sans-serif;background:#f4efe6;display:flex;box-sizing:border-box">
+    <div style="width:52%;padding:100px 70px 100px 120px;display:flex;flex-direction:column;justify-content:center">
+      <div style="color:#a97e20;font-size:21px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:22px">03 · Housekeeping &amp; laundry</div>
+      <div style="font-family:'Spectral',serif;font-size:56px;font-weight:600;color:#0e2c46;line-height:1.1">Reporting all the way<br>to the printed tag.</div>
+      <div style="color:#3a4b56;font-size:27px;margin-top:26px;line-height:1.5;max-width:640px">Turnovers schedule from the booking calendar. Linen sets, run numbers and barcodes print straight to the label printer — and scan back in on return.</div>
+      <div style="display:flex;gap:40px;margin-top:44px">
+        <div><div style="font-family:'Spectral',serif;font-size:48px;font-weight:600;color:#cf9a34">96%</div><div style="color:#6c7a86;font-size:20px">on-time turnovers</div></div>
+        <div><div style="font-family:'Spectral',serif;font-size:48px;font-weight:600;color:#cf9a34">3.2h</div><div style="color:#6c7a86;font-size:20px">avg turnaround</div></div>
+      </div>
+    </div>
+    <div style="width:48%;background:#0e2c46;display:flex;align-items:center;justify-content:center;padding:80px">
+      <div style="width:420px;background:#fff;border:3px dashed #c9bfa8;border-radius:18px;padding:34px;font-family:'IBM Plex Mono',monospace">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font-size:30px;font-weight:700;color:#0e2c46;font-family:'IBM Plex Sans'">Island Oasis</div><div style="font-size:19px;color:#6c7a86;margin-top:2px">Shoalhaven · The Whitfields</div></div><div style="width:78px;height:78px;background:repeating-linear-gradient(90deg,#0e2c46,#0e2c46 4px,#fff 4px,#fff 7px);border-radius:6px"></div></div>
+        <div style="height:1px;background:#eee6d5;margin:22px 0"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:21px;color:#14232e"><div><span style="color:#9aa6ac">Set</span><br>King ×2, Queen ×1</div><div><span style="color:#9aa6ac">Bath</span><br>Towels ×8</div><div><span style="color:#9aa6ac">Run</span><br>#L-3084</div><div><span style="color:#9aa6ac">Out</span><br>30 Jun</div></div>
+        <div style="margin-top:24px;font-size:40px;letter-spacing:8px;text-align:center;color:#0e2c46">▊▍▊▎▍▊▎▊▍▎▊</div>
+        <div style="text-align:center;font-size:19px;color:#6c7a86;margin-top:4px">HRS-ISO-3084-30JUN</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · Q&A / AUDITS -->
+  <section data-label="Q&amp;A / audits" data-speaker-notes="Quality is your brand. Desktop and physical audits produce a score; contractors and cleaning teams carry scorecards that inform allocation. Poor performers surface automatically." style="width:1920px;height:1080px;font-family:'IBM Plex Sans',sans-serif;background:#f4efe6;padding:92px 120px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box">
+    <div style="color:#a97e20;font-size:21px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:20px">04 · Q&amp;A / audits</div>
+    <div style="font-family:'Spectral',serif;font-size:56px;font-weight:600;color:#0e2c46;line-height:1.1;max-width:1300px">Quality you can measure — and act on.</div>
+    <div style="color:#3a4b56;font-size:27px;margin-top:22px;max-width:1160px;line-height:1.5">Desktop and physical audits produce a score per home. Cleaning teams and contractors carry scorecards that feed straight back into who gets the next job.</div>
+    <div style="display:flex;gap:24px;margin-top:56px">
+      <div style="flex:1.3;background:#fff;border-radius:18px;padding:34px 36px;box-shadow:0 2px 20px rgba(14,44,70,.06)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px"><div style="font-family:'Spectral',serif;font-size:27px;color:#0e2c46">Audit score breakdown</div><span style="font-size:20px;font-weight:700;color:#1a9e6a;background:#e4f4ec;padding:6px 16px;border-radius:20px">94 / 100</span></div>
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div><div style="display:flex;justify-content:space-between;font-size:21px;color:#3a4b56;margin-bottom:7px"><span>Cleanliness</span><span style="font-weight:600">95%</span></div><div style="height:9px;background:#f0ece3;border-radius:5px;overflow:hidden"><div style="width:95%;height:100%;background:#0e2c46"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:21px;color:#3a4b56;margin-bottom:7px"><span>Presentation &amp; staging</span><span style="font-weight:600">91%</span></div><div style="height:9px;background:#f0ece3;border-radius:5px;overflow:hidden"><div style="width:91%;height:100%;background:#0e2c46"></div></div></div>
+          <div><div style="display:flex;justify-content:space-between;font-size:21px;color:#3a4b56;margin-bottom:7px"><span>Amenities restocked</span><span style="font-weight:600">88%</span></div><div style="height:9px;background:#f0ece3;border-radius:5px;overflow:hidden"><div style="width:88%;height:100%;background:#cf9a34"></div></div></div>
+        </div>
+      </div>
+      <div style="flex:1;background:#0e2c46;border-radius:18px;padding:34px 36px">
+        <div style="font-family:'Spectral',serif;font-size:27px;color:#fff;margin-bottom:22px">Contractor scorecards</div>
+        <div style="display:flex;flex-direction:column;gap:16px;font-size:22px">
+          <div style="display:flex;justify-content:space-between;color:#dbe7f0"><span>Sparkle Co.</span><span style="color:#cf9a34;font-weight:700">A+</span></div>
+          <div style="display:flex;justify-content:space-between;color:#dbe7f0"><span>Coastal Cleans</span><span style="color:#cf9a34;font-weight:700">A</span></div>
+          <div style="display:flex;justify-content:space-between;color:#dbe7f0"><span>Bay Housekeeping</span><span style="color:#e8c07a;font-weight:700">B+</span></div>
+          <div style="display:flex;justify-content:space-between;color:#9fb8cc"><span>Highlands Home Care</span><span style="color:#e0846f;font-weight:700">C</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · FINANCE / TRUST / OWNER -->
+  <section data-label="Invoicing, trust &amp; owners" data-speaker-notes="Tie the money together. Invoices are outcomes of the work already recorded. Trust holds and reconciles guest funds. Owners see their P&L live. This is where trust accounting and owner interaction land." style="width:1920px;height:1080px;font-family:'IBM Plex Sans',sans-serif;background:#0e2c46;padding:92px 120px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box">
+    <div style="color:#cf9a34;font-size:21px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:20px">05 · Invoicing · Trust · Owners</div>
+    <div style="color:#fff;font-family:'Spectral',serif;font-size:56px;font-weight:600;line-height:1.1;max-width:1400px">The money side, reconciled while you sleep.</div>
+    <div style="color:#bcd0e0;font-size:27px;margin-top:22px;max-width:1200px;line-height:1.5">Invoices are the <span style="color:#fff;font-weight:600">outcome</span> of work already recorded. Guest funds sit in trust, reconcile daily, and disburse to owners under the rules — with statements issued automatically.</div>
+    <div style="display:flex;gap:22px;margin-top:56px">
+      <div style="flex:1;background:rgba(255,255,255,.06);border-radius:18px;padding:32px"><div style="font-size:28px;margin-bottom:12px">$</div><div style="color:#fff;font-family:'Spectral',serif;font-size:28px">Invoicing</div><div style="color:#9fb8cc;font-size:21px;margin-top:8px;line-height:1.45">Fees, cleans &amp; repairs roll up from the work done — no manual assembly.</div></div>
+      <div style="flex:1;background:rgba(255,255,255,.06);border-radius:18px;padding:32px"><div style="font-size:28px;margin-bottom:12px">⛁</div><div style="color:#fff;font-family:'Spectral',serif;font-size:28px">Trust accounting</div><div style="color:#9fb8cc;font-size:21px;margin-top:8px;line-height:1.45">Held, reconciled and disbursed — every movement auditable.</div></div>
+      <div style="flex:1;background:rgba(207,154,52,.14);border:1px solid #cf9a34;border-radius:18px;padding:32px"><div style="font-size:28px;margin-bottom:12px">◉</div><div style="color:#fff;font-family:'Spectral',serif;font-size:28px">Owner interaction</div><div style="color:#e8d3a6;font-size:21px;margin-top:8px;line-height:1.45">Owners see live earnings, occupancy &amp; statements — fewer "how's my place?" calls.</div></div>
+    </div>
+  </section>
+
+  <!-- 11 · PORTALS -->
+  <section data-label="Portals" data-speaker-notes="Both sides get a window in. Owners get transparency and calm; contractors get their jobs, accept and complete in the field. Less back-and-forth for the HRS team." style="width:1920px;height:1080px;font-family:'IBM Plex Sans',sans-serif;background:#f4efe6;padding:92px 120px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box">
+    <div style="color:#a97e20;font-size:21px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:20px">06 · Portals</div>
+    <div style="font-family:'Spectral',serif;font-size:56px;font-weight:600;color:#0e2c46;line-height:1.1">A window in — for both sides.</div>
+    <div style="display:flex;gap:26px;margin-top:52px">
+      <div style="flex:1;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 20px rgba(14,44,70,.06)">
+        <div style="background:linear-gradient(120deg,#0e2c46,#20507a);padding:30px 34px;color:#fff"><div style="font-size:18px;color:#9fb8cc;letter-spacing:.05em;text-transform:uppercase">Owner portal</div><div style="font-family:'Spectral',serif;font-size:34px;font-weight:600;margin-top:6px">Transparency, on tap</div></div>
+        <div style="padding:30px 34px;color:#3a4b56;font-size:23px;line-height:1.6">Live earnings &amp; occupancy · monthly statements to download · direct line to their Holiday Manager. Owners stay informed without the phone calls.</div>
+      </div>
+      <div style="flex:1;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 20px rgba(14,44,70,.06)">
+        <div style="background:linear-gradient(120deg,#164066,#2f7d94);padding:30px 34px;color:#fff"><div style="font-size:18px;color:#cfe4ec;letter-spacing:.05em;text-transform:uppercase">Contractor portal</div><div style="font-family:'Spectral',serif;font-size:34px;font-weight:600;margin-top:6px">Jobs, in the field</div></div>
+        <div style="padding:30px 34px;color:#3a4b56;font-size:23px;line-height:1.6">Assigned jobs · accept with a tap · mark complete with a photo · invoice submitted. The chase disappears for your team.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 · NBN / NEXT -->
+  <section data-label="NBN &amp; what's next" data-speaker-notes="Set the horizon. NBN-style cluster comms: message groups of properties at once, collate returned data, template file loads with Dropbox. This is where the platform's ceiling is genuinely exponential." style="width:1920px;height:1080px;font-family:'IBM Plex Sans',sans-serif;background:#0e2c46;padding:92px 120px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box">
+    <div style="color:#cf9a34;font-size:21px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:20px">07 · The next horizon</div>
+    <div style="color:#fff;font-family:'Spectral',serif;font-size:56px;font-weight:600;line-height:1.1;max-width:1400px">Cluster communication &amp; collaboration.</div>
+    <div style="color:#bcd0e0;font-size:27px;margin-top:22px;max-width:1200px;line-height:1.5">The same engine, aimed at coordinating groups of properties at once — the direction the NBN work points toward.</div>
+    <div style="display:flex;gap:22px;margin-top:56px">
+      <div style="flex:1;background:rgba(255,255,255,.06);border-radius:18px;padding:32px"><div style="font-size:28px;margin-bottom:12px">📣</div><div style="color:#fff;font-family:'Spectral',serif;font-size:26px">Cluster / group comms</div><div style="color:#9fb8cc;font-size:20px;margin-top:8px;line-height:1.45">Reach a whole cluster of homes or owners in one automated action.</div></div>
+      <div style="flex:1;background:rgba(255,255,255,.06);border-radius:18px;padding:32px"><div style="font-size:28px;margin-bottom:12px">📊</div><div style="color:#fff;font-family:'Spectral',serif;font-size:26px">Collation of returns</div><div style="color:#9fb8cc;font-size:20px;margin-top:8px;line-height:1.45">Responses and data gather themselves back into one structured view.</div></div>
+      <div style="flex:1;background:rgba(255,255,255,.06);border-radius:18px;padding:32px"><div style="font-size:28px;margin-bottom:12px">🗂</div><div style="color:#fff;font-family:'Spectral',serif;font-size:26px">Templates + Dropbox</div><div style="color:#9fb8cc;font-size:20px;margin-top:8px;line-height:1.45">Standard file loads &amp; sharing, collaborating through Dropbox.</div></div>
+    </div>
+  </section>
+
+  <!-- 13 · COCKPIT -->
+  <section data-label="Management cockpit" data-speaker-notes="Bring it up to the management altitude. Everything the modules do rolls into one performance view — revenue, occupancy, housekeeping KPIs. This is the live demo home screen." style="width:1920px;height:1080px;font-family:'IBM Plex Sans',sans-serif;background:#f4efe6;padding:92px 120px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box">
+    <div style="color:#a97e20;font-size:21px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:20px">The management view</div>
+    <div style="font-family:'Spectral',serif;font-size:56px;font-weight:600;color:#0e2c46;line-height:1.1;max-width:1300px">Every module rolls into one cockpit.</div>
+    <div style="color:#3a4b56;font-size:27px;margin-top:22px;max-width:1160px;line-height:1.5">Revenue, occupancy, ADR and housekeeping performance — the whole portfolio at a glance, so decisions are made on data, not gut.</div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:56px">
+      <div style="background:#fff;border-radius:16px;padding:26px 28px;box-shadow:0 2px 16px rgba(14,44,70,.05)"><div style="color:#6c7a86;font-size:19px">Revenue MTD</div><div style="font-family:'Spectral',serif;font-size:42px;font-weight:600;color:#0e2c46;margin-top:6px">$1.49M</div><div style="color:#1a9e6a;font-size:17px;margin-top:4px">▲ 11.2%</div></div>
+      <div style="background:#fff;border-radius:16px;padding:26px 28px;box-shadow:0 2px 16px rgba(14,44,70,.05)"><div style="color:#6c7a86;font-size:19px">Occupancy</div><div style="font-family:'Spectral',serif;font-size:42px;font-weight:600;color:#0e2c46;margin-top:6px">82%</div><div style="color:#1a9e6a;font-size:17px;margin-top:4px">▲ 4.0 pts</div></div>
+      <div style="background:#fff;border-radius:16px;padding:26px 28px;box-shadow:0 2px 16px rgba(14,44,70,.05)"><div style="color:#6c7a86;font-size:19px">ADR</div><div style="font-family:'Spectral',serif;font-size:42px;font-weight:600;color:#0e2c46;margin-top:6px">$385</div><div style="color:#1a9e6a;font-size:17px;margin-top:4px">▲ $22</div></div>
+      <div style="background:#fff;border-radius:16px;padding:26px 28px;box-shadow:0 2px 16px rgba(14,44,70,.05)"><div style="color:#6c7a86;font-size:19px">On-time cleans</div><div style="font-family:'Spectral',serif;font-size:42px;font-weight:600;color:#0e2c46;margin-top:6px">96%</div><div style="color:#1a9e6a;font-size:17px;margin-top:4px">▲ 3 pts</div></div>
+      <div style="background:#0e2c46;border-radius:16px;padding:26px 28px"><div style="color:#9fb8cc;font-size:19px">Guest rating</div><div style="font-family:'Spectral',serif;font-size:42px;font-weight:600;color:#fff;margin-top:6px">4.7</div><div style="color:#cf9a34;font-size:17px;margin-top:4px">▲ 0.2</div></div>
+    </div>
+  </section>
+
+  <!-- 14 · ROLLOUT -->
+  <section data-label="Rollout" data-speaker-notes="The business case. HRS as the launch partner and industry reference; from there it scales to others. The economics compound — every module removed is time and cost back. End on 'exponential'." style="width:1920px;height:1080px;font-family:'IBM Plex Sans',sans-serif;background:#f4efe6;padding:120px;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box">
+    <div style="color:#a97e20;font-size:21px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:24px">Where this goes</div>
+    <div style="font-family:'Spectral',serif;font-size:66px;font-weight:600;color:#0e2c46;line-height:1.1;max-width:1500px;letter-spacing:-.01em">HRS proves it. The industry follows.</div>
+    <div style="color:#3a4b56;font-size:29px;margin-top:28px;max-width:1240px;line-height:1.5">Built and refined around a market leader, the platform becomes the reference other operators want. Each module removed is time and cost handed back — <span style="color:#0e2c46;font-weight:600">and the potential compounds.</span></div>
+    <div style="display:flex;align-items:center;gap:20px;margin-top:60px">
+      <div style="background:#0e2c46;color:#fff;border-radius:14px;padding:20px 30px;font-size:24px;font-weight:600">1 · HRS launch partner</div>
+      <div style="color:#cf9a34;font-size:28px">→</div>
+      <div style="background:#fff;border:1px solid #e2dccf;color:#0e2c46;border-radius:14px;padding:20px 30px;font-size:24px;font-weight:600">2 · Proven in the field</div>
+      <div style="color:#cf9a34;font-size:28px">→</div>
+      <div style="background:#cf9a34;color:#0e2c46;border-radius:14px;padding:20px 30px;font-size:24px;font-weight:700">3 · The industry, exponentially</div>
+    </div>
+  </section>
+
+  <!-- 15 · CLOSE -->
+  <section data-label="Close" data-speaker-notes="Close and hand to the live demo. Invite them to name their biggest hassle — we'll show how the platform takes it off their plate." style="width:1920px;height:1080px;position:relative;overflow:hidden;font-family:'IBM Plex Sans',sans-serif;background:#0e2c46">
+    <div style="position:absolute;inset:0;background-image:url('images/grants-retreat.jpg');background-size:cover;background-position:center;opacity:.42"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,#0e2c46 32%,rgba(14,44,70,.5) 100%)"></div>
+    <div style="position:absolute;inset:0;padding:120px;display:flex;flex-direction:column;justify-content:center">
+      <div style="display:flex;align-items:center;gap:15px;margin-bottom:44px"><div style="width:48px;height:48px;border-radius:12px;background:#cf9a34;color:#0e2c46;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:23px;font-family:'Spectral',serif">H</div><div style="color:#fff;font-family:'Spectral',serif;font-size:22px;font-weight:600">Holiday Rental Specialists · PMS</div></div>
+      <div style="color:#fff;font-family:'Spectral',serif;font-size:78px;font-weight:600;line-height:1.08;letter-spacing:-.02em;max-width:1300px">So — what's your<br>biggest hassle?</div>
+      <div style="color:#bcd0e0;font-size:30px;margin-top:32px;max-width:1040px;line-height:1.5">Name it, and we'll show you — live — how the platform takes it off your plate.</div>
+      <div style="color:#cf9a34;font-size:24px;font-weight:600;margin-top:52px;letter-spacing:.02em">Let's open the demo →</div>
+    </div>
+  </section>
+
+</x-import>
+</x-dc>
+</body>
+</html>

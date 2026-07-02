@@ -1,0 +1,17 @@
+# Netlify configuration for the HRS PMS demo
+# Static site (no build step) + one serverless function for the AI assistant.
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# Clean URLs
+[[redirects]]
+  from = "/app"
+  to = "/app.html"
+  status = 200
+
+[[redirects]]
+  from = "/deck"
+  to = "/deck.html"
+  status = 200
