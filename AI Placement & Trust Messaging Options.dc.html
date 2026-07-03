@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#efe9dc;font-family:'IBM Plex Sans',system-ui,sans-serif}
+  .dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(14,44,70,.1);scroll-margin-top:16px}
+  .dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 6px}
+  .dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#0e2c46;color:#fff;border-radius:4px;text-decoration:none}
+  .dv-tname{font:600 15px/1.2 system-ui,sans-serif;color:#0e2c46}
+  .dv-tsub{font:400 12.5px/1.4 system-ui,sans-serif;color:#6c7a86;margin:0 0 22px}
+  .dv-opts{display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start}
+  .dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+  .dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(14,44,70,.1);color:#0e2c46;border-radius:5px;text-decoration:none}
+  .dv-olabel{display:flex;align-items:baseline;gap:8px;font:600 12.5px/1.3 system-ui,sans-serif;color:#0e2c46}
+  .dv-odesc{font:400 11.5px/1.5 system-ui,sans-serif;color:#6c7a86;max-width:320px}
+  .dv-card{max-width:100%;background:#fff;border:1px solid rgba(14,44,70,.1);border-radius:10px;box-shadow:0 1px 3px rgba(14,44,70,.08);overflow:hidden}
+  .dv-opt:target .dv-oid{background:#cf9a34;color:#0e2c46}
+  .dv-next{margin:22px 0 0;font:12px/1.6 system-ui,sans-serif;color:rgba(14,44,70,.55)}
+  .dv-next a{color:#2f7d94}
+
+  /* ---- shared mini mockup styles (HRS palette) ---- */
+  .m-hdr{height:50px;flex:none;background:#fff;border-bottom:1px solid #e8e2d6;display:flex;align-items:center;gap:10px;padding:0 14px}
+  .m-burger{width:28px;height:28px;flex:none;border-radius:7px;background:#f2eee6;display:flex;align-items:center;justify-content:center;font-size:13px;color:#0e2c46}
+  .m-title{font-size:12.5px;font-weight:700;color:#0e2c46;flex:1}
+  .m-bell{width:26px;height:26px;border-radius:7px;background:#f2eee6;display:flex;align-items:center;justify-content:center;font-size:12px;flex:none}
+  .m-avatar{width:26px;height:26px;border-radius:50%;background:#0e2c46;color:#fff;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;flex:none}
+  .m-ai-icon{width:28px;height:28px;border-radius:8px;background:linear-gradient(120deg,#cf9a34,#e0b455);color:#0e2c46;display:flex;align-items:center;justify-content:center;font-size:13px;flex:none;cursor:pointer;box-shadow:0 2px 6px rgba(207,154,52,.4)}
+  .m-body{background:#e9e3d7;flex:1;padding:14px;position:relative}
+  .m-block{background:#fff;border-radius:9px;box-shadow:0 1px 3px rgba(16,49,78,.05);padding:12px 14px;margin-bottom:10px}
+  .m-sidebar{background:#0e2c46;color:#c3d3df;width:100%;padding:12px 10px}
+  .m-navitem{font-size:10.5px;padding:7px 8px;border-radius:7px;display:flex;align-items:center;gap:8px}
+  .m-ai-card{background:linear-gradient(120deg,#cf9a34,#e0b455);border-radius:9px;padding:9px 10px;display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .m-ai-card-navy{background:rgba(255,255,255,.06);border-radius:9px;padding:9px 10px;margin-bottom:10px;font-size:9.5px;color:#8fa9bf;line-height:1.5}
+  .m-fab{position:absolute;bottom:16px;right:16px;width:46px;height:46px;border-radius:50%;background:linear-gradient(120deg,#cf9a34,#e0b455);display:flex;align-items:center;justify-content:center;font-size:19px;color:#0e2c46;box-shadow:0 6px 16px rgba(207,154,52,.5);z-index:5}
+  .m-fab-dot{position:absolute;top:1px;right:1px;width:11px;height:11px;border-radius:50%;background:#c0392b;border:2px solid #fff}
+  .phone{width:220px}
+  .phone-frame{border:6px solid #14232e;border-radius:22px;overflow:hidden;height:400px;display:flex;flex-direction:column}
+
+  /* deck mini-slide */
+  .slide{width:420px;height:236px;background:#0e2c46;padding:20px 22px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;color:#fff}
+  .slide-eyebrow{color:#cf9a34;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+  .slide-h{font-family:'Spectral',serif;font-size:19px;font-weight:600;line-height:1.15;max-width:340px}
+  .slide-sub{color:#bcd0e0;font-size:10.5px;margin-top:8px;max-width:340px;line-height:1.5}
+  .slide-cards{display:flex;gap:8px;margin-top:16px}
+  .slide-card{flex:1;background:rgba(255,255,255,.06);border-radius:8px;padding:10px}
+  .slide-card.gold{background:rgba(207,154,52,.16);border:1px solid #cf9a34}
+  .slide-card-icon{font-size:12px;margin-bottom:5px}
+  .slide-card-t{font-family:'Spectral',serif;font-size:11.5px;font-weight:600}
+  .slide-card-d{color:#9fb8cc;font-size:8.5px;margin-top:4px;line-height:1.4}
+  .badge{display:inline-flex;align-items:center;gap:5px;background:#1a9e6a;color:#fff;font-size:8.5px;font-weight:700;padding:3px 8px;border-radius:20px;margin-top:10px}
+
+  .app-banner{background:#eef3f6;border:1px solid #d5e3ea;border-radius:9px;padding:10px 12px;font-size:10px;color:#2f6076;line-height:1.55}
+  .app-banner b{color:#0e2c46}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t2">
+  <div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">Where should the AI entry point live?</span></div>
+  <p class="dv-tsub">"AI this morning" + "Talk to AI" currently sit at the bottom of the sidebar — invisible on mobile until the drawer opens and you scroll. Renamed to "AI Today" in every option below.</p>
+  <div class="dv-opts">
+
+    <div class="dv-opt" id="2a">
+      <div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>Header icon only</div>
+      <div class="dv-odesc">Gold sparkle button next to the bell, on every screen, mobile + desktop. Opens the AI drawer instantly — no need to open the sidebar at all. Sidebar card renamed &amp; moved to top of nav.</div>
+      <div class="dv-card phone">
+        <div class="phone-frame">
+          <div class="m-hdr">
+            <div class="m-burger">☰</div>
+            <div class="m-title">Dashboard</div>
+            <div class="m-ai-icon">✦</div>
+            <div class="m-bell">🔔</div>
+            <div class="m-avatar">JR</div>
+          </div>
+          <div class="m-body">
+            <div class="m-block" style="height:14px;width:70%"></div>
+            <div class="m-block" style="height:50px"></div>
+            <div class="m-block" style="height:50px"></div>
+          </div>
+        </div>
+      </div>
+      <div class="dv-odesc" style="font-weight:600;color:#0e2c46">Sidebar (drawer open) — card now first</div>
+      <div class="dv-card" style="width:220px">
+        <div class="m-sidebar">
+          <div class="m-ai-card"><span style="font-size:13px">✦</span><div><div style="font-size:10px;font-weight:700;color:#0e2c46">Talk to AI</div><div style="font-size:8.5px;color:#5a4a1e">AI Today · 12 read · 8 replied</div></div></div>
+          <div class="m-navitem" style="background:rgba(207,154,52,.16)">▤ Dashboard</div>
+          <div class="m-navitem">☷ Reservations</div>
+          <div class="m-navitem">✉ Inbox</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="2b">
+      <div class="dv-olabel"><a class="dv-oid" href="#2b">2b</a>Floating action button</div>
+      <div class="dv-odesc">Persistent round gold FAB, bottom-right, on every screen incl. mobile. A small red dot hints "something to see". Sidebar card renamed but stays at the bottom, unchanged position.</div>
+      <div class="dv-card phone">
+        <div class="phone-frame">
+          <div class="m-hdr">
+            <div class="m-burger">☰</div>
+            <div class="m-title">Dashboard</div>
+            <div class="m-bell">🔔</div>
+            <div class="m-avatar">JR</div>
+          </div>
+          <div class="m-body">
+            <div class="m-block" style="height:14px;width:70%"></div>
+            <div class="m-block" style="height:50px"></div>
+            <div class="m-block" style="height:90px"></div>
+            <div class="m-fab">✦<div class="m-fab-dot"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="dv-odesc">Always reachable with a thumb, even mid-scroll — but competes visually with nothing else, since it floats above every screen permanently.</div>
+    </div>
+
+    <div class="dv-opt" id="2c">
+      <div class="dv-olabel"><a class="dv-oid" href="#2c">2c</a>Both — header icon + top-of-sidebar card</div>
+      <div class="dv-odesc">Header icon for guaranteed, one-tap access from anywhere. The richer "AI Today" teaser card also moves to the very top of the sidebar, so opening the drawer leads with it. Most visible option; two ways in.</div>
+      <div class="dv-card phone">
+        <div class="phone-frame">
+          <div class="m-hdr">
+            <div class="m-burger">☰</div>
+            <div class="m-title">Dashboard</div>
+            <div class="m-ai-icon">✦</div>
+            <div class="m-bell">🔔</div>
+            <div class="m-avatar">JR</div>
+          </div>
+          <div style="display:flex;flex:1">
+            <div class="m-sidebar" style="width:120px;flex:none">
+              <div class="m-ai-card" style="padding:7px 8px"><span style="font-size:11px">✦</span><div style="font-size:8px;font-weight:700;color:#0e2c46">AI Today</div></div>
+              <div class="m-navitem" style="font-size:9px;background:rgba(207,154,52,.16)">▤ Dashboard</div>
+              <div class="m-navitem" style="font-size:9px">☷ Reservations</div>
+            </div>
+            <div class="m-body" style="padding:10px">
+              <div class="m-block" style="height:14px;width:90%"></div>
+              <div class="m-block" style="height:60px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="dv-next">Try next: "go with <a class="dv-oid" href="#2c">2c</a>" · "make the header icon pulse like <a class="dv-oid" href="#2b">2b</a>'s dot" · "show a 4th option"</p>
+</section>
+
+<section class="dv-turn" id="t1">
+  <div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Reinforcing trust-accounting compliance</span></div>
+  <p class="dv-tsub">Goal: signal that HRS understands the regulatory side deeply. No competitor named anywhere.</p>
+  <div class="dv-opts">
+
+    <div class="dv-opt" id="1a">
+      <div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Strengthen the in-app Trust banner</div>
+      <div class="dv-odesc">Sharpen the existing Trust-screen banner copy to name the regulatory basis directly and lean into "audit-ready", not just "auditable".</div>
+      <div class="dv-card" style="width:420px;padding:14px">
+        <div class="app-banner">⛁ &nbsp;<b>Statutory trust account</b> — held under the NSW Property &amp; Stock Agents Act trust-account rules, reconciled daily and disbursed to owners per agency law. Every movement is logged, time-stamped and audit-ready on request.</div>
+      </div>
+      <div class="dv-odesc">Current copy: "guest funds held separately, reconciled daily, disbursed... per NSW agency rules. Every movement is auditable." — this option names the Act and adds "audit-ready on request", a step up in specificity/confidence.</div>
+    </div>
+
+    <div class="dv-opt" id="1b">
+      <div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Credibility badge on the deck's Trust slide</div>
+      <div class="dv-odesc">Add a small green "compliant by design" badge under the Trust accounting card on slide 05, without adding new content real estate.</div>
+      <div class="dv-card">
+        <div class="slide">
+          <div class="slide-eyebrow">05 · Invoicing · Trust · Owners</div>
+          <div class="slide-h">The money side, reconciled while you sleep.</div>
+          <div class="slide-cards">
+            <div class="slide-card"><div class="slide-card-icon">$</div><div class="slide-card-t">Invoicing</div><div class="slide-card-d">Rolls up from the work done.</div></div>
+            <div class="slide-card gold"><div class="slide-card-icon">⛁</div><div class="slide-card-t">Trust accounting</div><div class="slide-card-d">Held, reconciled, disbursed — every movement auditable.</div><div class="badge">✓ Compliant by design</div></div>
+            <div class="slide-card"><div class="slide-card-icon">◉</div><div class="slide-card-t">Owner interaction</div><div class="slide-card-d">Live earnings &amp; statements.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dv-opt" id="1c">
+      <div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>New dedicated compliance slide</div>
+      <div class="dv-odesc">A short standalone slide right after 05, making the regulatory point its own beat rather than a line inside another slide — the strongest signal, costs one extra slide.</div>
+      <div class="dv-card">
+        <div class="slide" style="background:#f4efe6;color:#0e2c46">
+          <div class="slide-eyebrow" style="color:#a97e20">05b · Built for the rules, not around them</div>
+          <div class="slide-h" style="color:#0e2c46">Trust accounting isn't an afterthought here.</div>
+          <div class="slide-sub" style="color:#4a5b66">Statutory holding, daily reconciliation and owner disbursement are modelled into the platform from day one — not bolted on when an auditor asks.</div>
+          <div class="slide-cards">
+            <div class="slide-card gold" style="background:rgba(207,154,52,.14);border:1px solid #cf9a34"><div class="slide-card-icon">⛁</div><div class="slide-card-t" style="color:#0e2c46">Held to the law</div><div class="slide-card-d" style="color:#6c7a86">NSW Property &amp; Stock Agents Act rules, by default.</div></div>
+            <div class="slide-card" style="background:rgba(14,44,70,.05)"><div class="slide-card-icon">✓</div><div class="slide-card-t" style="color:#0e2c46">Reconciled daily</div><div class="slide-card-d" style="color:#6c7a86">Every movement logged &amp; matched, not batched monthly.</div></div>
+            <div class="slide-card" style="background:rgba(14,44,70,.05)"><div class="slide-card-icon">📋</div><div class="slide-card-t" style="color:#0e2c46">Audit-ready</div><div class="slide-card-d" style="color:#6c7a86">Full trail on demand — nothing to reconstruct.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="dv-next">Try next: "use <a class="dv-oid" href="#1a">1a</a> and <a class="dv-oid" href="#1b">1b</a> together" · "make <a class="dv-oid" href="#1c">1c</a> the closing slide instead" · "soften the tone on <a class="dv-oid" href="#1c">1c</a>"</p>
+</section>
+
+</x-dc>
+</body>
+</html>

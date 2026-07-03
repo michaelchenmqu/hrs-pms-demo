@@ -67,6 +67,15 @@
     </div>
 
     <div style="font-size:9.5px;font-weight:600;color:#5b7690;letter-spacing:.1em;padding:8px 10px 5px">MANAGEMENT</div>
+    <div style="margin-bottom:14px">
+      <div style="padding:12px;background:rgba(255,255,255,.05);border-radius:11px">
+        <div style="font-size:11px;color:#8fa9bf;line-height:1.5"><b style="color:#cf9a34">✦ AI Today</b><br>12 emails read · 8 auto-replied · 4 tasks drafted</div>
+      </div>
+      <div class="btn" onClick="{{ openAi }}" style="margin-top:10px;display:flex;align-items:center;gap:9px;padding:11px 13px;background:linear-gradient(120deg,#cf9a34,#e0b455);border-radius:11px;cursor:pointer">
+        <span style="width:26px;height:26px;border-radius:8px;background:#0e2c46;color:#cf9a34;display:flex;align-items:center;justify-content:center;font-size:14px;flex:none">✦</span>
+        <div style="line-height:1.15"><div style="font-size:12.5px;font-weight:700;color:#0e2c46">Talk to AI</div><div style="font-size:10.5px;color:#5a4a1e">Ask about anything</div></div>
+      </div>
+    </div>
     <div class="navitem" data-screen="dashboard" onClick="{{ nav }}" style="position:relative;display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:12.5px;cursor:pointer;margin-bottom:1px">
       <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}"><div class="navhi" style="position:absolute;inset:0;background:rgba(207,154,52,.16);border-left:3px solid #cf9a34;border-radius:9px"></div></sc-if>
       <span style="position:relative;z-index:1;width:16px;text-align:center">▤</span><span style="position:relative;z-index:1">Dashboard</span></div>
@@ -110,13 +119,6 @@
       <sc-if value="{{ isContractorPortal }}" hint-placeholder-val="{{ false }}"><div class="navhi" style="position:absolute;inset:0;background:rgba(207,154,52,.16);border-left:3px solid #cf9a34;border-radius:9px"></div></sc-if>
       <span style="position:relative;z-index:1;width:16px;text-align:center">⛏</span><span style="position:relative;z-index:1">Contractor portal</span></div>
 
-    <div style="margin-top:20px;padding:12px;background:rgba(255,255,255,.05);border-radius:11px">
-      <div style="font-size:11px;color:#8fa9bf;line-height:1.5"><b style="color:#cf9a34">✦ AI this morning</b><br>12 emails read · 8 auto-replied · 4 tasks drafted</div>
-    </div>
-    <div class="btn" onClick="{{ openAi }}" style="margin-top:10px;display:flex;align-items:center;gap:9px;padding:11px 13px;background:linear-gradient(120deg,#cf9a34,#e0b455);border-radius:11px;cursor:pointer">
-      <span style="width:26px;height:26px;border-radius:8px;background:#0e2c46;color:#cf9a34;display:flex;align-items:center;justify-content:center;font-size:14px;flex:none">✦</span>
-      <div style="line-height:1.15"><div style="font-size:12.5px;font-weight:700;color:#0e2c46">Talk to AI</div><div style="font-size:10.5px;color:#5a4a1e">Ask about anything</div></div>
-    </div>
   </aside>
 
   <!-- ===================== MAIN ===================== -->
@@ -128,8 +130,9 @@
       <div class="header-search" style="flex:1;max-width:380px;height:34px;display:flex;align-items:center;gap:9px;padding:0 13px;background:#f2eee6;border:1px solid #e8e2d6;border-radius:9px;color:#9aa6ac;font-size:12.5px">⌕ Search property, booking, owner…</div>
       <div style="flex:1"></div>
       <div class="header-region" style="display:flex;align-items:center;gap:7px;height:32px;padding:0 12px;border:1px solid #e8e2d6;border-radius:9px;font-size:12px;color:#4a5b66;font-weight:500">📍 South Coast ▾</div>
+      <div class="btn" onClick="{{ openAi }}" title="Talk to AI" style="width:32px;height:32px;flex:none;border-radius:9px;background:linear-gradient(120deg,#cf9a34,#e0b455);color:#0e2c46;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;box-shadow:0 2px 6px rgba(207,154,52,.4)">✦</div>
       <div style="width:32px;height:32px;border-radius:9px;background:#f2eee6;display:flex;align-items:center;justify-content:center">🔔</div>
-      <div style="width:32px;height:32px;border-radius:50%;background:#0e2c46;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600">DK</div>
+      <div style="width:32px;height:32px;border-radius:50%;background:#0e2c46;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600">JR</div>
     </header>
 
     <main style="flex:1;padding:24px 26px 40px;overflow-x:hidden">
@@ -776,7 +779,7 @@ class Component extends DCLogic {
   state = { screen: 'dashboard', selectedEmailId: 'e1', range: 'month', toast: null,
     processedEmails: {}, selectedResId: null, acceptedJobs: {}, doneJobs: {}, disbursed: false,
     resTab: 'arrivals', aiOpen: false, aiBusy: false, mobileNavOpen: false,
-    aiMsgs: [{ role:'ai', text:"Morning, Dana. I've read 12 emails, drafted 4 tasks and auto-replied to 8. Ask me anything — a property, an owner, today's arrivals, or what needs your attention." }] };
+    aiMsgs: [{ role:'ai', text:"Morning, Jane. I've read 12 emails, drafted 4 tasks and auto-replied to 8. Ask me anything — a property, an owner, today's arrivals, or what needs your attention." }] };
 
   _toastTimer = null;
   toast = (msg) => {
