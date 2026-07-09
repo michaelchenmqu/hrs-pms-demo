@@ -69,13 +69,19 @@
     <div style="font-size:9.5px;font-weight:600;color:#5b7690;letter-spacing:.1em;padding:8px 10px 5px">MANAGEMENT</div>
     <div style="margin-bottom:14px">
       <div style="padding:12px;background:rgba(255,255,255,.05);border-radius:11px">
-        <div style="font-size:11px;color:#8fa9bf;line-height:1.5"><b style="color:#cf9a34">✦ AI Today</b><br>12 emails read · 8 auto-replied · 4 tasks drafted</div>
+        <div style="font-size:11px;color:#8fa9bf;line-height:1.5"><b style="color:#cf9a34">✦ AI Today</b><br>143 in stay · 6 check-ins · 3 need your attention</div>
       </div>
       <div class="btn" onClick="{{ openAi }}" style="margin-top:10px;display:flex;align-items:center;gap:9px;padding:11px 13px;background:linear-gradient(120deg,#cf9a34,#e0b455);border-radius:11px;cursor:pointer">
         <span style="width:26px;height:26px;border-radius:8px;background:#0e2c46;color:#cf9a34;display:flex;align-items:center;justify-content:center;font-size:14px;flex:none">✦</span>
         <div style="line-height:1.15"><div style="font-size:12.5px;font-weight:700;color:#0e2c46">Talk to AI</div><div style="font-size:10.5px;color:#5a4a1e">Ask about anything</div></div>
       </div>
     </div>
+
+    <div style="font-size:9.5px;font-weight:600;color:#5b7690;letter-spacing:.1em;padding:8px 10px 5px">AI TOOLS</div>
+    <div class="navitem" data-screen="aitrainer" onClick="{{ nav }}" style="position:relative;display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:12.5px;cursor:pointer;margin-bottom:14px">
+      <sc-if value="{{ isAiTrainer }}" hint-placeholder-val="{{ false }}"><div class="navhi" style="position:absolute;inset:0;background:rgba(207,154,52,.16);border-left:3px solid #cf9a34;border-radius:9px"></div></sc-if>
+      <span style="position:relative;z-index:1;width:16px;text-align:center">✦</span><span style="position:relative;z-index:1">AI Trainer</span></div>
+
     <div class="navitem" data-screen="dashboard" onClick="{{ nav }}" style="position:relative;display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:12.5px;cursor:pointer;margin-bottom:1px">
       <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}"><div class="navhi" style="position:absolute;inset:0;background:rgba(207,154,52,.16);border-left:3px solid #cf9a34;border-radius:9px"></div></sc-if>
       <span style="position:relative;z-index:1;width:16px;text-align:center">▤</span><span style="position:relative;z-index:1">Dashboard</span></div>
@@ -454,6 +460,34 @@
           <div class="lift" data-msg="38 physical audits completed this month" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Physical audits ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#0e2c46">38</div></div>
           <div class="lift" data-msg="7 quality flags raised this week" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Flags this week ›</div><div style="font-family:'Spectral',serif;font-size:24px;font-weight:600;color:#c0392b">7</div></div>
         </div>
+        <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);padding:20px 22px;margin-bottom:16px">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px">
+            <div style="font-size:14px;font-weight:700;color:#0e2c46">Guest reviews &amp; reputation</div>
+            <div style="font-size:11px;color:#9aa6ac">Airbnb · Booking.com · Stayz — synced hourly</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:18px;align-items:stretch">
+            <div style="background:#fdece9;border-radius:12px;padding:16px 18px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                <div style="font-size:12.5px;font-weight:700;color:#0e2c46">Burrangarra · Airbnb</div>
+                <div style="font-size:13px;font-weight:700;color:#c0392b">★ 2.0</div>
+              </div>
+              <div style="font-size:12px;color:#3a4b56;line-height:1.5;font-style:italic">"Lovely house but we could hear the neighbour's party until 1am both nights. Raised it with the host but nothing changed."</div>
+              <div style="font-size:10.5px;color:#9aa6ac;margin-top:8px">M. Delgado · stayed 3 nights · posted yesterday</div>
+            </div>
+            <div style="background:#f9f7f2;border-radius:12px;padding:16px 18px">
+              <div style="font-size:12.5px;font-weight:700;color:#0e2c46;margin-bottom:10px">AI-recommended actions</div>
+              <div style="display:flex;flex-direction:column;gap:9px">
+                <div style="display:flex;gap:9px;align-items:flex-start"><span style="width:18px;height:18px;flex:none;border-radius:5px;background:#e4f4ec;color:#137a4f;display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:1px">1</span><span style="font-size:12px;color:#3a4b56;line-height:1.45">Post a public reply acknowledging the noise issue and noting the neighbour liaison process now in place — protects the listing's rating without over-promising.</span></div>
+                <div style="display:flex;gap:9px;align-items:flex-start"><span style="width:18px;height:18px;flex:none;border-radius:5px;background:#e4f4ec;color:#137a4f;display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:1px">2</span><span style="font-size:12px;color:#3a4b56;line-height:1.45">This is the property's 2nd noise mention in 90 days — recommend flagging to the owner and adding a house-rules reminder card for guests at check-in.</span></div>
+                <div style="display:flex;gap:9px;align-items:flex-start"><span style="width:18px;height:18px;flex:none;border-radius:5px;background:#e4f4ec;color:#137a4f;display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:1px">3</span><span style="font-size:12px;color:#3a4b56;line-height:1.45">Rating impact is small (1 of 47 reviews) — no threshold breach, so a goodwill refund isn't recommended unless the guest requests one directly.</span></div>
+              </div>
+              <div style="display:flex;gap:9px;margin-top:14px">
+                <div class="btn" data-msg="Reply posted to Airbnb" onClick="{{ simpleToast }}" style="height:32px;padding:0 14px;background:#cf9a34;color:#0e2c46;border-radius:8px;font-size:11.5px;font-weight:700;display:flex;align-items:center;cursor:pointer">Use reply &amp; post</div>
+                <div class="btn" data-msg="Flagged to owner S. Voss" onClick="{{ simpleToast }}" style="height:32px;padding:0 14px;background:#f2eee6;color:#0e2c46;border-radius:8px;font-size:11.5px;font-weight:600;display:flex;align-items:center;cursor:pointer">Flag to owner</div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="split-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start">
           <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden">
             <div style="padding:14px 18px;border-bottom:1px solid #f0ece3;display:flex;justify-content:space-between;align-items:center"><div style="font-size:14px;font-weight:700;color:#0e2c46">Physical audit — Belvedere Bayfront</div><span style="font-size:11px;font-weight:700;color:#1a9e6a;background:#e4f4ec;padding:3px 10px;border-radius:20px">Score 94</span></div>
@@ -530,6 +564,39 @@
           <div class="lift" data-msg="$318,600 held against future stays" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:15px 17px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Held (future stays) ›</div><div style="font-family:'Spectral',serif;font-size:25px;font-weight:600;color:#0e2c46;margin-top:3px">$318,600</div></div>
           <div class="lift" data-msg="$147,900 cleared and ready to disburse" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:15px 17px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Cleared to disburse ›</div><div style="font-family:'Spectral',serif;font-size:25px;font-weight:600;color:#1a9e6a;margin-top:3px">$147,900</div></div>
           <div class="lift" data-msg="Trust reconciled today — all movements matched" onClick="{{ simpleToast }}" style="background:#fff;border-radius:13px;padding:15px 17px;box-shadow:0 1px 3px rgba(16,49,78,.05);cursor:pointer"><div style="font-size:11px;color:#6c7a86">Reconciled ›</div><div style="font-family:'Spectral',serif;font-size:25px;font-weight:600;color:#0e2c46;margin-top:3px">✓ Today</div></div>
+        </div>
+        <div style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);padding:20px 22px;margin-bottom:16px">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px">
+            <div style="font-size:14px;font-weight:700;color:#0e2c46">Three-way trust reconciliation</div>
+            <div style="font-size:11px;color:#9aa6ac">NSW Property &amp; Stock Agents Act requirement · run daily</div>
+          </div>
+          <div style="font-size:11.5px;color:#6c7a86;margin-bottom:16px">Bank statement, trust cash book and the sum of individual trust ledgers must all agree — the assistant matches them automatically and only surfaces what doesn't.</div>
+          <div style="display:grid;grid-template-columns:1fr 44px 1fr 44px 1fr;align-items:center;gap:0">
+            <div style="background:#f9f7f2;border-radius:12px;padding:16px 18px">
+              <div style="font-size:11px;color:#9aa6ac;font-weight:600;text-transform:uppercase;letter-spacing:.03em">Bank statement</div>
+              <div style="font-family:'Spectral',serif;font-size:22px;font-weight:600;color:#0e2c46;margin-top:4px">$482,140.00</div>
+              <div style="font-size:10.5px;color:#9aa6ac;margin-top:3px">Westpac trust a/c · as at today</div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:center;font-size:18px;color:#1a9e6a;font-weight:700">=</div>
+            <div style="background:#f9f7f2;border-radius:12px;padding:16px 18px">
+              <div style="font-size:11px;color:#9aa6ac;font-weight:600;text-transform:uppercase;letter-spacing:.03em">Trust cash book</div>
+              <div style="font-family:'Spectral',serif;font-size:22px;font-weight:600;color:#0e2c46;margin-top:4px">$482,140.00</div>
+              <div style="font-size:10.5px;color:#9aa6ac;margin-top:3px">All receipts &amp; payments recorded</div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:center;font-size:18px;color:#1a9e6a;font-weight:700">=</div>
+            <div style="background:#f9f7f2;border-radius:12px;padding:16px 18px">
+              <div style="font-size:11px;color:#9aa6ac;font-weight:600;text-transform:uppercase;letter-spacing:.03em">Individual trust ledgers</div>
+              <div style="font-family:'Spectral',serif;font-size:22px;font-weight:600;color:#0e2c46;margin-top:4px">$482,140.00</div>
+              <div style="font-size:10.5px;color:#9aa6ac;margin-top:3px">Sum across 34 owner ledgers</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px solid #f0ece3">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="width:20px;height:20px;border-radius:50%;background:#1a9e6a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px">✓</span>
+              <span style="font-size:12.5px;font-weight:600;color:#137a4f">All three matched — $0.00 discrepancy · reconciled 9 Jul, 6:02am</span>
+            </div>
+            <div class="btn" data-msg="Reconciliation report opened — all 34 ledgers matched" onClick="{{ simpleToast }}" style="height:32px;padding:0 14px;background:#f2eee6;color:#0e2c46;border-radius:8px;font-size:11.5px;font-weight:600;display:flex;align-items:center;cursor:pointer">View full report →</div>
+          </div>
         </div>
         <div class="split-2" style="display:grid;grid-template-columns:1.5fr 1fr;gap:16px;align-items:start">
           <div class="tbl-card" style="background:#fff;border-radius:15px;box-shadow:0 1px 3px rgba(16,49,78,.05);overflow:hidden">
@@ -712,6 +779,88 @@
       </div>
       </sc-if>
 
+      <!-- ============ AI TRAINER (+ guided processes) ============ -->
+      <sc-if value="{{ isAiTrainer }}" hint-placeholder-val="{{ false }}">
+      <div class="screen">
+        <div style="margin-bottom:14px"><div style="font-family:'Spectral',serif;font-size:25px;font-weight:600;color:#0e2c46">AI Trainer</div><div style="font-size:12.5px;color:#6c7a86;margin-top:2px">Trained on HRS SOPs &amp; property notes — new starters get the real answer, and any staff can be walked through a process step by step</div></div>
+        <div style="display:flex;gap:8px;margin-bottom:16px">
+          <div onClick="{{ setTrainerTab }}" data-tab="modules" style="padding:9px 16px;border-radius:9px;font-size:12.5px;font-weight:600;cursor:pointer;background:{{ tabModulesBg }};color:{{ tabModulesCol }}">Training modules</div>
+          <div onClick="{{ setTrainerTab }}" data-tab="guided" style="padding:9px 16px;border-radius:9px;font-size:12.5px;font-weight:600;cursor:pointer;background:{{ tabGuidedBg }};color:{{ tabGuidedCol }}">Guided processes</div>
+        </div>
+
+        <sc-if value="{{ showModulesTab }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:1fr 1.5fr;gap:16px;align-items:start">
+          <div style="background:#fff;border-radius:16px;padding:20px 20px 16px;box-shadow:0 1px 3px rgba(16,49,78,.05)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+              <div style="font-size:13.5px;font-weight:700;color:#0e2c46">Maya T. · Week 1</div>
+              <div style="font-size:11px;font-weight:700;color:#1a9e6a">{{ trainerDoneCount }} / {{ trainerTotalCount }}</div>
+            </div>
+            <sc-for list="{{ trainerModules }}" as="mod" hint-placeholder-count="6">
+              <div data-id="{{ mod.id }}" onClick="{{ selectModule }}" style="display:flex;align-items:center;gap:10px;padding:10px 8px;border-radius:9px;cursor:pointer;background:{{ mod.rowBg }};margin-bottom:2px">
+                <div style="width:22px;height:22px;flex:none;border-radius:50%;background:{{ mod.dotBg }};color:{{ mod.dotColor }};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">{{ mod.dotIcon }}</div>
+                <div style="font-size:12.5px;color:{{ mod.textColor }};font-weight:{{ mod.textWeight }}">{{ mod.title }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="background:#0e2c46;border-radius:16px;display:flex;flex-direction:column;overflow:hidden;height:520px">
+            <div style="padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:11px">
+              <span style="width:30px;height:30px;border-radius:9px;background:#cf9a34;color:#0e2c46;display:flex;align-items:center;justify-content:center;font-size:14px;flex:none">✦</span>
+              <div><div style="font-size:11px;color:#8fa9bf">Now training</div><div style="font-family:'Spectral',serif;font-size:17px;color:#fff">{{ selectedModuleTitle }}</div></div>
+            </div>
+            <div id="trainer-scroll" style="flex:1;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:10px">
+              <sc-for list="{{ trainerMsgs }}" as="m" hint-placeholder-count="2">
+                <div style="align-self:{{ m.align }};max-width:86%;background:{{ m.bg }};color:{{ m.color }};padding:11px 14px;border-radius:{{ m.radius }};font-size:13px;line-height:1.5;white-space:pre-line">{{ m.text }}</div>
+              </sc-for>
+              <sc-if value="{{ trainerBusy }}" hint-placeholder-val="{{ false }}">
+                <div style="align-self:flex-start;background:rgba(255,255,255,.08);color:#9fb8cc;padding:11px 14px;border-radius:14px 14px 14px 4px;font-size:13px">Thinking…</div>
+              </sc-if>
+            </div>
+            <div style="padding:10px 16px 6px;display:flex;gap:7px;flex-wrap:wrap">
+              <span class="btn" data-q="{{ trainerQuickQ }}" onClick="{{ askTrainer }}" style="font-size:11px;color:#0e2c46;background:#fff;border-radius:16px;padding:6px 11px;cursor:pointer">{{ trainerQuickLabel }}</span>
+              <span class="btn" data-q="What should I do if I'm not sure?" onClick="{{ askTrainer }}" style="font-size:11px;color:#0e2c46;background:#fff;border-radius:16px;padding:6px 11px;cursor:pointer">What if I'm not sure?</span>
+            </div>
+            <div style="padding:8px 16px 16px;display:flex;gap:9px;align-items:flex-end">
+              <textarea id="trainer-input" onKeyDown="{{ trainerKey }}" rows="1" placeholder="Ask the trainer…" style="flex:1;resize:none;border:none;border-radius:11px;padding:11px 13px;font-size:13px;font-family:'IBM Plex Sans',sans-serif;color:#14232e;background:#fff;outline:none;max-height:100px"></textarea>
+              <div class="btn" onClick="{{ sendTrainer }}" style="width:42px;height:42px;flex:none;border-radius:11px;background:#cf9a34;color:#0e2c46;display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer">➤</div>
+            </div>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ showGuidedTab }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:280px 1fr;gap:16px;align-items:start">
+          <div style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 1px 3px rgba(16,49,78,.05);display:flex;flex-direction:column;gap:6px">
+            <sc-for list="{{ guidedProcessList }}" as="gp" hint-placeholder-count="5">
+              <div data-id="{{ gp.id }}" onClick="{{ pickProcess }}" style="padding:14px 14px;border-radius:11px;cursor:pointer;background:{{ gp.bg }}">
+                <div style="font-size:13px;font-weight:700;color:{{ gp.titleColor }}">{{ gp.title }}</div>
+                <div style="font-size:11px;color:{{ gp.subColor }};margin-top:3px">{{ gp.steps }} steps</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="background:#f6f2ea;border-radius:16px;padding:28px 32px;box-shadow:0 1px 3px rgba(16,49,78,.05)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+              <div style="font-size:14px;font-weight:700;color:#0e2c46">✦ Guided: {{ guidedTitle }}</div>
+              <div style="font-size:12px;color:#a97e20;font-weight:600">Step {{ guidedStepNum }} of {{ guidedStepTotal }}</div>
+            </div>
+            <div style="display:flex;gap:8px;margin-bottom:26px">
+              <sc-for list="{{ guidedProgress }}" as="bar" hint-placeholder-count="4">
+                <div style="flex:1;height:6px;border-radius:3px;background:{{ bar.color }}"></div>
+              </sc-for>
+            </div>
+            <div style="font-family:'Spectral',serif;font-size:26px;color:#0e2c46;margin-bottom:10px">{{ guidedStepTitle }}</div>
+            <div style="color:#3a4b56;font-size:16px;line-height:1.55;margin-bottom:24px;max-width:620px">{{ guidedStepBody }}</div>
+            <sc-if value="{{ guidedNotDone }}" hint-placeholder-val="{{ true }}">
+              <div class="btn" onClick="{{ guidedNext }}" style="display:inline-flex;height:46px;padding:0 24px;background:#cf9a34;color:#0e2c46;border-radius:10px;font-size:15px;font-weight:700;align-items:center;justify-content:center;cursor:pointer">{{ guidedBtnLabel }}</div>
+            </sc-if>
+            <sc-if value="{{ guidedDone }}" hint-placeholder-val="{{ false }}">
+              <div style="display:inline-flex;align-items:center;gap:9px;height:46px;padding:0 22px;background:#e4f4ec;color:#137a4f;border-radius:10px;font-size:15px;font-weight:700">✓ Process complete — logged</div>
+            </sc-if>
+          </div>
+        </div>
+        </sc-if>
+      </div>
+      </sc-if>
+
     </main>
   </div>
 </div>
@@ -719,13 +868,30 @@
 <!-- ===== AI DRAWER ===== -->
 <sc-if value="{{ aiOpen }}" hint-placeholder-val="{{ false }}">
   <div onClick="{{ closeAi }}" style="position:fixed;inset:0;z-index:95;background:rgba(14,44,70,.34)"></div>
-  <div class="ai-drawer" style="position:fixed;top:0;right:0;bottom:0;width:420px;z-index:96;background:#f6f2ea;box-shadow:-14px 0 40px rgba(14,44,70,.24);display:flex;flex-direction:column">
+  <div class="ai-drawer" style="position:fixed;top:0;right:0;bottom:0;width:440px;z-index:96;background:#f6f2ea;box-shadow:-14px 0 40px rgba(14,44,70,.24);display:flex;flex-direction:column">
     <div style="background:#0e2c46;padding:18px 20px;display:flex;align-items:center;gap:11px">
       <span style="width:34px;height:34px;border-radius:10px;background:#cf9a34;color:#0e2c46;display:flex;align-items:center;justify-content:center;font-size:16px;flex:none">✦</span>
       <div style="flex:1"><div style="font-size:14px;font-weight:700;color:#fff">HRS Assistant</div><div style="font-size:11px;color:#8fa9bf">Knows your portfolio, live</div></div>
       <div onClick="{{ closeAi }}" style="width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer">✕</div>
     </div>
-    <div id="ai-scroll" style="flex:1;overflow-y:auto;padding:18px 18px 8px;display:flex;flex-direction:column;gap:12px">
+    <div style="padding:16px 20px 4px">
+      <div style="font-size:11px;font-weight:700;color:#a97e20;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">✦ AI Today · Tuesday 30 June</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
+        <div style="background:#fff;border-radius:10px;padding:10px 8px;text-align:center;box-shadow:0 1px 3px rgba(16,49,78,.05)"><div style="font-family:'Spectral',serif;font-size:19px;font-weight:600;color:#0e2c46">143</div><div style="font-size:9.5px;color:#6c7a86;line-height:1.3;margin-top:2px">In stay</div></div>
+        <div style="background:#fff;border-radius:10px;padding:10px 8px;text-align:center;box-shadow:0 1px 3px rgba(16,49,78,.05)"><div style="font-family:'Spectral',serif;font-size:19px;font-weight:600;color:#0e2c46">6</div><div style="font-size:9.5px;color:#6c7a86;line-height:1.3;margin-top:2px">Check-ins today</div></div>
+        <div style="background:#fff;border-radius:10px;padding:10px 8px;text-align:center;box-shadow:0 1px 3px rgba(16,49,78,.05)"><div style="font-family:'Spectral',serif;font-size:19px;font-weight:600;color:#0e2c46">4</div><div style="font-size:9.5px;color:#6c7a86;line-height:1.3;margin-top:2px">Check-outs today</div></div>
+        <div style="background:#fff;border-radius:10px;padding:10px 8px;text-align:center;box-shadow:0 1px 3px rgba(16,49,78,.05)"><div style="font-family:'Spectral',serif;font-size:19px;font-weight:600;color:#1a9e6a">91%</div><div style="font-size:9.5px;color:#6c7a86;line-height:1.3;margin-top:2px">Occupancy MTD</div></div>
+      </div>
+      <div style="background:#fff;border-radius:11px;padding:12px 14px;box-shadow:0 1px 3px rgba(16,49,78,.05)">
+        <div style="font-size:11px;font-weight:700;color:#0e2c46;margin-bottom:8px">3 things need you today</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:#c0392b;flex:none"></span><span style="font-size:11.5px;color:#3a4b56;flex:1">Aircon still out at Belvedere — guest in-house</span><span style="font-size:10px;color:#9aa6ac">WO-1042</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:#c98a1a;flex:none"></span><span style="font-size:11.5px;color:#3a4b56;flex:1">2★ Airbnb review at Burrangarra needs a reply</span><span style="font-size:10px;color:#9aa6ac">Reviews</span></div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:#c98a1a;flex:none"></span><span style="font-size:11.5px;color:#3a4b56;flex:1">Overdue invoice — INV-2079, $2,180</span><span style="font-size:10px;color:#9aa6ac">Invoicing</span></div>
+        </div>
+      </div>
+    </div>
+    <div id="ai-scroll" style="flex:1;overflow-y:auto;padding:14px 18px 8px;display:flex;flex-direction:column;gap:12px">
       <sc-for list="{{ aiMsgs }}" as="m" hint-placeholder-count="1">
         <div style="align-self:{{ m.align }};max-width:86%;background:{{ m.bg }};color:{{ m.color }};padding:11px 14px;border-radius:{{ m.radius }};font-size:13px;line-height:1.5;box-shadow:0 1px 3px rgba(16,49,78,.06);white-space:pre-line">{{ m.text }}</div>
       </sc-for>
@@ -779,7 +945,15 @@ class Component extends DCLogic {
   state = { screen: 'dashboard', selectedEmailId: 'e1', range: 'month', toast: null,
     processedEmails: {}, selectedResId: null, acceptedJobs: {}, doneJobs: {}, disbursed: false,
     resTab: 'arrivals', aiOpen: false, aiBusy: false, mobileNavOpen: false,
-    aiMsgs: [{ role:'ai', text:"Morning, Jane. I've read 12 emails, drafted 4 tasks and auto-replied to 8. Ask me anything — a property, an owner, today's arrivals, or what needs your attention." }] };
+    aiMsgs: [{ role:'ai', text:"Morning, Jane. I've read 12 emails, drafted 4 tasks and auto-replied to 8. Ask me anything — a property, an owner, today's arrivals, or what needs your attention." }],
+    selectedModuleId: 'trust', trainerBusy: false,
+    trainerMsgsByModule: {
+      emails: [{ role:'ai', text:"This module covers reading and rendering guest emails. Ask me anything about it, or try the suggestion below." }],
+      workorders: [{ role:'ai', text:"This module covers logging a work order. Ask me anything about it, or try the suggestion below." }],
+      trust: [{ role:'ai', text:"Let's cover trust accounting basics. Ask me anything, or try the suggestion below — like how do I know which linen set a property needs, or how trust funds are held." }],
+      tone: [{ role:'ai', text:"This module covers owner communication tone & etiquette. Ask me anything about it, or try the suggestion below." }]
+    },
+    guidedProcessId: 'property', guidedStep: 1, trainerTab: 'modules' };
 
   _toastTimer = null;
   toast = (msg) => {
@@ -855,6 +1029,87 @@ class Component extends DCLogic {
     setTimeout(() => { const b = document.getElementById('ai-scroll'); if (b) b.scrollTop = b.scrollHeight; }, 30);
   };
 
+  selectModule = (e) => { const id = e.currentTarget.dataset.id; if (id) this.setState({ selectedModuleId: id }); };
+  setTrainerTab = (e) => { const t = e.currentTarget.dataset.tab; if (t) this.setState({ trainerTab: t }); };
+  askTrainer = (e) => { const q = e.currentTarget.dataset.q; if (q) this.runTrainer(q); };
+  sendTrainer = () => {
+    const inp = document.getElementById('trainer-input');
+    const q = inp ? inp.value.trim() : '';
+    if (q) { if (inp) inp.value = ''; this.runTrainer(q); }
+  };
+  trainerKey = (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.sendTrainer(); } };
+  runTrainer = async (q) => {
+    const modId = this.state.selectedModuleId;
+    const modTitle = (this.trainerModuleMeta[modId] || {}).title || 'this topic';
+    const prior = this.state.trainerMsgsByModule[modId] || [];
+    const msgs = [...prior, { role:'user', text:q }];
+    this.setState({ trainerMsgsByModule: { ...this.state.trainerMsgsByModule, [modId]: msgs }, trainerBusy: true });
+    setTimeout(() => { const b = document.getElementById('trainer-scroll'); if (b) b.scrollTop = b.scrollHeight; }, 30);
+    const context = `You are the HRS PMS onboarding trainer, coaching a brand-new staff member through the module "${modTitle}". Holiday Rental Specialists manages 387 homes across the NSW Southern Highlands, South Coast and Port Stephens. Reference HRS's real workflow: guest emails render into bookings/work orders, turnovers print linen tags per property profile, trust funds are held segregated and reconciled daily before owner disbursement, and owner communication should stay warm but professional. Answer as a patient, encouraging trainer in 2-4 short sentences, plain text only, no markdown or bullet symbols.`;
+    let answer = '';
+    try {
+      if (window.claude && window.claude.complete) {
+        answer = await window.claude.complete(context + '\n\nNew starter asks: ' + q + '\n\nTrainer:');
+      } else {
+        const resp = await fetch('/.netlify/functions/ai', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ system: context, question: q })
+        });
+        if (resp.ok) { const d = await resp.json(); answer = (d && d.text) || ''; if (!answer && d && d.error) answer = 'Assistant error: ' + d.error; }
+        else if (resp.status === 404) { answer = "The AI function isn't deployed (404). Make sure the netlify/functions/ai.js file and netlify.toml were pushed to your repo, then redeploy."; }
+        else { answer = 'Could not reach the AI function (HTTP ' + resp.status + ').'; }
+      }
+    } catch (err) { answer = 'Network error reaching the trainer: ' + String((err && err.message) || err); }
+    if (!answer) answer = "I couldn't reach the trainer just now — check the API key is set in Netlify, then redeploy.";
+    this.setState({ trainerMsgsByModule: { ...this.state.trainerMsgsByModule, [modId]: [...msgs, { role:'ai', text: answer.trim() }] }, trainerBusy: false });
+    setTimeout(() => { const b = document.getElementById('trainer-scroll'); if (b) b.scrollTop = b.scrollHeight; }, 30);
+  };
+
+  pickProcess = (e) => { const id = e.currentTarget.dataset.id; if (id) this.setState({ guidedProcessId: id, guidedStep: 1 }); };
+  guidedNext = () => {
+    const total = (this.guidedProcesses[this.state.guidedProcessId] || {}).steps.length || 1;
+    this.setState({ guidedStep: Math.min(this.state.guidedStep + 1, total + 1) });
+    if (this.state.guidedStep + 1 > total) this.toast('✓ Process complete — logged to the record');
+  };
+
+  get trainerModuleMeta() {
+    return {
+      emails: { title:'Reading & rendering guest emails', done:true },
+      workorders: { title:'Logging a work order', done:true },
+      trust: { title:'Trust accounting basics', done:false },
+      tone: { title:'Owner communication tone & etiquette', done:false }
+    };
+  }
+
+  get guidedProcesses() {
+    return {
+      property: { title:'Onboarding a new property', steps:[
+        { title:'Capture details & check compliance', body:"I've pulled the address, bedrooms and pool details from the listing form. Cross-checking against NSW STRA registration, pool safety and smoke alarm requirements — one item is missing: a current pool compliance certificate.", btn:'Request cert & continue →' },
+        { title:'Recommend a pricing & channel strategy', body:"Based on 6 comparable homes in this region, I'd suggest a $420–$480 nightly rate in peak season, listed on Airbnb and Booking.com. You can accept or adjust before it goes live.", btn:'Accept & continue →' },
+        { title:'Set the turnover & maintenance profile', body:"Defaulting to the standard 4-bedroom linen set and a 2.5 hour clean based on similar properties — confirm or edit before it's locked into the housekeeping schedule.", btn:'Confirm & continue →' },
+        { title:'Publish & go live', body:"Listing content checked against each channel's requirements (photos, house rules, cancellation policy). Ready to publish.", btn:'Publish listing' }
+      ]},
+      ownerOnboard: { title:'Onboarding a new owner', steps:[
+        { title:'Collect owner & trust account details', body:"Bank account and ABN details captured — format checked against NSW trust account requirements. Everything looks valid.", btn:'Confirm & continue →' },
+        { title:'Review the management agreement', body:"This owner's draft agreement has 2 clauses that differ from the HRS standard template — commission rate and minimum stay. Worth a second look before sending.", btn:'Looks fine, continue →' },
+        { title:'Link properties & set statement cadence', body:"3 properties linked to this owner. Statement cadence defaulted to monthly, issued on the 1st — matching their agreement terms.", btn:'Confirm & continue →' },
+        { title:'Send welcome pack & activate portal', body:"A welcome email is drafted with their portal login and what to expect in month one. Ready to send.", btn:'Send & activate' }
+      ]},
+      staffOnboard: { title:'Onboarding a new staff member', steps:[
+        { title:'Create system access', body:"Set up login and role permissions — I'd suggest \"Property Coordinator\" based on the job title, which gives access to bookings and work orders but not trust accounting.", btn:'Confirm & continue →' },
+        { title:'Assign a shadow portfolio', body:"Assigning 8 properties in the Shoalhaven region to shadow for week one — matched to their base location.", btn:'Confirm & continue →' },
+        { title:'Schedule AI Trainer modules', body:"Queuing the 4 core modules in AI Trainer, starting with guest emails and work orders. They can start today.", btn:'Confirm & continue →' },
+        { title:'Confirm day-one readiness', body:"Access, portfolio and training are set. A checklist has gone to their manager to confirm readiness before day one.", btn:'Mark ready' }
+      ]},
+      complaint: { title:'Guest complaint escalation', steps:[
+        { title:'Log the issue against the reservation', body:"Guest, property and dates are pre-filled from the booking. Confirm the issue type and I'll notify the duty manager.", btn:'Confirm & continue →' },
+        { title:'Notify the neighbour liaison', body:"For noise complaints, HRS policy is to loop in the neighbour liaison before contacting the guest — I've drafted that message for you to send.", btn:'Send & continue →' },
+        { title:'Offer a resolution to the guest', body:"A warm, on-brand reply is drafted — acknowledging the issue and outlining what's being done. Review and send.", btn:'Send & continue →' },
+        { title:'Close & log the outcome', body:"Mark the complaint resolved. It's added to the property's history so patterns show up in future audits.", btn:'Mark resolved' }
+      ]}
+    };
+  }
+
   get emailData() {
     return [
       { id:'e1', channel:'Airbnb', channelColor:'#ff5a5f', name:'The Hargreaves', time:'9:12am',
@@ -901,9 +1156,51 @@ class Component extends DCLogic {
 
   renderVals() {
     const s = this.state.screen;
+    const tt = this.state.trainerTab;
     const props = this.propData;
     const sel = this.emailData.find(e => e.id === this.state.selectedEmailId) || this.emailData[0];
-    const titles = { dashboard:'Dashboard', performance:'Property performance', reservations:'Reservations', owners:'Owners & clients', inbox:'Inbox & enquiries', workorders:'Work orders', housekeeping:'Housekeeping & laundry', qa:'Q&A / audits', invoicing:'Invoicing', trust:'Trust accounting', ownerportal:'Owner portal', contractorportal:'Contractor portal' };
+    const titles = { dashboard:'Dashboard', performance:'Property performance', reservations:'Reservations', owners:'Owners & clients', inbox:'Inbox & enquiries', workorders:'Work orders', housekeeping:'Housekeeping & laundry', qa:'Q&A / audits', invoicing:'Invoicing', trust:'Trust accounting', ownerportal:'Owner portal', contractorportal:'Contractor portal', aitrainer:'AI Trainer', guidedprocess:'Guided process' };
+
+    // --- AI Trainer ---
+    const modMeta = this.trainerModuleMeta;
+    const modOrder = ['emails','workorders','trust','tone'];
+    const selMod = this.state.selectedModuleId;
+    const trainerModules = modOrder.map(id => {
+      const m = modMeta[id];
+      const active = id === selMod;
+      return {
+        id, title: m.title,
+        rowBg: active ? 'rgba(207,154,52,.14)' : 'transparent',
+        dotBg: m.done ? '#1a9e6a' : (active ? '#cf9a34' : '#eee6d5'),
+        dotColor: m.done ? '#fff' : (active ? '#0e2c46' : '#9aa6ac'),
+        dotIcon: m.done ? '✓' : '●',
+        textColor: active ? '#0e2c46' : '#3a4b56',
+        textWeight: active ? '700' : '500'
+      };
+    });
+    const trainerDoneCount = modOrder.filter(id => modMeta[id].done).length;
+    const trainerQuickMap = {
+      emails: { q:'How do I tell if an email is a booking or an enquiry?', label:'Booking vs enquiry?' },
+      workorders: { q:'What priority do I set for a guest-in-house issue?', label:'Setting priority' },
+      trust: { q:'How do I know which linen set a property needs?', label:'Linen sets & trust basics' },
+      tone: { q:'How formal should I be with an owner?', label:'Owner tone' }
+    };
+    const rawTrainerMsgs = this.state.trainerMsgsByModule[selMod] || [];
+
+    // --- Guided process ---
+    const gpData = this.guidedProcesses;
+    const gpId = this.state.guidedProcessId;
+    const gpOrder = ['property','ownerOnboard','staffOnboard','complaint'];
+    const guidedProcessList = gpOrder.map(id => ({
+      id, title: gpData[id].title, steps: gpData[id].steps.length,
+      bg: id === gpId ? 'rgba(207,154,52,.14)' : '#f9f7f2',
+      titleColor: id === gpId ? '#0e2c46' : '#3a4b56',
+      subColor: id === gpId ? '#a97e20' : '#9aa6ac'
+    }));
+    const gpSteps = gpData[gpId].steps;
+    const gpStepIdx = Math.min(this.state.guidedStep, gpSteps.length) - 1;
+    const gpDone = this.state.guidedStep > gpSteps.length;
+    const guidedProgress = gpSteps.map((_, i) => ({ color: i <= gpStepIdx || gpDone ? '#cf9a34' : '#eee6d5' }));
 
     const kpiSets = {
       week:  { rev:'$342k', occ:'79%', adr:'$372', revpar:'$294', revNote:'▲ 6.1% vs last wk', occNote:'▲ 2.1 pts', note:'This week' },
@@ -980,6 +1277,26 @@ class Component extends DCLogic {
       isDashboard: s==='dashboard', isPerformance: s==='performance', isReservations: s==='reservations',
       isOwners: s==='owners', isInbox: s==='inbox', isWorkorders: s==='workorders', isHousekeeping: s==='housekeeping',
       isQa: s==='qa', isInvoicing: s==='invoicing', isTrust: s==='trust', isOwnerPortal: s==='ownerportal', isContractorPortal: s==='contractorportal',
+      isAiTrainer: s==='aitrainer',
+      setTrainerTab: this.setTrainerTab,
+      tabModulesBg: tt==='modules' ? '#0e2c46' : '#fff', tabModulesCol: tt==='modules' ? '#fff' : '#4a5b66',
+      tabGuidedBg: tt==='guided' ? '#0e2c46' : '#fff', tabGuidedCol: tt==='guided' ? '#fff' : '#4a5b66',
+      showModulesTab: tt==='modules', showGuidedTab: tt==='guided',
+      selectModule: this.selectModule, askTrainer: this.askTrainer, sendTrainer: this.sendTrainer, trainerKey: this.trainerKey,
+      trainerModules, trainerDoneCount, trainerTotalCount: modOrder.length,
+      selectedModuleTitle: modMeta[selMod].title,
+      trainerBusy: this.state.trainerBusy,
+      trainerQuickQ: trainerQuickMap[selMod].q, trainerQuickLabel: trainerQuickMap[selMod].label,
+      trainerMsgs: rawTrainerMsgs.map(m => m.role==='user'
+        ? { ...m, align:'flex-end', bg:'#0e2c46', color:'#fff', radius:'14px 14px 4px 14px' }
+        : { ...m, align:'flex-start', bg:'rgba(255,255,255,.08)', color:'#dbe7f0', radius:'14px 14px 14px 4px' }),
+      pickProcess: this.pickProcess, guidedNext: this.guidedNext,
+      guidedProcessList, guidedTitle: gpData[gpId].title,
+      guidedStepNum: Math.min(this.state.guidedStep, gpSteps.length), guidedStepTotal: gpSteps.length,
+      guidedProgress,
+      guidedStepTitle: gpSteps[gpStepIdx].title, guidedStepBody: gpSteps[gpStepIdx].body,
+      guidedBtnLabel: gpSteps[gpStepIdx].btn,
+      guidedNotDone: !gpDone, guidedDone: gpDone,
 
       topProps: props.slice(0,5),
       allProps: props,
